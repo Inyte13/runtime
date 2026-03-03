@@ -4,10 +4,17 @@ import { useActividadesStore } from '../store/actividadesStore'
 
 // TODO: El primer cambio si renderiza todos los
 export default memo(function Actividad({ id }: { id: number }) {
+  const nombre = useActividadesStore(
+    state =>
+      state.actividades.find(actividad => actividad.id === id)?.nombre || ''
+  )
+  const colorFallback = useActividadesStore(
+    state =>
+      state.actividades.find(actividad => actividad.id === id)?.color || ''
+  )
   return (
     <div className='flex items-center gap-2 p-1.5 hover:bg-accent hover:text-accent-foreground cursor-pointer rounded-lg'>
-      <ColorPicker actividad={actividad} />
-      <span>{nombre}</span>
+      <ColorPicker id={id} colorFallback={colorFallback} />
       <span className='capitalize'>{nombre}</span>
     </div>
   )
