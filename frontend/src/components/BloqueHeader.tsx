@@ -34,6 +34,7 @@ export default memo(function BloqueHeader({
         variant='destructive'
         className='top-[0.2rem] right-[0.2rem] absolute'
         onClick={() => eliminarBloque(id)}
+        disabled={!isLast}
       >
         <XIcon />
       </Button>
