@@ -5,7 +5,7 @@ import { memo } from 'react'
 import useDuracionBloque from '../hooks/useDuracionBloque'
 import BloqueColor from './BloqueColor'
 
-export default memo(function Bloque({ bloque }: { bloque: BloqueRead }) {
+export default memo(function Bloque({ id }: { id: number }) {
   const actualizarBloque = useDiasStore(state => state.actualizarBloque)
   const descripcion = bloque.descripcion || ''
   const manejarDescripcion = async (e: React.FocusEvent<HTMLInputElement>) => {
@@ -27,7 +27,7 @@ export default memo(function Bloque({ bloque }: { bloque: BloqueRead }) {
       className='border border-border border-l-2 rounded-md px-2 pb-2 pt-1 relative bg-card flex flex-col'
     >
       <BloqueHeader
-        bloque={bloque}
+        id={id}
         duracion={duracionLocal}
         manejarDuracion={manejarDuracion}
       />
