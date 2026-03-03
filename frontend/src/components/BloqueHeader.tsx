@@ -27,6 +27,7 @@ export default memo(function BloqueHeader({
       <ControlesDuracion
         duracion={duracion}
         manejarDuracion={manejarDuracion}
+        isLast={isLast}
       />
       <Button
         size='icon-xxs'
