@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { useColorStore } from '../store/colorStore'
 
 export default function BloqueColor({

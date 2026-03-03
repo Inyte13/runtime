@@ -3,6 +3,7 @@ from datetime import date, datetime
 from fastapi import APIRouter, Body, Query
 
 from app.core.database import PathDate, QueryDate, SessionDep
+from app.schemas.bloque_schema import BloqueRead
 from app.schemas.dia_schema import DiaRead, DiaReadDetail, DiaUpdate
 from app.services.dia_services import (
   actualizar_dia,
@@ -10,7 +11,7 @@ from app.services.dia_services import (
   buscar_dia_detail,
   eliminar_dia,
   mostrar_dias,
-  recalcular_hora_final,
+  recalcular_horas,
 )
 
 dia_router = APIRouter(tags=['Dia'])

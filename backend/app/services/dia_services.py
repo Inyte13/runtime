@@ -4,7 +4,6 @@ from typing import Sequence
 from fastapi import HTTPException, status
 from sqlmodel import Session
 
-from app.crud.bloque_crud import read_bloques_by_fecha
 from app.crud.dia_crud import (
   create_dia,
   delete_dia,
@@ -13,8 +12,10 @@ from app.crud.dia_crud import (
   read_dias,
   update_dia,
 )
+from app.models.bloque import Bloque
 from app.models.dia import Dia
 from app.schemas.dia_schema import DiaUpdate
+from app.services.bloque_service import mostrar_bloques
 
 
 def buscar_dia(session: Session, fecha: date) -> Dia:

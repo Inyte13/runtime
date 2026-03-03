@@ -1,6 +1,6 @@
-import { memo } from "react";
-import { ActividadRead } from "../types/Actividad";
-import ColorPicker from "./ColorPicker";
+import { memo } from 'react'
+import ColorPicker from './ColorPicker'
+import { useActividadesStore } from '../store/actividadesStore'
 
 export default memo(function Actividad({ actividad }: { actividad: ActividadRead}) {
   const nombreBd = actividad.nombre

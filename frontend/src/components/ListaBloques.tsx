@@ -1,8 +1,18 @@
 import { Plus } from 'lucide-react'
 import { useDiasStore } from '../store/diasStore'
-import Bloque from './Bloque'
 import { Button } from './ui/button'
 import { memo } from 'react'
+import BloqueOrdenable from './BloqueOrdenable'
+import { useShallow } from 'zustand/react/shallow'
+import {
+  DndContext,
+  PointerSensor,
+  closestCenter,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core'
+import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
+import { restrictToVerticalAxis } from '@dnd-kit/modifiers'
 
 export default memo(function ListaBloques() {
   // (?.): Lo usamos porque diaDetail puede no estar creado

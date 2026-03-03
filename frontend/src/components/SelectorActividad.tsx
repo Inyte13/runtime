@@ -1,6 +1,5 @@
 import { useActividadesStore } from '../store/actividadesStore.js'
 import { useDiasStore } from '../store/diasStore.js'
-import { BloqueRead } from '../types/Bloque.js'
 import { useColorStore } from '../store/colorStore.js'
 import {
   Combobox,
@@ -14,6 +13,7 @@ import {
 } from './ui/combobox.js'
 import { Button } from './ui/button.js'
 import { ChevronDown } from 'lucide-react'
+import { memo } from 'react'
 
 export default function SelectorActividad({ bloque }: { bloque: BloqueRead }) {
   const actualizarBloque = useDiasStore(state => state.actualizarBloque)

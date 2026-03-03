@@ -1,5 +1,4 @@
 import { useDiasStore } from '../store/diasStore'
-import { BloqueRead } from '../types/Bloque'
 import BloqueHeader from './BloqueHeader'
 import { Input } from './ui/input'
 import { memo } from 'react'

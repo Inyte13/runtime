@@ -1,4 +1,5 @@
 from datetime import date, datetime, time, timedelta
+from typing import Sequence
 
 from fastapi import HTTPException, status
 from sqlmodel import Session, desc, select
@@ -8,6 +9,7 @@ from app.crud.bloque_crud import (
   create_bloque,
   delete_bloque,
   read_bloque_by_id,
+  read_bloques_by_fecha,
   update_bloque,
 )
 from app.crud.dia_crud import create_dia, read_dia

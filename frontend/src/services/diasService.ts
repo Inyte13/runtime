@@ -1,3 +1,4 @@
+import { BloqueRead } from '../types/Bloque'
 import { DiaRead, DiaReadDetail, DiaUpdate } from '../types/Dia'
 
 const URL = '/dias'

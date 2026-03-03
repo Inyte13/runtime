@@ -2,6 +2,8 @@ import { useEffect } from 'react'
 import { useActividadesStore } from '../store/actividadesStore'
 import Actividad from './Actividad'
 import ListaActividadesFooter from './ListaActividadesFooter'
+import { useShallow } from 'zustand/react/shallow'
+
 
 export default function ListaActividades() {
   const actividades = useActividadesStore(state => state.actividades)
