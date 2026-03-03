@@ -58,11 +58,13 @@ def patch_dia(
   return actualizar_dia(session, fecha, dia)
 
 
-# PATCH: Para actualizar las horas cuando se haga drag and drop
-@dia_router.patch('/dias/{fecha}/reordenar', status_code=200)
-def sort_bloques(session: SessionDep, fecha: date, ids: list[int] = Body(...)):
-  recalcular_hora_final(session, fecha, ids)
-  return
+# PATCH: Con las duraciones hago coincidir hora y hora_fin
+@dia_router.patch('/dias/{fecha}/reordenar', response_model=list[BloqueRead])
+def recalculate_hours(
+  session: SessionDep, fecha: date, ids: list[int] = Body(...)
+):
+  # ids: Lista de el nuevo orden enviado por el frontend
+  return recalcular_horas(session, fecha, ids)
 
 
 # DELETE: Elimina el dia y los bloques que esten dentro
