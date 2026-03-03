@@ -6,6 +6,9 @@ import useDuracionBloque from '../hooks/useDuracionBloque'
 import BloqueColor from './BloqueColor'
 
 export default memo(function Bloque({ id }: { id: number }) {
+  const bloque = useDiasStore(state =>
+    state.diaDetail?.bloques.find(bloque => bloque.id === id)
+  )
   const actualizarBloque = useDiasStore(state => state.actualizarBloque)
   const descripcion = bloque.descripcion || ''
   const manejarDescripcion = async (e: React.FocusEvent<HTMLInputElement>) => {
