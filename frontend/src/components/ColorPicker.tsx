@@ -2,19 +2,19 @@ import { useActividadesStore } from '../store/actividadesStore.js'
 import { useColorStore } from '../store/colorStore.js'
 
 export default function ColorPicker({
-  actividad,
+  id,
+  colorFallback,
 }: {
-  actividad: ActividadRead
+  id: number
+  colorFallback: string
 }) {
-  const color = useColorStore(
-    state => state.colores[actividad.id] || actividad.color
-  )
+  const color = useColorStore(state => state.colores[id] || colorFallback)
   const setColor = useColorStore(state => state.setColor)
   const actualizarActividad = useActividadesStore(
     state => state.actualizarActividad
   )
   const manejarCambioColor = async (e: React.FocusEvent<HTMLInputElement>) => {
-    await actualizarActividad(actividad.id, { color: e.target.value })
+    await actualizarActividad(id, { color: e.target.value })
   }
   return (
     <input
@@ -23,7 +23,7 @@ export default function ColorPicker({
       value={color}
       style={{ background: color }}
       // onChange solo para cambiar en el frontend
-      onChange={e => setColor(actividad.id, e.target.value)}
+      onChange={e => setColor(id, e.target.value)}
       // onBlur se ejecuta cuando cambia el foco
       onBlur={manejarCambioColor}
     />
