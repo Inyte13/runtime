@@ -21,6 +21,11 @@ class DiaBase(SQLModel):
 
 
 class Dia(DiaBase, table=True):
-  bloques: list["Bloque"] = Relationship(
-    back_populates="dia", sa_relationship_kwargs={"cascade": "all, delete-orphan"}
+  bloques: list['Bloque'] = Relationship(
+    back_populates='dia',
+    sa_relationship_kwargs={
+      'cascade': 'all, delete-orphan',
+      # Cuando llamemos al diaDetail, traera los bloques ordenados
+      'order_by': 'Bloque.hora',
+    },
   )
