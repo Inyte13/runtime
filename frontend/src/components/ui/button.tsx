@@ -6,7 +6,7 @@ import { Slot } from '@radix-ui/react-slot'
 // Los valores por default
 export const buttonVariants = cva(
   [
-    'inline-flex items-center justify-center rounded-lg gap-2 ',
+    'inline-flex items-center justify-center rounded-lg gap-2 cursor-pointer',
     'disabled:pointer-events-none disabled:opacity-50',
     'outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]',
     'whitespace-nowrap', // Mantenerse en una sola línea
