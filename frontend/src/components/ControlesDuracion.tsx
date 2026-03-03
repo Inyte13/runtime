@@ -19,7 +19,6 @@ export default memo(function ControlesDuracion({
           size='icon-xs'
           onClick={prevTime}
           disabled={duracion === 0}
-          className={`${duracion === 0 ? '' : ''}`}
           variant='ghost'
         >
           <ChevronUp />
