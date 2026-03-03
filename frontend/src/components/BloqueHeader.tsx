@@ -7,18 +7,18 @@ import { memo } from 'react'
 import ControlesDuracion from './ControlesDuracion'
 
 export default memo(function BloqueHeader({
-  bloque,
+  id,
   duracion,
   manejarDuracion,
 }: {
-  bloque: BloqueRead
+  id: number
   duracion: number
   manejarDuracion: (newDuracion: number) => void
 }) {
   const eliminarBloque = useDiasStore(state => state.eliminarBloque)
   return (
     <header className='flex justify-between'>
-      <SelectorActividad bloque={bloque} />
+      <SelectorActividad id={id} />
       <ControlesDuracion
         duracion={duracion}
         manejarDuracion={manejarDuracion}
@@ -27,7 +27,7 @@ export default memo(function BloqueHeader({
         size='icon-xxs'
         variant='destructive'
         className='top-[0.2rem] right-[0.2rem] absolute'
-        onClick={() => eliminarBloque(bloque.id)}
+        onClick={() => eliminarBloque(id)}
       >
         <XIcon />
       </Button>
