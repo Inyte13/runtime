@@ -82,8 +82,11 @@ def recalcular_horas(session: Session, fecha: date, ids: list[int]):
     bloque = bloques_dict[id]
     bloque.hora = hora_temp.time()
 
+    # Si tiene duracion
     if bloque.duracion is not None:
+      # Le sumamos la duracion al temp
       hora_temp += timedelta(hours=bloque.duracion)
+      # Le asignamos: hora_fin = hora_temp + duracion
       bloque.hora_fin = hora_temp.time()
 
     else:
