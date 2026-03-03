@@ -16,6 +16,10 @@ export default memo(function BloqueHeader({
 }) {
   const eliminarBloque = useDiasStore(state => state.eliminarBloque)
 
+  const isLast = useDiasStore(state => {
+    const bloques = state.diaDetail?.bloques || []
+    return bloques.length > 0 && bloques[bloques.length - 1].id === id
+  })
   
   return (
     <header className='flex justify-between'>
