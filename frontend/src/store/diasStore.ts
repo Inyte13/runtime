@@ -18,6 +18,7 @@ interface DiasState {
   actualizarDia: (fechaISO: string, dia: DiaUpdate) => Promise<void>
   crearBloque: () => Promise<void>
   actualizarBloque: (id: number, bloque: BloqueUpdate) => Promise<void>
+  reordenarBloques: (event: DragEndEvent) => Promise<void>
   eliminarBloque: (id: number) => Promise<void>
 }
 
@@ -99,6 +100,77 @@ export const useDiasStore = create<DiasState>(set => ({
       })
     } catch (err) {
       console.error('Error actualizando el bloque', err)
+    }
+  },
+
+  reordenarBloques: async (event: DragEndEvent) => {
+    // active: lo que tienes agarrado
+    // over: donde cayó
+    const { active, over } = event
+
+    if (
+      !over || // Si lo soltó fuera de la lista
+      active.id === over.id // Si lo soltó en el mismo lugar
+    )
+      return
+
+    const diaDetail = useDiasStore.getState().diaDetail
+
+    // Si por una casualidad no existe el diaDetail
+    if (!diaDetail) return
+
+    const bloques = [...diaDetail.bloques]
+    const backup = [...bloques]
+
+    const inicio = bloques.findIndex(bloque => bloque.id === active.id)
+    const fin = bloques.findIndex(bloque => bloque.id === over.id)
+
+    // Si por una casualidad los ids no existe
+    if (inicio === -1 || fin === -1) return
+
+    // Guardamos el value de la posicion inicio
+    const [bloque] = bloques.splice(inicio, 1)
+    // Insertamos nuestro bloque en la posicion final
+    bloques.splice(fin, 0, bloque)
+
+    // Buscamos el primer bloque sin duracion
+    const bloqueSinDuracion = bloques.find(bloque => !bloque.duracion)
+    if (
+      bloqueSinDuracion && // Si existe:
+      bloques.indexOf(bloqueSinDuracion) !== bloques.length - 1 // Y no es el ultimo
+    )
+      return
+
+    set({
+      diaDetail: {
+        ...diaDetail,
+        bloques: bloques,
+      },
+    })
+
+    try {
+      const ids = bloques.map(bloque => bloque.id)
+      const fecha = useFechaStore.getState().fecha
+      const fechaISO = formatFechaISO(fecha)
+      const bloques_new = await sortDia(fechaISO, ids)
+      set(state => {
+        if (!state.diaDetail) return state
+        return {
+          diaDetail: {
+            ...state.diaDetail,
+            bloques: bloques_new,
+          },
+        }
+      })
+    } catch (error) {
+      console.error('Error al reordenar los bloques:', error)
+      // Rollback
+      set({
+        diaDetail: {
+          ...diaDetail,
+          bloques: backup,
+        },
+      })
     }
   },
 
