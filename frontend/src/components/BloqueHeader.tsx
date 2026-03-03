@@ -1,6 +1,5 @@
 import { useDiasStore } from '../store/diasStore'
 import SelectorActividad from './SelectorActividad'
-import { BloqueRead } from '../types/Bloque'
 import { XIcon } from 'lucide-react'
 import { Button } from './ui/button'
 import { memo } from 'react'
