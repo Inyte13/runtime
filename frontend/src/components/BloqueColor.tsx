@@ -1,7 +1,8 @@
 import { memo } from 'react'
 import { useColorStore } from '../store/colorStore'
 
-export default function BloqueColor({
+// Este componente se creo para renderizar los colores mas arriba
+export default memo(function BloqueColor({
   className,
   children,
   id,
@@ -26,4 +27,4 @@ export default function BloqueColor({
       {children}
     </article>
   )
-}
+})
