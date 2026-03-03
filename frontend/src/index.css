@@ -1,13 +1,6 @@
 @import "tailwindcss";
 @import './colors.css';
 
-/* Para que en el imput-color no salga el cuadradito */
-input[type="color"]::-webkit-color-swatch {
-  border: none;
-}
-input[type="color"]::-moz-color-swatch {
-  border: none;
-}
 
 /* El selection, el que se usa para copiar */
 @layer base {
