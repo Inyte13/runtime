@@ -147,5 +147,3 @@ def eliminar_bloque(session: Session, id: int) -> None:
   bloque = buscar_bloque(session, id)
   delete_bloque(session, bloque)
   return
-
-
