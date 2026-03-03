@@ -76,6 +76,8 @@ def recalcular_horas(session: Session, fecha: date, ids: list[int]):
 
   hora_temp = datetime.combine(fecha, time(0, 0))
 
+  bloques_actualizados = []
+
   for i, id in enumerate(ids):
     bloque = bloques_dict[id]
     bloque.hora = hora_temp.time()
@@ -92,6 +94,7 @@ def recalcular_horas(session: Session, fecha: date, ids: list[int]):
           detail='El bloque sin duración solo puede ir al final del día',
         )
     session.add(bloque)
+    bloques_actualizados.append(bloque)
   session.commit()
   return
 
