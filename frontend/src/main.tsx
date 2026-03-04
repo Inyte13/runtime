@@ -3,7 +3,8 @@ import { BrowserRouter } from 'react-router'
 import App from './App'
 import './index.css'
 
-createRoot(document.getElementById('root')).render(
+// ! al final para decirle que el div id='root' si existe
+createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
     <App />
   </BrowserRouter>
