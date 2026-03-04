@@ -1,7 +1,10 @@
+export interface BloqueRead {
   id: number
-  fecha: string
-  actividad?: Actividad | null
-  dia: Dia
+  hora: string
+  descripcion: string | null
+  actividad: ActividadRead
+  duracion: number | null
+  hora_fin: string | null
 }
 
 export interface BloqueCreate {
