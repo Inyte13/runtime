@@ -223,18 +223,53 @@ export const useDiasStore = create<DiasState>(set => ({
     }
   },
 
-  eliminarBloque: async id => {
-    try {
-      await deleteBloque(id)
-      set(state => {
-        if (!state.diaDetail) return state
+  eliminarBloque: async (id: number) => {
+    set(state => {
+      if (!state.diaDetail) return state
+
+      const bloques = state.diaDetail.bloques
+      const indice = bloques.findIndex(bloque => bloque.id === id)
+      if (indice === -1) return state
+
+      // Si la duracion es 0 no hay bloques debajo por lo tanto solo lo quitamos
+      if (!bloques[indice].duracion) {
         return {
           diaDetail: {
             ...state.diaDetail,
-            bloques: state.diaDetail.bloques.filter(bloque => bloque.id !== id),
+            bloques: bloques.filter(bloque => bloque.id !== id),
           },
         }
-      })
+      }
+
+      // Guardamos la duracion que tenia
+      const diferencia = -bloques[indice].duracion
+
+      const newBloques = bloques
+        .filter(bloque => bloque.id !== id)
+        .map((bloque, i) => {
+          // Como el filter quitó 1 elemento, los índices se han desplazado.
+          if (i >= indice) {
+            return {
+              ...bloque,
+              hora: modificarHora(bloque.hora, diferencia),
+              hora_fin: bloque.hora_fin
+                ? modificarHora(bloque.hora_fin, diferencia)
+                : bloque.hora_fin,
+            }
+          }
+          return bloque
+        })
+
+      return {
+        diaDetail: {
+          ...state.diaDetail,
+          bloques: newBloques,
+        },
+      }
+    })
+
+    try {
+      await deleteBloque(id)
     } catch (err) {
       console.error('Error eliminando el bloque', err)
     }
