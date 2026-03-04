@@ -24,17 +24,15 @@ export default memo(function Bloque({
   )
   const actualizarBloque = useDiasStore(state => state.actualizarBloque)
   const descripcion = bloque.descripcion || ''
-  const manejarDescripcion = async (e: React.FocusEvent<HTMLInputElement>) => {
-    const newDescripcion = e.target.value
-    if (newDescripcion === descripcion) return
-    await actualizarBloque(bloque.id, { descripcion: e.target.value })
-  }
-
-  const { duracionLocal, manejarDuracion, horaFin } = useDuracionBloque(
-    bloque.id,
-    bloque.duracion,
-    bloque.hora
+  const manejarDescripcion = useCallback(
+    async (e: React.FocusEvent<HTMLInputElement>) => {
+      const newDescripcion = e.target.value
+      if (newDescripcion === descripcion) return
+      await actualizarBloque(id, { descripcion: e.target.value })
+    },
+    [id, descripcion, actualizarBloque]
   )
+  const { manejarDuracion } = useDuracionBloque(bloque.id)
 
   return (
     <BloqueColor
