@@ -1,7 +1,7 @@
-from datetime import date
+from datetime import date, time
 from typing import Sequence
 
-from sqlmodel import Session, select
+from sqlmodel import Session, col, select
 
 from app.models.bloque import Bloque
 from app.schemas.bloque_schema import BloqueUpdate

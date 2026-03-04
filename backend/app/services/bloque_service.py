@@ -9,7 +9,7 @@ from app.crud.bloque_crud import (
   create_bloque,
   delete_bloque,
   read_bloque_by_id,
-  read_bloques_by_fecha,
+  read_bloques_by_range,
   update_bloque,
 )
 from app.crud.dia_crud import create_dia, read_dia

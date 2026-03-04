@@ -1,9 +1,6 @@
-import { useDiasStore } from '../store/diasStore'
+import Duracion from './Duracion'
 import SelectorActividad from './SelectorActividad'
-import { XIcon } from 'lucide-react'
-import { Button } from './ui/button'
 import { memo } from 'react'
-import ControlesDuracion from './ControlesDuracion'
 
 export default memo(function BloqueHeader({
   id,

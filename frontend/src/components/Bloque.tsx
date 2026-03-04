@@ -1,9 +1,14 @@
 import { useDiasStore } from '../store/diasStore'
 import BloqueHeader from './BloqueHeader'
 import { Input } from './ui/input'
-import { memo } from 'react'
+import { memo, useCallback } from 'react'
 import useDuracionBloque from '../hooks/useDuracionBloque'
 import BloqueColor from './BloqueColor'
+import { manejarEnter } from '../utils/keboard'
+import { Button } from './ui/button'
+import { GripVertical, XIcon } from 'lucide-react'
+import { DraggableAttributes } from '@dnd-kit/core'
+import { SyntheticListenerMap } from '@dnd-kit/core/dist/hooks/utilities'
 
 export default memo(function Bloque({ id }: { id: number }) {
   const bloque = useDiasStore(state =>

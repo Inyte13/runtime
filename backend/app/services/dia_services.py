@@ -12,7 +12,6 @@ from app.crud.dia_crud import (
   read_dias,
   update_dia,
 )
-from app.models.bloque import Bloque
 from app.models.dia import Dia
 from app.schemas.dia_schema import DiaUpdate
 from app.services.bloque_service import mostrar_bloques

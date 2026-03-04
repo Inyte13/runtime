@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 import {
   createActividad,
+  deleteActividadSoft,
   readActividades,
   updateActividad,
 } from '../services/actividadesServices'

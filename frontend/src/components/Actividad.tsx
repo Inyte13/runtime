@@ -1,6 +1,8 @@
 import { memo } from 'react'
 import ColorPicker from './ColorPicker'
 import { useActividadesStore } from '../store/actividadesStore'
+import { Input } from './ui/input'
+import { manejarEnter } from '../utils/keboard'
 
 // TODO: El primer cambio si renderiza todos los
 export default memo(function Actividad({ id }: { id: number }) {

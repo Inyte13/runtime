@@ -1,9 +1,9 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useActividadesStore } from '../store/actividadesStore'
 import Actividad from './Actividad'
 import ListaActividadesFooter from './ListaActividadesFooter'
 import { useShallow } from 'zustand/react/shallow'
-
+import ActividadTemp from './ActividadTemp'
 
 export default function ListaActividades() {
   const actividadesIds = useActividadesStore(

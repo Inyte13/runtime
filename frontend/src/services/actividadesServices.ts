@@ -1,4 +1,8 @@
-import { ActividadCreate, ActividadRead, ActividadUpdate } from '../types/Actividad'
+import {
+  ActividadCreate,
+  ActividadRead,
+  ActividadUpdate,
+} from '../types/Actividad'
 
 const URL = '/actividades'
 
