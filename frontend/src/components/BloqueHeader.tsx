@@ -11,13 +11,6 @@ export default memo(function BloqueHeader({
   duracion: number
   manejarDuracion: (newDuracion: number) => void
 }) {
-  const eliminarBloque = useDiasStore(state => state.eliminarBloque)
-
-  const isLast = useDiasStore(state => {
-    const bloques = state.diaDetail?.bloques || []
-    return bloques.length > 0 && bloques[bloques.length - 1].id === id
-  })
-
   return (
     <header className='flex justify-between'>
       <SelectorActividad id={id} />
@@ -26,16 +19,6 @@ export default memo(function BloqueHeader({
         manejarDuracion={manejarDuracion}
         isLast={isLast}
       />
-      {isLast && (
-        <Button
-          size='icon-xxs'
-          variant='destructive'
-          className='top-[0.2rem] right-[0.2rem] absolute'
-          onClick={() => eliminarBloque(id)}
-        >
-          <XIcon />
-        </Button>
-      )}
     </header>
   )
 })
