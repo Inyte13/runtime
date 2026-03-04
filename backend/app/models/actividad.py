@@ -1,10 +1,9 @@
 from sqlmodel import Field, SQLModel
 
 
-# La clase base para no reescribir
 class ActividadBase(SQLModel):
   nombre: str = Field(
-    index=True,  # Hace que las búsquedas por nombre sean más rápidas
+    index=True,
     unique=True,
     max_length=50,
   )
