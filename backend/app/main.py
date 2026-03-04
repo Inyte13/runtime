@@ -16,9 +16,9 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(lifespan=lifespan, title="Runtime App")
-app.include_router(actividad_router)
-app.include_router(bloque_router)
 app.include_router(dia_router)
+app.include_router(bloque_router)
+app.include_router(actividad_router)
 
 origins = [
   "http://localhost:5173", 
