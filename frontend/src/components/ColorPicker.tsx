@@ -18,8 +18,16 @@ export default function ColorPicker({
   }
   return (
     <input
-      className='rounded-full size-4'
       style={{ background: color }}
+      className={`rounded-full size-4 shrink-0 cursor-pointer p-0 
+        [&::-webkit-color-swatch-wrapper]:p-0
+        [&::-webkit-color-swatch]:opacity-0 
+        [&::-webkit-color-swatch]:border-none 
+        [&::-webkit-color-swatch]:rounded-full
+        [&::-moz-color-swatch]:border-none 
+        [&::-moz-color-swatch]:rounded-full
+        [&::-moz-color-swatch]:opacity-0
+        `}
       type='color'
       value={color}
       onChange={e => setColor(id, e.target.value)}
