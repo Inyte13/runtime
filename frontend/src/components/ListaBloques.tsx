@@ -17,7 +17,7 @@ import { restrictToVerticalAxis } from '@dnd-kit/modifiers'
 export default memo(function ListaBloques() {
   const bloquesIds = useDiasStore(
     useShallow(
-      state => state.diaDetail?.bloques?.map(bloque => bloque.id) ?? []
+      state => state.diaDetail?.bloques?.map(bloque => bloque.id)
     )
   )
 
@@ -38,11 +38,11 @@ export default memo(function ListaBloques() {
         sensors={sensors}
       >
         <SortableContext
-          items={bloquesIds}
+          items={bloquesIds ?? []}
           strategy={verticalListSortingStrategy} // Optimiza las animaciones
         >
           <ul className='flex flex-col gap-y-2'>
-            {bloquesIds.map(id => (
+            {bloquesIds?.map(id => (
               <BloqueOrdenable key={id} id={id} />
             ))}
           </ul>
