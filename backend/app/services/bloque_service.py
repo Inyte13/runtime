@@ -31,6 +31,16 @@ def _modificar_hora(hora: time, duracion: float) -> time:
   return fin.time()
 
 
+def _modificar_horas(
+  session: Session, bloques: Sequence[Bloque], diferencia: float
+) -> None:
+  for bloque in bloques:
+    bloque.hora = _modificar_hora(bloque.hora, diferencia)
+    if bloque.duracion is not None:
+      bloque.hora_fin = _modificar_hora(bloque.hora, bloque.duracion)
+    session.add(bloque)
+
+
 def _validar_actividad(session: Session, id: int) -> None:
   actividad = read_actividad_by_id(session, id)
   if not actividad:
