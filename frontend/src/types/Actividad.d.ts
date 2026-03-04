@@ -4,11 +4,15 @@ export interface ActividadCreate {
   is_active?: boolean
 }
 
+export interface ActividadRead {
   id: number
+  nombre: string
+  color: string
+  is_active: boolean
 }
 
 export interface ActividadUpdate {
-  nombre?: string | null
-  color?: string | null
-  is_active?: boolean | null
+  nombre?: string
+  color?: string
+  is_active?: boolean
 }
