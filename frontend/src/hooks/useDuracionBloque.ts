@@ -9,8 +9,8 @@ export default function useDuracionBloque(id: number) {
   const manejarDuracion = useCallback(
     (newDuracion: number) => {
       actualizarHoras(id, newDuracion)
-      if (debounceTimer.current) clearTimeout(debounceTimer.current)
-      debounceTimer.current = setTimeout(() => {
+      if (debounceTimer.current) window.clearTimeout(debounceTimer.current)
+      debounceTimer.current = window.setTimeout(() => {
         actualizarBloque(id, { duracion: newDuracion })
       }, 600)
     },
