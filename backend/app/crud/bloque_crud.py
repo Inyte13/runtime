@@ -18,17 +18,28 @@ def read_bloque_by_id(session: Session, id: int) -> Bloque | None:
   return session.get(Bloque, id)
 
 
-def read_bloques_by_fecha(session: Session, fecha: date) -> Sequence[Bloque]:
-  statement = select(Bloque).where(Bloque.fecha == fecha)
+# TODO: Sobre ingenieria?
+def read_bloques_by_range(
+  session: Session,
+  fecha: date,
+  hora_desde: time | None = None,
+  hora_hasta: time | None = None,
+  # Para la cascada
+  incluir_desde: bool = True,
+) -> Sequence[Bloque]:
+  statement = (
+    select(Bloque).where(Bloque.fecha == fecha).order_by(col(Bloque.hora))
+  )
+  if hora_desde is not None:
+    if incluir_desde:
+      statement = statement.where(Bloque.hora >= hora_desde)
+    else:
+      # Para la cascada
+      statement = statement.where(Bloque.hora > hora_desde)
+
+  if hora_hasta is not None:
+    statement = statement.where(Bloque.hora <= hora_hasta)
   return session.exec(statement).all()
-
-
-# TODO: Agregar cuando se añada el schema para el diaCalendario
-# def read_bloques_by_range(
-#   session: Session, inicio: date, final: date
-# ) -> Sequence[Bloque]:
-#   statement = select(Bloque).where(Bloque.fecha >= inicio, Bloque.fecha <= final)
-#   return session.exec(statement).all()
 
 
 def update_bloque(
