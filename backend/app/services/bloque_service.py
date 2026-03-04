@@ -25,12 +25,8 @@ def _ultimo_bloque(session: Session, fecha) -> Bloque | None:
   return session.exec(statement).first()
 
 
-def _calcular_hora_fin(
-  fecha: date, hora: time, duracion: float | None
-) -> time | None:
-  if duracion is None:
-    return None
-  inicio = datetime.combine(fecha, hora)
+def _modificar_hora(hora: time, duracion: float) -> time:
+  inicio = datetime.combine(date.today(), hora)
   fin = inicio + timedelta(hours=duracion)
   return fin.time()
 
