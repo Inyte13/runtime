@@ -58,9 +58,20 @@ export default memo(function Bloque({
       >
         <XIcon />
       </Button>
+
+      <div
+        // El handle, el unico receptor del agarre
+        {...attributes}
+        {...listeners}
+        className='absolute top-1/2 -translate-y-1/2 right-0 z-10 cursor-grab active:cursor-grabbing opacity-30 hover:opacity-100 transition-opacity'
+      >
+        <GripVertical />
+      </div>
+
       <span className='pl-1 text-foreground/70'>
         {bloque.hora} {bloque.hora_fin && `- ${bloque.hora_fin}`}
       </span>
+
       <Input
         className='border-0 border-b border-transparent focus:border-(--color) outline-none rounded-none italic h-[1.6rem] text-base pr-0 pl-1 mt-1'
         defaultValue={descripcion}
