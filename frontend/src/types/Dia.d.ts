@@ -9,6 +9,9 @@ export enum Estado {
 export interface DiaBase {
   titulo?: string | null
   estado: Estado
+export interface DiaRead {
+  titulo: string | null
+  estado: Estado | null
   fecha: string
 }
 
