@@ -75,7 +75,8 @@ export const useDiasStore = create<DiasState>(set => ({
         return {
           diaDetail: {
             fecha: fechaISO,
-            estado: 2,
+            titulo: null,
+            estado: null,
             bloques: [bloque],
           },
         }
