@@ -17,7 +17,13 @@ export default memo(function Actividad({ id }: { id: number }) {
   return (
     <div className='flex items-center p-1.5 hover:bg-accent hover:text-accent-foreground rounded-lg'>
       <ColorPicker id={id} colorFallback={colorFallback} />
-      <span className='capitalize'>{nombre}</span>
+      <Input
+        className='capitalize p-0 pl-2 border-none outline-none rounded-none h-[1.6rem] text-base'
+        defaultValue={nombre}
+        onBlur={manejarNombre}
+        maxLength={50}
+        onKeyDown={manejarEnter}
+      />
     </div>
   )
 })
