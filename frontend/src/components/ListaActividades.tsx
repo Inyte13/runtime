@@ -11,6 +11,8 @@ export default function ListaActividades() {
   )
   const traerActividades = useActividadesStore(state => state.traerActividades)
 
+  const [isCreate, setIsCreate] = useState(false)
+
   useEffect(() => {
     traerActividades()
   }, [traerActividades])
@@ -24,9 +26,14 @@ export default function ListaActividades() {
               <Actividad id={id} />
             </li>
           ))}
+          {isCreate && (
+            <li className='first:pt-2 last:pb-2'>
+              <ActividadTemp offCreate={() => setIsCreate(false)} />
+            </li>
+          )}
         </ul>
       </div>
-      <ListaActividadesFooter />
+      <ListaActividadesFooter onCreate={() => setIsCreate(true)} />
     </section>
   )
 }
