@@ -14,11 +14,10 @@ def create_actividad(session: Session, actividad: Actividad) -> Actividad:
   return actividad
 
 
-# Sequence, una lista solo de lectura
-def read_actividades(
-  session: Session, is_active: bool | None = None
-) -> Sequence[Actividad]:
-  statement = select(Actividad)
+# No especifico que devuelvo porque es esto [(Actividad, True), (Actividad, False)])
+def read_actividades(session: Session, is_active: bool | None = None):
+  subquery = select(Bloque.id).where(Bloque.id_actividad == Actividad.id)
+  statement = select(Actividad, subquery.exists())
   if is_active is not None:
     statement = statement.where(Actividad.is_active == is_active)
   return session.exec(statement).all()
