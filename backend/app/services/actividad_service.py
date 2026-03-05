@@ -45,15 +45,7 @@ def actualizar_actividad(session, id: int, actividad: ActividadUpdate) -> Activi
   return update_actividad(session, actividad_bd, actividad)
 
 
-def eliminar_actividad_soft(session: Session, id: int) -> None:
-  actividad_bd = buscar_actividad(session, id)
-  # Soft delete
-  actividad = ActividadUpdate(is_active=False)
-  update_actividad(session, actividad_bd, actividad)
-  return
-
-
-def eliminar_actividad_hard(session: Session, id: int) -> None:
+def eliminar_actividad(session: Session, id: int) -> None:
   actividad = buscar_actividad(session, id)
   delete_actividad(session, actividad)
   return

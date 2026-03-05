@@ -9,8 +9,7 @@ from app.schemas.actividad_schema import (
 )
 from app.services.actividad_service import (
   actualizar_actividad,
-  eliminar_actividad_hard,
-  eliminar_actividad_soft,
+  eliminar_actividad,
   registrar_actividad,
 )
 
@@ -35,11 +34,7 @@ def patch_actividad(session: SessionDep, actividad: ActividadUpdate, id: int):
   return actualizar_actividad(session, id, actividad)
 
 
-# Aunque sea soft delete, igual va delete
 @actividad_router.delete('/actividades/{id}', status_code=204)
-def delete_actividad(session: SessionDep, id: int, hard: bool = False):
-  if hard:
-    eliminar_actividad_hard(session, id)
-  else:
-    eliminar_actividad_soft(session, id)
+def delete_actividad(session: SessionDep, id: int):
+  eliminar_actividad(session, id)
   return
