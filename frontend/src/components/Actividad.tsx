@@ -28,8 +28,8 @@ export default memo(function Actividad({ id }: { id: number }) {
     await actualizarActividad(id, { nombre: newNombre })
   }
   // TODO: Todavia no se agrego el lugar de la papelera para incluir el soft
-  const eliminarActividadSoft = useActividadesStore(
-    state => state.eliminarActividadSoft
+  const eliminarActividad = useActividadesStore(
+    state => state.eliminarActividad
   )
 
   return (

@@ -45,7 +45,7 @@ export async function updateActividad(
   return res.json() as Promise<ActividadRead>
 }
 
-export async function deleteActividadSoft(id: number): Promise<void> {
+export async function deleteActividad(id: number): Promise<void> {
   const res = await fetch(`${URL}/${id}`, { method: 'DELETE' })
   if (!res.ok) throw new Error('Error al eliminar la actividad por id')
 }

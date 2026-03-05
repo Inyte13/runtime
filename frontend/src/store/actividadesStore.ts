@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import {
   createActividad,
-  deleteActividadSoft,
+  deleteActividad,
   readActividades,
   updateActividad,
 } from '../services/actividadesServices'
@@ -17,7 +17,7 @@ interface ActividadState {
   traerActividades: () => Promise<void>
   crearActividad: (actividad: ActividadCreate) => Promise<void>
   actualizarActividad: (id: number, actividad: ActividadUpdate) => Promise<void>
-  eliminarActividadSoft: (id: number) => Promise<void>
+  eliminarActividad: (id: number) => Promise<void>
 }
 
 export const useActividadesStore = create<ActividadState>(set => ({
@@ -56,9 +56,9 @@ export const useActividadesStore = create<ActividadState>(set => ({
     }
   },
 
-  eliminarActividadSoft: async id => {
+  eliminarActividad: async id => {
     try {
-      await deleteActividadSoft(id)
+      await deleteActividad(id)
       set(state => {
         if (!state.actividades) return state
         return {
