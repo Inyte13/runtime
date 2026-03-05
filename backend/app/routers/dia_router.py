@@ -17,7 +17,7 @@ from app.services.dia_services import (
 dia_router = APIRouter(tags=['Dia'])
 
 
-# GET: Dia básico/detail
+# GET: Dia básico o detail
 @dia_router.get('/dias/{fecha}', response_model=DiaReadDetail | DiaRead)
 def get_dia(
   session: SessionDep,
