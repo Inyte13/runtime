@@ -3,6 +3,8 @@ import ColorPicker from './ColorPicker'
 import { useActividadesStore } from '../store/actividadesStore'
 import { Input } from './ui/input'
 import { manejarEnter } from '../utils/keyboard'
+import { Button } from './ui/button'
+import { Archive, Trash2} from 'lucide-react'
 
 // TODO: El primer cambio si renderiza todos los
 export default memo(function Actividad({ id }: { id: number }) {
