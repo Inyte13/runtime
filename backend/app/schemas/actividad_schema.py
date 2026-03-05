@@ -23,6 +23,11 @@ class ActividadRead(ActividadBase):
   id: int
 
 
+class ActividadReadDetail(ActividadBase):
+  id: int
+  tiene_bloques: bool
+
+
 class ActividadUpdate(SQLModel):
   nombre: str | None = None
   color: str | None = None
