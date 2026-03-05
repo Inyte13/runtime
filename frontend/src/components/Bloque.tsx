@@ -50,7 +50,7 @@ export default memo(function Bloque({
         duracion={bloque.duracion || 0}
         manejarDuracion={manejarDuracion}
       />
-
+      
       <Button
         size='icon-xxs'
         variant='ghost'
