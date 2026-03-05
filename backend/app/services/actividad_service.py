@@ -20,7 +20,7 @@ from app.schemas.actividad_schema import (
 )
 
 
-def validar_nombre_unico(session: Session, nombre: str) -> None:
+def _validar_nombre_unico(session: Session, nombre: str) -> None:
   if search_actividad_by_nombre(session, nombre):
     raise HTTPException(
       status_code=status.HTTP_400_BAD_REQUEST,
@@ -69,7 +69,7 @@ def actualizar_actividad(
   actividad_bd = buscar_actividad(session, id)
   # Valido si el nombre existe y si es diferente al nombre original
   if actividad.nombre and actividad.nombre != actividad_bd.nombre:
-    validar_nombre_unico(session, actividad.nombre)
+    _validar_nombre_unico(session, actividad.nombre)
   return update_actividad(session, actividad_bd, actividad)
 
 
