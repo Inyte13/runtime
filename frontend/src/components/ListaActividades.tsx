@@ -8,8 +8,6 @@ import Archivadas from './Archivadas'
 import { Input } from './ui/input'
 
 export default function ListaActividades() {
-  const actividadesIds = useActividadesStore(
-    useShallow(state => state.actividades.map(actividad => actividad.id))
   const traerActividadesDetail = useActividadesStore(
     state => state.traerActividadesDetail
   )
@@ -36,6 +34,8 @@ export default function ListaActividades() {
         </ul>
       </div>
       <ListaActividadesFooter onCreate={() => setIsCreate(true)} />
+          <Activas isCreate={isCreate} offCreate={() => setIsCreate(false)} />
+          <Archivadas />
     </section>
   )
 }
