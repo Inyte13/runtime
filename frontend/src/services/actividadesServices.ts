@@ -9,17 +9,17 @@ const URL = '/actividades'
 
 export async function createActividad(
   actividad: ActividadCreate
-): Promise<ActividadRead> {
+): Promise<ActividadReadDetail> {
   const res = await fetch(URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(actividad),
   })
   if (!res.ok) throw new Error('Error al crear la actividad')
-  return res.json() as Promise<ActividadRead>
+  return res.json() as Promise<ActividadReadDetail>
 }
 
-export async function readActividades(
+export async function readActividadesDetail(
   isActive?: boolean
 ): Promise<ActividadReadDetail[]> {
   // Si es undefined no tiene params directamente

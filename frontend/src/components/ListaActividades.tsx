@@ -10,15 +10,15 @@ import { Input } from './ui/input'
 export default function ListaActividades() {
   const actividadesIds = useActividadesStore(
     useShallow(state => state.actividades.map(actividad => actividad.id))
+  const traerActividadesDetail = useActividadesStore(
+    state => state.traerActividadesDetail
   )
-  const traerActividades = useActividadesStore(state => state.traerActividades)
-
   const [isCreate, setIsCreate] = useState(false)
 
   useEffect(() => {
-    traerActividades()
-  }, [traerActividades])
-
+    traerActividadesDetail()
+  }, [traerActividadesDetail])
+  
   return (
     <section className='flex flex-col max-w-60 h-full overflow-hidden p-4 gap-y-2 justify-content'>
       <div className='flex-1 min-h-0 overflow-y-auto border border-border rounded-lg bg-card text-card-foreground [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]'>

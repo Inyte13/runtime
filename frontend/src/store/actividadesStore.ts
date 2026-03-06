@@ -13,20 +13,20 @@ import {
 import { useColorStore } from './colorStore'
 
 interface ActividadState {
-  actividades: ActividadRead[]
-  traerActividades: () => Promise<void>
+  actividadesDetail: ActividadReadDetail[]
+  traerActividadesDetail: () => Promise<void>
   crearActividad: (actividad: ActividadCreate) => Promise<void>
   actualizarActividad: (id: number, actividad: ActividadUpdate) => Promise<void>
   eliminarActividad: (id: number) => Promise<void>
 }
 
 export const useActividadesStore = create<ActividadState>(set => ({
-  actividades: [],
+  actividadesDetail: [],
 
-  traerActividades: async () => {
+  traerActividadesDetail: async () => {
     try {
-      const data = await readActividades()
-      set({ actividades: data })
+      const data = await readActividadesDetail()
+      set({ actividadesDetail: data })
       // Store Hydration: Para guardar los los colores para no repetirlos
       useColorStore.getState().setColores(data)
     } catch (err) {
@@ -34,10 +34,12 @@ export const useActividadesStore = create<ActividadState>(set => ({
     }
   },
 
-  crearActividad: async actividad => {
+  crearActividad: async actividadNew => {
     try {
-      const actividadNew = await createActividad(actividad)
-      set(state => ({ actividades: [...state.actividades, actividadNew] }))
+      const actividad = await createActividad(actividadNew)
+      set(state => ({
+        actividadesDetail: [...state.actividadesDetail, actividad],
+      }))
     } catch (err) {
       console.error('Error al crear la actividad', err)
     }
@@ -45,10 +47,12 @@ export const useActividadesStore = create<ActividadState>(set => ({
 
   actualizarActividad: async (id, actividadNew) => {
     try {
-      await updateActividad(id, actividadNew)
+      const actividad = await updateActividad(id, actividadNew)
       set(state => ({
-        actividades: state.actividades.map(actividad =>
-          actividad.id === id ? { ...actividad, ...actividadNew } : actividad
+        actividadesDetail: state.actividadesDetail.map(actividadDetail =>
+          actividadDetail.id === id
+            ? { ...actividadDetail, ...actividad }
+            : actividadDetail
         ),
       }))
     } catch (err) {
@@ -59,14 +63,11 @@ export const useActividadesStore = create<ActividadState>(set => ({
   eliminarActividad: async id => {
     try {
       await deleteActividad(id)
-      set(state => {
-        if (!state.actividades) return state
-        return {
-          actividades: state.actividades.filter(
-            actividad => actividad.id !== id
-          ),
-        }
-      })
+      set(state => ({
+        actividadesDetail: state.actividadesDetail.filter(
+          actividad => actividad.id !== id
+        ),
+      }))
     } catch (err) {
       console.error('Error eliminando la actividad', err)
     }

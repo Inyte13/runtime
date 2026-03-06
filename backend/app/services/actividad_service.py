@@ -56,7 +56,7 @@ def mostrar_actividades(
 
 def registrar_actividad(
   session: Session, actividad: ActividadCreate
-) -> Actividad:
+) -> ActividadReadDetail:
   _validar_nombre_unico(session, actividad.nombre)
   new_actividad = create_actividad(session, Actividad.model_validate(actividad))
   actividad_detail = new_actividad.model_dump()
