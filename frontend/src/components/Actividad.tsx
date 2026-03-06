@@ -15,6 +15,9 @@ export default memo(function Actividad({ id }: { id: number }) {
   const actualizarActividad = useActividadesStore(
     state => state.actualizarActividad
   )
+  const eliminarActividad = useActividadesStore(
+    state => state.eliminarActividad
+  )
   const { nombre, color: colorFallback, tiene_bloques } = actividad
 
   const manejarNombre = async (e: React.FocusEvent<HTMLInputElement>) => {
@@ -41,6 +44,16 @@ export default memo(function Actividad({ id }: { id: number }) {
         maxLength={50}
         onKeyDown={manejarEnter}
       />
+      {!tiene_bloques && (
+        <Button
+          size='icon-xs'
+          variant='destructive'
+          className='opacity-0 group-hover:opacity-100 transition-none pointer-events-none group-hover:pointer-events-auto'
+          onClick={() => eliminarActividad(id)}
+        >
+          <Trash2 />
+        </Button>
+      )}
     </div>
   )
 })
