@@ -17,6 +17,9 @@ export default function ListaActividades() {
     traerActividadesDetail()
   }, [traerActividadesDetail])
   
+  // TODO: Filtros, por color, con/sin bloques y recientes/semana
+  
+  // h-auto en lugar de h-9 para evitar salto de layout al cambiar tabs
   return (
     <section className='flex flex-col max-w-60 min-w-60 h-full overflow-hidden p-4 gap-y-2 justify-content'>
       <Input placeholder='Buscar' className='h-auto bg-input/30 border-input/30'/>
