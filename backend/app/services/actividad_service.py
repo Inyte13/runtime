@@ -43,16 +43,15 @@ def mostrar_actividades(
   session: Session, is_active: bool | None = None
 ) -> Sequence[ActividadReadDetail]:
   # Actividades con el tiene_bloques a lado: [(Actividad, True), (Actividad, False)])
-  actividades_bd_con_estado = read_actividades(session, is_active)
-  actividades = []
-  for actividad_bd, tiene_bloques in actividades_bd_con_estado:
+  tuple = read_actividades(session, is_active)
+  actividades_detail = []
+  for actividad, tiene_bloques in tuple:
     # Lo convertimos en dict
-    actividad = actividad_bd.model_dump()
+    actividad_detail = actividad.model_dump()
     # Metemos el atributo tiene_bloques
-    actividad['tiene_bloques'] = tiene_bloques
-    new_actividad = ActividadReadDetail(**actividad)
-    actividades.append(new_actividad)
-  return actividades
+    actividad_detail['tiene_bloques'] = tiene_bloques
+    actividades_detail.append(ActividadReadDetail(**actividad_detail))
+  return actividades_detail
 
 
 def registrar_actividad(
