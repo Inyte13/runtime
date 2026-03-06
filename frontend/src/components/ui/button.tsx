@@ -32,6 +32,7 @@ const buttonVariants = cva(
         sm: 'text-sm py-1.5 h-8 px-3 gap-1.5 has-[>svg]:px-2.5',
         md: 'text-sm py-2 h-9 px-4 font-medium has-[>svg]:px-3',
         lg: 'text-base py-2.5 h-10 px-6 has-[>svg]:px-4',
+        icon: 'size-9 [&_svg:not([class*="size-"])]:size-6',
         'icon-xxs': 'size-5 [&_svg:not([class*="size-"])]:size-3',
         'icon-xs': 'size-6 [&_svg:not([class*="size-"])]:size-4',
         'icon-sm': 'size-8 [&_svg:not([class*="size-"])]:size-5',
@@ -39,7 +40,6 @@ const buttonVariants = cva(
         'icon-lg': 'size-10 [&_svg:not([class*="size-"])]:size-7',
       },
     },
-    // TODO: Default icon-md cuando tenga un hijo dentro
     defaultVariants: {
       variant: 'primary',
       size: 'md',
