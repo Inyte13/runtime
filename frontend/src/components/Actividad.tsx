@@ -30,9 +30,10 @@ export default memo(function Actividad({ id }: { id: number }) {
     }
     await actualizarActividad(id, { nombre: newNombre })
   }
-
+  const isArchived = actividad.is_active
+  
   const manejarArchivar = async () => {
-    await actualizarActividad(id, { is_active: !actividad.is_active })
+    await actualizarActividad(id, { is_active: !isArchived })
   }
 
   return (
@@ -61,7 +62,7 @@ export default memo(function Actividad({ id }: { id: number }) {
         className='opacity-0 group-hover:opacity-100 transition-none pointer-events-none group-hover:pointer-events-auto'
         onClick={manejarArchivar}
       >
-        {actividad.is_active ? <Archive /> : <ArchiveRestore />}
+        {isArchived ? <Archive /> : <ArchiveRestore />}
       </Button>
       {!tiene_bloques && (
         <Button
