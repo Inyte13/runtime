@@ -18,24 +18,38 @@ export default function ListaActividades() {
   }, [traerActividadesDetail])
   
   return (
-    <section className='flex flex-col max-w-60 h-full overflow-hidden p-4 gap-y-2 justify-content'>
-      <div className='flex-1 min-h-0 overflow-y-auto border border-border rounded-lg bg-card text-card-foreground [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]'>
-        <ul className='flex flex-col divide-y divide-border/50 px-4'>
-          {actividadesIds.map(id => (
-            <li className='first:pt-2 last:pb-2' key={id}>
-              <Actividad id={id} />
-            </li>
-          ))}
-          {isCreate && (
-            <li className='first:pt-2 last:pb-2'>
-              <ActividadTemp offCreate={() => setIsCreate(false)} />
-            </li>
-          )}
-        </ul>
-      </div>
-      <ListaActividadesFooter onCreate={() => setIsCreate(true)} />
+    <section className='flex flex-col max-w-60 min-w-60 h-full overflow-hidden p-4 gap-y-2 justify-content'>
+      <Input placeholder='Buscar' className='h-auto bg-input/30 border-input/30'/>
+      <Tabs defaultValue='activas' className='flex flex-col min-h-0 gap-2'>
+        <TabsList className='w-fit'>
+
+          <TabsTrigger value='activas' className='flex gap-1'>
+            <CircleCheck className='size-3.5' />
+            Activas
+          </TabsTrigger>
+
+          <TabsTrigger value='archivadas' className='flex gap-1'>
+            <Archive className='size-3.5' />
+            Archivadas
+          </TabsTrigger>
+
+        </TabsList>
+
+        <TabsContent
+          value='activas'
+          className='m-0 flex flex-col min-h-50 gap-2'
+        >
           <Activas isCreate={isCreate} offCreate={() => setIsCreate(false)} />
+          <ListaActividadesFooter onCreate={() => setIsCreate(true)} />
+        </TabsContent>
+
+        <TabsContent
+          value='archivadas'
+          className='m-0 flex flex-col min-h-50 gap-2'
+        >
           <Archivadas />
+        </TabsContent>
+      </Tabs>
     </section>
   )
 }
