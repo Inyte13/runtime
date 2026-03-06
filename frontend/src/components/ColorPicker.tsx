@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils.js'
 import { useActividadesStore } from '../store/actividadesStore.js'
 import { useColorStore } from '../store/colorStore.js'
 
