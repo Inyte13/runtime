@@ -28,13 +28,10 @@ export function Header() {
               <Link to='/configuraciones'>
                 <Settings />
               </Link>
-            </Button> 
+            </Button>
           </li>
           <li>
-            <Button
-              variant='secondary'
-              onClick={() => setIsDark(!isDark)}
-            >
+            <Button variant='secondary' onClick={() => setIsDark(!isDark)}>
               {isDark ? 'Dark' : 'Light'}
             </Button>
           </li>

@@ -18,7 +18,7 @@ function CalendarioToolbar() {
   const { prevDia, nextDia, irHoy } = useFechaStore()
   return (
     <div className='flex'>
-      <div >
+      <div>
         <Button className=''>Mes</Button>
         <Button className=''>Semana</Button>
       </div>

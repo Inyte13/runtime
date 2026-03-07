@@ -1,13 +1,12 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 @import './colors.css';
-
 
 /* El selection, el que se usa para copiar */
 @layer base {
   ::selection {
     @apply bg-primary text-primary-foreground;
   }
-  
+
   ::-moz-selection {
     @apply bg-primary text-primary-foreground;
   }
@@ -33,10 +32,12 @@
   --color-primary: var(--primary); /* El color de mi btn principal */
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary); /* El color de mi btn secundario */
-  --color-secondary-foreground: var(--secondary-foreground); 
+  --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent); /* Se usa para interactuar con algo que no es un btn*/
+  --color-accent: var(
+    --accent
+  ); /* Se usa para interactuar con algo que no es un btn*/
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-border: var(--border);
@@ -107,7 +108,7 @@
   --muted-foreground: var(--gray-10);
   --accent: var(--gray-a2);
   --accent-foreground: var(--gray-12);
-  --destructive: oklch(61% 0.21 25); 
+  --destructive: oklch(61% 0.21 25);
   --border: var(--gray-5);
   --input: var(--gray-5);
   --ring: var(--gray-5);

@@ -31,7 +31,7 @@ export default memo(function Actividad({ id }: { id: number }) {
     await actualizarActividad(id, { nombre: newNombre })
   }
   const isArchived = actividad.is_active
-  
+
   const manejarArchivar = async () => {
     await actualizarActividad(id, { is_active: !isArchived })
   }

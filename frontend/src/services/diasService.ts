@@ -60,7 +60,7 @@ export async function sortDia(
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(ids), // FastAPI lo recibe como tu list[int]
   })
-  
+
   if (!res.ok) throw new Error('Error al reordenar los bloques en el servidor')
   return res.json() as Promise<BloqueRead[]>
 }

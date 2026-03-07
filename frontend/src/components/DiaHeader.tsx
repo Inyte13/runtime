@@ -1,8 +1,8 @@
-import { useEffect, useRef } from "react";
-import { useDiasStore } from "../store/diasStore";
-import { useFechaStore } from "../store/fechaStore";
-import { formatFechaDetail, formatFechaISO } from "../utils/formatDate";
-import { Input } from "./ui/input";
+import { useEffect, useRef } from 'react'
+import { useDiasStore } from '../store/diasStore'
+import { useFechaStore } from '../store/fechaStore'
+import { formatFechaDetail, formatFechaISO } from '../utils/formatDate'
+import { Input } from './ui/input'
 
 export default function DiaHeader() {
   const fecha = useFechaStore(state => state.fecha)
@@ -13,7 +13,7 @@ export default function DiaHeader() {
   const titulo = useDiasStore(state => state.diaDetail?.titulo) || ''
   const actualizarDia = useDiasStore(state => state.actualizarDia)
 
-    // Creame una ref pero por ahora es null
+  // Creame una ref pero por ahora es null
   const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {

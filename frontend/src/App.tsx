@@ -4,8 +4,8 @@ import { lazy } from 'react'
 
 const Home = lazy(() => import('./pages/Home.js'))
 
-  // El overflow-hidden en el div es para proteger toda la ventana
-  // El overflow-hidden en el main es para proteger al header
+// El overflow-hidden en el div es para proteger toda la ventana
+// El overflow-hidden en el main es para proteger al header
 export default function App() {
   return (
     <div className='flex flex-col h-dvh overflow-hidden'>

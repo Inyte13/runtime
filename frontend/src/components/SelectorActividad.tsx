@@ -36,7 +36,7 @@ export default memo(function SelectorActividad({ id }: { id: number }) {
     if (!actividad) return
     await actualizarBloque(id, { id_actividad: actividad.id })
   }
-  
+
   // label y value son nombres que espera Base UI
   const items = actividades.map(act => ({
     label: act.nombre,
@@ -61,9 +61,7 @@ export default memo(function SelectorActividad({ id }: { id: number }) {
                   style={{ backgroundColor: color }}
                 />
               )}
-              <span
-                className='capitalize text-2xl font-light'
-              >
+              <span className='capitalize text-2xl font-light'>
                 <ComboboxValue />
               </span>
             </div>

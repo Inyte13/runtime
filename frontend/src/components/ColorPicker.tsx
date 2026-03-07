@@ -9,8 +9,11 @@ export default function ColorPicker({
   ...props
 }: {
   id: number
-  colorFallback: string,
-}& Omit<React.ComponentProps<'input'>, 'type' | 'value' | 'onChange' | 'onBlur' | 'id'>) {
+  colorFallback: string
+} & Omit<
+  React.ComponentProps<'input'>,
+  'type' | 'value' | 'onChange' | 'onBlur' | 'id'
+>) {
   const color = useColorStore(state => state.colores[id] || colorFallback)
   const setColor = useColorStore(state => state.setColor)
   const actualizarActividad = useActividadesStore(
@@ -23,7 +26,8 @@ export default function ColorPicker({
     <input
       {...props}
       style={{ background: color }}
-      className={cn(`rounded-full size-4 shrink-0 cursor-pointer p-0 
+      className={cn(
+        `rounded-full size-4 shrink-0 cursor-pointer p-0 
         [&::-webkit-color-swatch-wrapper]:p-0
         [&::-webkit-color-swatch]:opacity-0 
         [&::-webkit-color-swatch]:border-none 
@@ -31,7 +35,9 @@ export default function ColorPicker({
         [&::-moz-color-swatch]:border-none 
         [&::-moz-color-swatch]:rounded-full
         [&::-moz-color-swatch]:opacity-0
-        `, className)}
+        `,
+        className
+      )}
       type='color'
       value={color}
       onChange={e => setColor(id, e.target.value)}
