@@ -63,15 +63,21 @@ export default function ListaActividades() {
           value='activas'
           className='m-0 flex flex-col min-h-50 gap-2'
         >
-          <Activas isCreate={isCreate} offCreate={() => setIsCreate(false)} />
-          <ListaActividadesFooter onCreate={() => setIsCreate(true)} />
+          <Activas
+            isCreate={isCreate}
+            offCreate={() => setIsCreate(false)}
+            search={search}
+          />
+          {!search && (
+            <ListaActividadesFooter onCreate={() => setIsCreate(true)} />
+          )}
         </TabsContent>
 
         <TabsContent
           value='archivadas'
           className='m-0 flex flex-col min-h-50 gap-2'
         >
-          <Archivadas />
+          <Archivadas search={search} />
         </TabsContent>
       </Tabs>
     </section>
