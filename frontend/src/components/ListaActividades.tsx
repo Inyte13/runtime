@@ -2,10 +2,16 @@ import { useEffect, useState } from 'react'
 import { useActividadesStore } from '../store/actividadesStore'
 import ListaActividadesFooter from './ListaActividadesFooter'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs'
-import { Archive, CircleCheck } from 'lucide-react'
+import { Archive, CircleCheck, X } from 'lucide-react'
 import Activas from './Activas'
 import Archivadas from './Archivadas'
 import { Input } from './ui/input'
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+} from './ui/input-group'
 
 export default function ListaActividades() {
   const traerActividadesDetail = useActividadesStore(

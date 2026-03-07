@@ -1,4 +1,4 @@
-import { Ghost } from 'lucide-react'
+import { Ghost, Search } from 'lucide-react'
 import Actividad from './Actividad'
 import ActividadTemp from './ActividadTemp'
 import { useActividadesStore } from '@/store/actividadesStore'
