@@ -8,14 +8,20 @@ import { memo } from 'react'
 export default memo(function Activas({
   isCreate,
   offCreate,
+  search,
 }: {
   isCreate: boolean
   offCreate: () => void
+  search: string
 }) {
   const activasIds = useActividadesStore(
     useShallow(state =>
       state.actividadesDetail
-        .filter(actividad => actividad.is_active)
+        .filter(
+          actividad =>
+            actividad.is_active &&
+            actividad.nombre.includes(search.toLowerCase())
+        )
         .map(actividad => actividad.id)
     )
   )

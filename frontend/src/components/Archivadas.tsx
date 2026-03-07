@@ -4,11 +4,15 @@ import { useShallow } from 'zustand/react/shallow'
 import Actividad from './Actividad'
 import { memo } from 'react'
 
-export default memo(function Archivadas() {
+export default memo(function Archivadas({ search }: { search: string }) {
   const archivadasIds = useActividadesStore(
     useShallow(state =>
       state.actividadesDetail
-        .filter(actividad => !actividad.is_active)
+        .filter(
+          actividad =>
+            !actividad.is_active &&
+            actividad.nombre.includes(search.toLowerCase())
+        )
         .map(actividad => actividad.id)
     )
   )
