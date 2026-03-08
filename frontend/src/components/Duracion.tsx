@@ -20,7 +20,8 @@ export default memo(function Duracion({
         <Button
           size='icon-xs'
           onClick={prevTime}
-          disabled={duracion === 0}
+          // TODO: Deberia ser el mínimo múltiplo que elija el usuario ejm(0.25, 0.5, 1)
+          disabled={duracion === 0.5}
           variant='ghost'
         >
           <ChevronUp />
