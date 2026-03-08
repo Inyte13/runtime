@@ -37,7 +37,11 @@ export default function ListaActividades() {
         />
         {search && (
           <InputGroupAddon align='inline-end'>
-            <InputGroupButton variant='ghost' size='icon-xs'>
+            <InputGroupButton
+              variant='ghost'
+              size='icon-xs'
+              onClick={() => setSearch('')}
+            >
               <X />
             </InputGroupButton>
           </InputGroupAddon>
