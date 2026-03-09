@@ -32,11 +32,7 @@ export default memo(function SelectorActividad({ id }: { id: number }) {
   // Puede ser null al limpiar con el btn X
   const manejarSelector = async (idStr: string | null) => {
     if (!idStr) return
-    const actividad = actividades.find(
-      actividad => actividad.id.toString() === idStr
-    )
-    if (!actividad) return
-    await actualizarBloque(id, { id_actividad: actividad.id })
+    await actualizarBloque(id, { id_actividad: parseInt(idStr) })
   }
 
   // label y value son nombres que espera Base UI
