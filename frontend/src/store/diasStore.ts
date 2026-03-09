@@ -119,43 +119,26 @@ export const useDiasStore = create<DiasState>(set => ({
     set(state => {
       if (!state.diaDetail) return state
       const bloques = state.diaDetail.bloques
+      const indiceRef = bloques.findIndex(bloque => bloque.id === id)
+      if (indiceRef === -1) return state
 
-      // La posición del índice del bloque actualizado
-      const indice = bloques.findIndex(bloque => bloque.id === id)
-      if (indice === -1) return state
-
-      const diferencia = duracion - (bloques[indice].duracion || 0)
+      const diferencia = duracion - bloques[indiceRef].duracion
 
       // Si la diferencia es la misma
       if (diferencia === 0) return state
 
       const newBloques = bloques.map((bloque, i) => {
-        if (i === indice) {
-          return {
-            ...bloque,
-            // Solo le cambiamos la duracion y la hora_fin la hora se queda como está
-            duracion: duracion,
-            hora_fin: modificarHora(bloque.hora, duracion),
-          }
+        if (i !== indiceRef) return bloque
+        return {
+          ...bloque,
+          duracion,
+          hora_fin: modificarHora(bloque.hora, duracion),
         }
-
-        if (i > indice) {
-          return {
-            ...bloque,
-            // Modificamos la hora y hora_fin
-            hora: modificarHora(bloque.hora, diferencia),
-            hora_fin: bloque.hora_fin
-              ? modificarHora(bloque.hora_fin, diferencia)
-              : bloque.hora_fin,
-          }
-        }
-        return bloque
       })
-
       return {
         diaDetail: {
           ...state.diaDetail,
-          bloques: newBloques,
+          bloques: modificarHoras(newBloques, indiceRef + 1, diferencia),
         },
       }
     })
