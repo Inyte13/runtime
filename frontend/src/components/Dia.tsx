@@ -12,7 +12,7 @@ export default function Dia() {
   }, [fecha, traerDiaDetail])
 
   return (
-    <section className='flex flex-col min-w-80 h-full gap-y-2 p-4'>
+    <section className='flex flex-col min-w-81 h-full gap-y-2 p-4 pr-0'>
       <DiaHeader />
       <div className='flex-1 min-h-0'>
         <ListaBloques />

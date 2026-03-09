@@ -34,7 +34,7 @@ export default function DiaHeader() {
   }
 
   return (
-    <header className='flex flex-col gap-y-1 items-center'>
+    <header className='flex flex-col gap-y-1 items-center pr-8'>
       <h2 className='text-2xl font-semibold'>{fechaDetail}</h2>
       <Input
         ref={inputRef} // 4. Conectamos la referencia al componente
