@@ -14,19 +14,15 @@ def create_actividad(session: Session, actividad: Actividad) -> Actividad:
   return actividad
 
 
-# No especifico que devuelvo porque es esto [(Actividad, True), (Actividad, False)])
-def read_actividades(
-  session: Session, is_active: bool | None = None
-) -> Sequence[tuple[Actividad, bool]]:
-  subquery = select(Bloque.id).where(Bloque.id_actividad == Actividad.id)
-  statement = select(Actividad, subquery.exists())
-  if is_active is not None:
-    statement = statement.where(Actividad.is_active == is_active)
-  return session.exec(statement).all()
-
-
-def read_actividad_by_id(session: Session, id: int) -> Actividad | None:
+def read_actividad(session: Session, id: int) -> Actividad | None:
   return session.get(Actividad, id)
+
+
+def is_exists_bloque(session: Session, id: int) -> bool:
+  # exists, existe al menos uno?
+  subquery = select(Bloque.id).where(Bloque.id_actividad == id).exists()
+  result = session.exec(select(subquery))
+  return result.one()
 
 
 def search_actividad_by_nombre(

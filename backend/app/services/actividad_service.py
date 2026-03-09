@@ -33,30 +33,18 @@ def buscar_actividad(session: Session, id: int) -> Actividad:
   return actividad
 
 
-# Especificamos el ActividadReadDetail porque es el único que tiene el atributo tiene_bloques
 def mostrar_actividades(
   session: Session, is_active: bool | None = None
-) -> Sequence[ActividadReadDetail]:
-  # Actividades con el tiene_bloques a lado: [(Actividad, True), (Actividad, False)])
-  tuple = read_actividades(session, is_active)
-  actividades_detail = []
-  for actividad, tiene_bloques in tuple:
-    # Lo convertimos en dict
-    actividad_detail = actividad.model_dump()
-    # Metemos el atributo tiene_bloques
-    actividad_detail['tiene_bloques'] = tiene_bloques
-    actividades_detail.append(ActividadReadDetail(**actividad_detail))
-  return actividades_detail
-
-
-def registrar_actividad(
-  session: Session, actividad: ActividadCreate
-) -> ActividadReadDetail:
-  _validar_nombre_unico(session, actividad.nombre)
-  new_actividad = create_actividad(session, Actividad.model_validate(actividad))
-  actividad_detail = new_actividad.model_dump()
-  actividad_detail['tiene_bloques'] = False
-  return ActividadReadDetail(**actividad_detail)
+) -> list[ActividadReadDetail]:
+  actividades = read_actividades(session, is_active)
+  return [
+    ActividadReadDetail(
+      **actividad.model_dump(),
+      # actividad.id nunca sera none por mi backend
+      tiene_bloques=is_exists_bloque(session, actividad.id),  # type: ignore
+    )
+    for actividad in actividades
+  ]
 
 
 def actualizar_actividad(
