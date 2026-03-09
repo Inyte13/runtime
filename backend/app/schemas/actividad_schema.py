@@ -4,9 +4,10 @@ from pydantic import field_validator
 from sqlmodel import SQLModel
 
 
+class ActividadCreate(SQLModel):
+  nombre: str
+  color: str
 
-# TODO: Validar el regex para mayor seguridad
-class ActividadCreate(ActividadBase):
   @field_validator('nombre')
   def to_lowercase_and_not_empty(cls, v: str) -> str:
     if v.strip() == '':
@@ -15,17 +16,19 @@ class ActividadCreate(ActividadBase):
 
   @field_validator('color')
   def color_not_empty(cls, v: str) -> str:
-    if v.strip() == '':
-      raise ValueError('El color no puede estar vacío')
+    if not re.match(r'^#[0-9A-Fa-f]{6}$', v):
+      raise ValueError('El color debe ser un hexadecimal válido (#RRGGBB)')
     return v
 
 
-class ActividadRead(ActividadBase):
+class ActividadRead(SQLModel):
   id: int
+  nombre: str
+  color: str
 
 
-class ActividadReadDetail(ActividadBase):
-  id: int
+class ActividadReadDetail(ActividadRead):
+  is_active: bool
   tiene_bloques: bool
 
 
@@ -43,7 +46,7 @@ class ActividadUpdate(SQLModel):
     return v
 
   @field_validator('color')
-  def color_not_empty(cls, v: str | None) -> str | None:
-    if v is not None and v.strip() == '':
-      raise ValueError('El color no puede estar vacío')
+  def color_not_empty(cls, v: str) -> str:
+    if not re.match(r'^#[0-9A-Fa-f]{6}$', v):
+      raise ValueError('El color debe ser un hexadecimal válido (#RRGGBB)')
     return v
