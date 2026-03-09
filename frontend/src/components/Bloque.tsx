@@ -45,7 +45,7 @@ export default memo(function Bloque({ id }: { id: number }) {
       </Button>
 
       <span className='pl-1 text-foreground/70'>
-        {bloque.hora} {(bloque.duracion ?? 0) > 0 && `- ${bloque.hora_fin}`}
+        {bloque.hora} - {bloque.hora_fin}
       </span>
 
       <Input
