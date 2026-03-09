@@ -25,12 +25,7 @@ def is_exists_bloque(session: Session, id: int) -> bool:
   return result.one()
 
 
-def search_actividad_by_nombre(
-  session: Session, texto_busqueda: str
 ) -> Sequence[Actividad]:
-  patron = f'%{texto_busqueda}%'
-  # Buscamos coincidencias insensibles a uppercase y lowercase
-  statement = select(Actividad).where(col(Actividad.nombre).ilike(patron))
   return session.exec(statement).all()
 
 
