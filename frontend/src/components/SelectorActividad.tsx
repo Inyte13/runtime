@@ -14,14 +14,10 @@ import {
 import { Button } from './ui/button.js'
 import { ChevronDown } from 'lucide-react'
 import { memo, useMemo } from 'react'
-import { useShallow } from 'zustand/react/shallow'
 
 export default memo(function SelectorActividad({ id }: { id: number }) {
-  const actividad = useDiasStore(
-    useShallow(
-      state =>
-        state.diaDetail?.bloques.find(bloque => bloque.id === id)?.actividad
-    )
+  const bloque = useDiasStore(state =>
+    state.diaDetail?.bloques.find(bloque => bloque.id === id)
   )
   const actividad = useActividadesStore(state =>
     state.actividadesDetail.find(

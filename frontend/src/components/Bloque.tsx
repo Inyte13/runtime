@@ -6,14 +6,11 @@ import BloqueColor from './BloqueColor'
 import { manejarEnter } from '../utils/keyboard'
 import { Button } from './ui/button'
 import { X } from 'lucide-react'
-import { useShallow } from 'zustand/react/shallow'
 import { useActividadesStore } from '@/store/actividadesStore'
 
 export default memo(function Bloque({ id }: { id: number }) {
-  const bloque = useDiasStore(
-    useShallow(state =>
-      state.diaDetail?.bloques.find(bloque => bloque.id === id)
-    )
+  const bloque = useDiasStore(state =>
+    state.diaDetail?.bloques.find(bloque => bloque.id === id)
   )
   const actividad = useActividadesStore(state =>
     state.actividadesDetail.find(
