@@ -17,7 +17,7 @@ interface DiasState {
   diaDetail: DiaReadDetail | null
   traerDiaDetail: () => Promise<void>
   actualizarDia: (fechaISO: string, dia: DiaUpdate) => Promise<void>
-  crearBloque: () => Promise<void>
+  crearBloque: (id?: number) => Promise<void>
   actualizarBloque: (id: number, bloque: BloqueUpdate) => Promise<void>
   actualizarHoras: (id: number, duracion: number) => void
   reordenarBloques: (event: DragEndEvent) => Promise<void>
@@ -54,31 +54,39 @@ export const useDiasStore = create<DiasState>(set => ({
     }
   },
 
-  crearBloque: async () => {
+  crearBloque: async id => {
     const fecha = useFechaStore.getState().fecha
     const fechaISO = formatFechaISO(fecha)
     try {
-      const bloque = await createBloque({ fecha: fechaISO })
+      const bloque = await createBloque({ fecha: fechaISO, id_ref: id })
       set(state => {
-        if (state.diaDetail) {
+        // Si no hay diaDetail crearmos uno falso confiando en que el backend lo creo para ser rapido
           return {
             diaDetail: {
-              // Conservamos título, estado y fecha
-              ...state.diaDetail,
-              // Hacemos una copia en una dirección diferente de memoria
-              // Los elementos copiados mantienen su misma referencia de memoria
-              bloques: [...state.diaDetail.bloques, bloque],
+              fecha: fechaISO,
+              titulo: null,
+              estado: null,
+              bloques: [bloque],
             },
           }
         }
-        // Si no hay diaDetail crearmos uno falso confiando en que el backend lo creo para ser rapido
+        const bloques = state.diaDetail.bloques
+        if (id === undefined) {
+          return {
+            diaDetail: { ...state.diaDetail, bloques: [...bloques, bloque] },
+          }
+        }
+        const indiceRef = bloques.findIndex(bloque => bloque.id === id)
+        const anteriores = bloques.slice(0, indiceRef + 1) // Incluido
+        const siguientes = bloques.slice(indiceRef + 1)
+
+        const newBloques = [
+          ...anteriores,
+          bloque,
+          ...modificarHoras(siguientes, 0, bloque.duracion),
+        ]
         return {
-          diaDetail: {
-            fecha: fechaISO,
-            titulo: null,
-            estado: null,
-            bloques: [bloque],
-          },
+          diaDetail: { ...state.diaDetail, bloques: newBloques },
         }
       })
     } catch (err) {
