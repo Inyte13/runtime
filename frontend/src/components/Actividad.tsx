@@ -7,7 +7,6 @@ import { Button } from './ui/button'
 import { Archive, ArchiveRestore, Trash2 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
-// TODO: El primer cambio si renderiza todos los
 export default memo(function Actividad({ id }: { id: number }) {
   const actividad = useActividadesStore(state =>
     state.actividadesDetail.find(actividad => actividad.id === id)
