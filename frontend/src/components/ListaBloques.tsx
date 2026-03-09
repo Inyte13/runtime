@@ -17,7 +17,6 @@ export default memo(function ListaBloques() {
   const bloquesIds = useDiasStore(
     useShallow(state => state.diaDetail?.bloques?.map(bloque => bloque.id))
   )
-  const crearBloque = useDiasStore(state => state.crearBloque)
   const reordenarBloques = useDiasStore(state => state.reordenarBloques)
   // Que actue solo si se mueve mas de 5px
   const sensors = useSensors(
@@ -38,8 +37,8 @@ export default memo(function ListaBloques() {
           strategy={verticalListSortingStrategy} // Optimiza las animaciones
         >
           <ul className='flex flex-col gap-y-2'>
-            {bloquesIds?.map(id => (
-              <BloqueOrdenable key={id} id={id} />
+            {bloquesIds?.map((id, i) => (
+              <BloqueOrdenable key={id} id={id} idPrevious={bloquesIds[i-1]}/>
             ))}
           </ul>
         </SortableContext>
