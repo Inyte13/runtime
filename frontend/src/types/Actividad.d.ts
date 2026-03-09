@@ -11,11 +11,7 @@ export interface ActividadRead {
   is_active: boolean
 }
 
-export interface ActividadReadDetail {
-  id: number
-  nombre: string
-  color: string
-  is_active: boolean
+export interface ActividadReadDetail extends ActividadRead {
   tiene_bloques: boolean
 }
 

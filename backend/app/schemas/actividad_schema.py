@@ -25,10 +25,10 @@ class ActividadRead(SQLModel):
   id: int
   nombre: str
   color: str
+  is_active: bool
 
 
 class ActividadReadDetail(ActividadRead):
-  is_active: bool
   tiene_bloques: bool
 
 
