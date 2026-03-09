@@ -2,13 +2,11 @@ import { useDiasStore } from '../store/diasStore'
 import BloqueHeader from './BloqueHeader'
 import { Input } from './ui/input'
 import { memo, useCallback } from 'react'
-import useDuracionBloque from '../hooks/useDuracionBloque'
 import BloqueColor from './BloqueColor'
 import { manejarEnter } from '../utils/keyboard'
 import { Button } from './ui/button'
-import { GripVertical, X } from 'lucide-react'
-import { DraggableAttributes } from '@dnd-kit/core'
-import { SyntheticListenerMap } from '@dnd-kit/core/dist/hooks/utilities'
+import { X } from 'lucide-react'
+import { useShallow } from 'zustand/react/shallow'
 
 export default memo(function Bloque({
   id,

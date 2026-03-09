@@ -2,6 +2,9 @@ import Bloque from './Bloque'
 import { memo } from 'react'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
+import { Button } from './ui/button'
+import { GripVertical, Plus } from 'lucide-react'
+import { useDiasStore } from '@/store/diasStore'
 
 // Creado solo para separar el li del bloque y dejarlo limpio
 export default memo(function BloqueOrdenable({ id }: { id: number }) {

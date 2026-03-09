@@ -10,7 +10,7 @@ import { DiaRead, DiaReadDetail, DiaUpdate } from '../types/Dia'
 import { BloqueUpdate } from '../types/Bloque'
 import { formatFechaISO } from '../utils/formatDate'
 import { DragEndEvent } from '@dnd-kit/core'
-import { modificarHora } from '../utils/hora'
+import { modificarHora, modificarHoras } from '../utils/hora'
 
 interface DiasState {
   dia: DiaRead | null

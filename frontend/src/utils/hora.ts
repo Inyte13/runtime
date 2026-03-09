@@ -1,3 +1,5 @@
+import { BloqueRead } from '@/types/Bloque'
+
 export function modificarHora(inicio: string, duracion: number): string {
   // Map number lo convierte a number
   const [hora, minutos] = inicio.split(':').map(Number)

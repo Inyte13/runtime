@@ -1,6 +1,9 @@
 import { ChevronDown, ChevronUp } from 'lucide-react'
 import { Button } from './ui/button'
 import { memo } from 'react'
+import useDuracionBloque from '@/hooks/useDuracionBloque'
+import { useDiasStore } from '@/store/diasStore'
+
 
 export default memo(function Duracion({
   duracion,

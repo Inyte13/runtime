@@ -1,6 +1,4 @@
-import { Plus } from 'lucide-react'
 import { useDiasStore } from '../store/diasStore'
-import { Button } from './ui/button'
 import { memo } from 'react'
 import BloqueOrdenable from './BloqueOrdenable'
 import { useShallow } from 'zustand/react/shallow'
@@ -13,12 +11,12 @@ import {
 } from '@dnd-kit/core'
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers'
+import ListaBloquesFooter from './ListaBloquesFooter'
 
 export default memo(function ListaBloques() {
   const bloquesIds = useDiasStore(
     useShallow(state => state.diaDetail?.bloques?.map(bloque => bloque.id))
   )
-
   const crearBloque = useDiasStore(state => state.crearBloque)
   const reordenarBloques = useDiasStore(state => state.reordenarBloques)
   // Que actue solo si se mueve mas de 5px

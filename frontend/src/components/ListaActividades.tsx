@@ -5,7 +5,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs'
 import { Archive, CircleCheck, X } from 'lucide-react'
 import Activas from './Activas'
 import Archivadas from './Archivadas'
-import { Input } from './ui/input'
 import {
   InputGroup,
   InputGroupAddon,
