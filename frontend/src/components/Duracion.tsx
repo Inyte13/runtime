@@ -4,14 +4,12 @@ import { memo } from 'react'
 import useDuracionBloque from '@/hooks/useDuracionBloque'
 import { useDiasStore } from '@/store/diasStore'
 
+export default memo(function Duracion({ id }: { id: number }) {
+  const { manejarDuracion } = useDuracionBloque(id)
+  const duracion = useDiasStore(
+    state => state.diaDetail?.bloques.find(b => b.id === id)?.duracion ?? 0
+  )
 
-export default memo(function Duracion({
-  duracion,
-  manejarDuracion,
-}: {
-  duracion: number
-  manejarDuracion: (newDuracion: number) => void
-}) {
   const nextTime = () => manejarDuracion(duracion + 0.5)
   const prevTime = () => manejarDuracion(Math.max(0, duracion - 0.5))
   return (

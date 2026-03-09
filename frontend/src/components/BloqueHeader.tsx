@@ -2,19 +2,12 @@ import Duracion from './Duracion'
 import SelectorActividad from './SelectorActividad'
 import { memo } from 'react'
 
-export default memo(function BloqueHeader({
-  id,
-  duracion,
-  manejarDuracion,
-}: {
-  id: number
-  duracion: number
-  manejarDuracion: (newDuracion: number) => void
-}) {
+export default memo(function BloqueHeader({ id }: { id: number }) {
+  
   return (
     <header className='flex justify-between items-center'>
       <SelectorActividad id={id} />
-      <Duracion duracion={duracion} manejarDuracion={manejarDuracion} />
+      <Duracion id={id} />
     </header>
   )
 })

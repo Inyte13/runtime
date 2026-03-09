@@ -17,8 +17,6 @@ export default memo(function Bloque({ id }: { id: number }) {
   const actualizarBloque = useDiasStore(state => state.actualizarBloque)
   const eliminarBloque = useDiasStore(state => state.eliminarBloque)
 
-  const { manejarDuracion } = useDuracionBloque(id)
-
   const descripcion = bloque?.descripcion || ''
   const manejarDescripcion = useCallback(
     async (e: React.FocusEvent<HTMLInputElement>) => {
@@ -35,11 +33,7 @@ export default memo(function Bloque({ id }: { id: number }) {
       colorDefault={bloque.actividad.color}
       className='group flex flex-col border border-border border-l-2 rounded-md px-2 pb-2 pt-1 relative bg-card w-full'
     >
-      <BloqueHeader
-        id={id}
-        duracion={bloque.duracion || 0}
-        manejarDuracion={manejarDuracion}
-      />
+      <BloqueHeader id={id} />
 
       <Button
         size='icon-xs'
