@@ -1,6 +1,7 @@
 from datetime import date, datetime
 
-from fastapi import APIRouter, Body, Query
+from fastapi import APIRouter, Body, HTTPException, Query
+from starlette import status
 
 from app.core.database import PathDate, QueryDate, SessionDep
 from app.schemas.bloque_schema import BloqueRead

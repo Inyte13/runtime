@@ -1,8 +1,8 @@
 from app.crud.actividad_crud import (
   create_actividad,
   delete_actividad,
-  read_actividad_by_id,
-  read_actividades,
+  read_actividad,
+  read_actividades_detail,
   search_actividad_by_nombre,
   update_actividad,
 )

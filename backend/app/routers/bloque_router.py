@@ -1,4 +1,5 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
+from starlette import status
 
 from app.core.database import SessionDep
 from app.schemas.bloque_schema import BloqueCreate, BloqueRead, BloqueUpdate

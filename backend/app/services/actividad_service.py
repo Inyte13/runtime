@@ -1,19 +1,14 @@
-from typing import Sequence
-
-from fastapi import HTTPException, status
 from sqlmodel import Session
 
 from app.crud.actividad_crud import (
-  create_actividad,
   delete_actividad,
-  read_actividad_by_id,
+  is_exists_bloque,
+  read_actividad,
   read_actividades,
-  search_actividad_by_nombre,
   update_actividad,
 )
 from app.models.actividad import Actividad
 from app.schemas.actividad_schema import (
-  ActividadCreate,
   ActividadReadDetail,
   ActividadUpdate,
 )

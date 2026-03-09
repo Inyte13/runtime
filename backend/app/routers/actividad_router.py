@@ -1,6 +1,10 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
+from sqlalchemy.exc import IntegrityError
+from starlette import status
 
 from app.core.database import SessionDep
+from app.crud.actividad_crud import create_actividad
+from app.models.actividad import Actividad
 from app.schemas.actividad_schema import (
   ActividadCreate,
   ActividadRead,
@@ -11,7 +15,6 @@ from app.services.actividad_service import (
   actualizar_actividad,
   eliminar_actividad,
   mostrar_actividades,
-  registrar_actividad,
 )
 
 actividad_router = APIRouter(tags=['Actividades'])

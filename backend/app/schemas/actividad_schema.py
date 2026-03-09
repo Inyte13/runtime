@@ -1,7 +1,8 @@
+import re
+
 from pydantic import field_validator
 from sqlmodel import SQLModel
 
-from app.models.actividad import ActividadBase
 
 
 # TODO: Validar el regex para mayor seguridad

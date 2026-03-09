@@ -1,7 +1,6 @@
 from datetime import date, datetime, time, timedelta
 from typing import Sequence
 
-from fastapi import HTTPException, status
 from sqlmodel import Session
 
 from app.crud.bloque_crud import read_bloques_by_range
@@ -13,6 +12,7 @@ from app.crud.dia_crud import (
   read_dias,
   update_dia,
 )
+from app.models.bloque import Bloque
 from app.models.dia import Dia
 from app.schemas.dia_schema import DiaUpdate
 

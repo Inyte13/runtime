@@ -1,7 +1,9 @@
+from datetime import date
+
 from pydantic import field_validator
 from sqlmodel import SQLModel
 
-from app.models.dia import DiaBase, Estado
+from app.models.dia import Estado
 from app.schemas.bloque_schema import BloqueRead
 
 # DiaCreate? NO por que ya no valido el json que recibia POST(ya no existe)
