@@ -106,7 +106,7 @@
   --secondary-foreground: var(--gray-12);
   --muted: var(--gray-2);
   --muted-foreground: var(--gray-10);
-  --accent: var(--gray-a2);
+  --accent: var(--yellow-a2);
   --accent-foreground: var(--gray-12);
   --destructive: oklch(61% 0.21 25);
   --border: var(--gray-5);
