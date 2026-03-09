@@ -20,29 +20,21 @@ from app.schemas.dia_schema import DiaUpdate
 def buscar_dia(session: Session, fecha: date) -> Dia:
   dia = read_dia(session, fecha)
   if not dia:
-    raise HTTPException(
-      status_code=status.HTTP_404_NOT_FOUND, detail='No se encontró el día'
-    )
+    raise ValueError('No se encontró el día')
   return dia
 
 
 def buscar_dia_detail(session: Session, fecha: date) -> Dia:
   dia = read_dia_detail(session, fecha)
   if not dia:
-    raise HTTPException(
-      status_code=status.HTTP_404_NOT_FOUND,
-      detail='No se encontró el día detail',
-    )
+    raise ValueError('No se encontró el día completo')
   return dia
 
 def mostrar_dias(session: Session, inicio: date, final: date) -> Sequence[Dia]:
   nro_dias = (final - inicio).days
   # Solo se puede mostrar máximo 1 año
-  if nro_dias > 365:
-    raise HTTPException(
-      status_code=status.HTTP_400_BAD_REQUEST,
-      detail='El rango debe ser menor a 1 año',
-    )
+  if (final - inicio).days > 365:
+    raise ValueError('El intervalo no puede ser mayor a 1 año')
   return read_dias(session, inicio, final)
 
 

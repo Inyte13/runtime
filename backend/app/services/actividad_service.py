@@ -17,9 +17,7 @@ from app.schemas.actividad_schema import (
 def buscar_actividad(session: Session, id: int) -> Actividad:
   actividad = read_actividad(session, id)
   if not actividad:
-    raise HTTPException(
-      status_code=status.HTTP_404_NOT_FOUND, detail='Actividad no encontrada'
-    )
+    raise ValueError('Actividad no encontrada')
   return actividad
 
 

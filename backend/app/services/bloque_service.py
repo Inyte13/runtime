@@ -41,17 +41,9 @@ def _modificar_horas(
 
 
 def _validar_actividad(session: Session, id: int) -> None:
-  actividad = read_actividad_by_id(session, id)
-  if not actividad:
-    raise HTTPException(
-      status_code=status.HTTP_404_NOT_FOUND, detail='Actividad no encontrada'
-    )
+  actividad = buscar_actividad(session, id)
   if not actividad.is_active:
-    raise HTTPException(
-      status_code=status.HTTP_400_BAD_REQUEST,
-      detail='La actividad está en la papelera',
-    )
-  return
+    raise ValueError('La actividad está archivada')
 
 
 def _validar_hora_granulidad(hora: time, unidad_duracion: int = 30) -> None:
@@ -60,18 +52,15 @@ def _validar_hora_granulidad(hora: time, unidad_duracion: int = 30) -> None:
     or hora.second != 0
     or hora.microsecond != 0
   ):
-    raise HTTPException(
-      status_code=status.HTTP_400_BAD_REQUEST,
-      detail=f'La hora debe estar en múltiplos de {unidad_bloque} minutos',
+    raise ValueError(
+      f'La hora debe estar en múltiplos de {unidad_duracion} minutos'
     )
 
 
 def buscar_bloque(session: Session, id: int) -> Bloque:
   bloque = read_bloque(session, id)
   if not bloque:
-    raise HTTPException(
-      status_code=status.HTTP_404_NOT_FOUND, detail='Bloque no encontrado'
-    )
+    raise ValueError('No se encontró el bloque')
   return bloque
 
 

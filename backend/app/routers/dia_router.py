@@ -25,11 +25,14 @@ def get_dia(
   fecha: PathDate,
   detail: bool = False,
 ):
-  if detail:
-    dia_db = buscar_dia_detail(session, fecha)
-    return DiaReadDetail.model_validate(dia_db)
-  dia_db = buscar_dia(session, fecha)
-  return DiaRead.model_validate(dia_db)
+  try:
+    if detail:
+      dia_db = buscar_dia_detail(session, fecha)
+      return DiaReadDetail.model_validate(dia_db)
+    dia_db = buscar_dia(session, fecha)
+    return DiaRead.model_validate(dia_db)
+  except ValueError as e:
+    raise HTTPException(status_code=404, detail=str(e))
 
 
 # GET: Dias básicos entre un rango de fechas incluyendo al inicio y al final
@@ -43,7 +46,10 @@ def get_dias_range(
     description='Por defecto es hoy',
   ),
 ):
-  return mostrar_dias(session, inicio, final)
+  try:
+    return mostrar_dias(session, inicio, final)
+  except ValueError as e:
+    raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
 
 
 # POST? NO, se supone que 'todos' los dias ya están creados solo falta actualizarlos
@@ -56,7 +62,10 @@ def patch_dia(
   dia: DiaUpdate,
   fecha: PathDate,
 ):
-  return actualizar_dia(session, fecha, dia)
+  try:
+    return actualizar_dia(session, fecha, dia)
+  except ValueError as e:
+    raise HTTPException(status_code=404, detail=str(e))
 
 
 # PATCH: Con las duraciones hago coincidir hora y hora_fin
@@ -64,12 +73,17 @@ def patch_dia(
 def recalculate_hours(
   session: SessionDep, fecha: date, ids: list[int] = Body(...)
 ):
-  # ids: Lista de el nuevo orden enviado por el frontend
-  return recalcular_horas(session, fecha, ids)
+  try:
+    # ids: Lista de el nuevo orden enviado por el frontend
+    return recalcular_horas(session, fecha, ids)
+  except ValueError as e:
+    raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
 
 
 # DELETE: Elimina el dia y los bloques que esten dentro
 @dia_router.delete('/dias/{fecha}', status_code=204)
 def delete_dia(session: SessionDep, fecha: PathDate):
-  eliminar_dia(session, fecha)
-  return
+  try:
+    eliminar_dia(session, fecha)
+  except ValueError as e:
+    raise HTTPException(status_code=404, detail=str(e))
