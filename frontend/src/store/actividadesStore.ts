@@ -48,6 +48,10 @@ export const useActividadesStore = create<ActividadState>(set => ({
   actualizarActividad: async (id, actividadNew) => {
     try {
       const actividad = await updateActividad(id, actividadNew)
+
+      // Si solo cambiaste color no hagas nada mas
+      if (Object.keys(actividadNew).every(k => k === 'color')) return
+      
       set(state => ({
         actividadesDetail: state.actividadesDetail.map(actividadDetail =>
           actividadDetail.id === id
