@@ -9,12 +9,12 @@ from app.schemas.dia_schema import DiaUpdate
 
 
 def read_dia(session: Session, fecha: date) -> Dia | None:
-  # Lazy loading
+  # Lazy loading, solo trae el Dia, si despues quiero Dia.bloques hace otra query
   return session.get(Dia, fecha)
 
 
 def read_dia_detail(session: Session, fecha: date) -> Dia | None:
-  # Eager loading
+  # Eager loading, trae Dia y bloques en una solo query
   statement = (
     select(Dia).where(Dia.fecha == fecha).options(selectinload(Dia.bloques))  # type: ignore
   )
