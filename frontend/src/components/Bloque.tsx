@@ -8,17 +8,11 @@ import { Button } from './ui/button'
 import { X } from 'lucide-react'
 import { useShallow } from 'zustand/react/shallow'
 
-export default memo(function Bloque({
-  id,
-  attributes,
-  listeners,
-}: {
-  id: number
-  attributes: DraggableAttributes
-  listeners?: SyntheticListenerMap
-}) {
-  const bloque = useDiasStore(state =>
-    state.diaDetail?.bloques.find(bloque => bloque.id === id)
+export default memo(function Bloque({ id }: { id: number }) {
+  const bloque = useDiasStore(
+    useShallow(state =>
+      state.diaDetail?.bloques.find(bloque => bloque.id === id)
+    )
   )
   const actualizarBloque = useDiasStore(state => state.actualizarBloque)
   const eliminarBloque = useDiasStore(state => state.eliminarBloque)
@@ -55,15 +49,6 @@ export default memo(function Bloque({
       >
         <X />
       </Button>
-
-      <div
-        // El handle, el unico receptor del agarre
-        {...attributes}
-        {...listeners}
-        className='absolute top-1/2 -translate-y-1/2 right-0 z-10 cursor-grab active:cursor-grabbing opacity-30 hover:opacity-100 transition-opacity'
-      >
-        <GripVertical />
-      </div>
 
       <span className='pl-1 text-foreground/70'>
         {bloque.hora} {(bloque.duracion ?? 0) > 0 && `- ${bloque.hora_fin}`}
