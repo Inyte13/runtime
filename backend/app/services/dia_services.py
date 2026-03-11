@@ -14,7 +14,8 @@ from app.crud.dia_crud import (
 )
 from app.models.bloque import Bloque
 from app.models.dia import Dia
-from app.schemas.dia_schema import DiaUpdate
+from app.schemas.bloque_schema import BloqueResumen
+from app.schemas.dia_schema import DiaResumen, DiaUpdate
 
 
 def buscar_dia(session: Session, fecha: date) -> Dia:

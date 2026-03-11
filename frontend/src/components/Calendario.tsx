@@ -1,7 +1,10 @@
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { CalendarDays, ChevronLeft, ChevronRight, Columns3 } from 'lucide-react'
 import { useFechaStore } from '../store/fechaStore.js'
 import { Button } from './ui/button.js'
 import { formatFechaTitle } from '../utils/formatDate.js'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs.js'
+import { useDiasStore } from '@/store/diasStore.js'
+import CalendarioMes from './CalendarioMes.js'
 
 function CalendarioTitle() {
   const fecha = useFechaStore(state => state.fecha)

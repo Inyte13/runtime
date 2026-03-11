@@ -1,0 +1,6 @@
+import { useDiasStore } from '@/store/diasStore'
+import { useFechaStore } from '@/store/fechaStore'
+import { formatFechaISO } from '@/utils/formatDate'
+import { Button } from './ui/button'
+import { useActividadesStore } from '@/store/actividadesStore'
+import Grafico from './Grafico'

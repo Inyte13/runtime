@@ -1,4 +1,9 @@
-import { readDiaDetail, sortDia, updateDia } from '../services/diasService'
+import {
+  readDiaDetail,
+  readDiasRange,
+  sortDia,
+  updateDia,
+} from '../services/diasService'
 import { create } from 'zustand'
 import { useFechaStore } from './fechaStore'
 import {
@@ -6,11 +11,13 @@ import {
   deleteBloque,
   updateBloque,
 } from '../services/bloquesService'
-import { DiaRead, DiaReadDetail, DiaUpdate } from '../types/Dia'
+import { DiaRead, DiaReadDetail, DiaResumen, DiaUpdate } from '../types/Dia'
 import { BloqueUpdate } from '../types/Bloque'
 import { formatFechaISO } from '../utils/formatDate'
 import { DragEndEvent } from '@dnd-kit/core'
-import { modificarHora, modificarHoras } from '../utils/hora'
+import { modificarHora } from '../utils/modificarHora'
+import { modificarHoras } from '../utils/modificarHoras'
+import { resumenDia } from '@/utils/resumenDia'
 
 interface DiasState {
   dia: DiaRead | null

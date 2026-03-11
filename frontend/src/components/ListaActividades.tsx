@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react'
-import { useActividadesStore } from '../store/actividadesStore'
+import { useState } from 'react'
 import ListaActividadesFooter from './ListaActividadesFooter'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs'
 import { Archive, CircleCheck, X } from 'lucide-react'

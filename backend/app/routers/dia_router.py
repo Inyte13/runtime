@@ -5,7 +5,7 @@ from starlette import status
 
 from app.core.database import PathDate, QueryDate, SessionDep
 from app.schemas.bloque_schema import BloqueRead
-from app.schemas.dia_schema import DiaRead, DiaReadDetail, DiaUpdate
+from app.schemas.dia_schema import DiaRead, DiaReadDetail, DiaResumen, DiaUpdate
 from app.services.dia_services import (
   actualizar_dia,
   buscar_dia,
@@ -13,6 +13,7 @@ from app.services.dia_services import (
   eliminar_dia,
   mostrar_dias,
   recalcular_horas,
+  resumen_dia,
 )
 
 dia_router = APIRouter(tags=['Dia'])

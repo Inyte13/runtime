@@ -1,6 +1,7 @@
 import { Header } from './components/Header.js'
 import { Route, Routes } from 'react-router'
-import { lazy } from 'react'
+import { lazy, useEffect, useState } from 'react'
+import { useActividadesStore } from './store/actividadesStore.js'
 
 const Home = lazy(() => import('./pages/Home.js'))
 
