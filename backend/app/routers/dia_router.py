@@ -36,19 +36,16 @@ def get_dia(
     raise HTTPException(status_code=404, detail=str(e))
 
 
-# GET: Dias básicos entre un rango de fechas incluyendo al inicio y al final
-@dia_router.get('/dias', response_model=list[DiaRead])
-def get_dias_range(
+# GET: Dias mes entre un rango de fechas incluyendo al inicio y al final
+@dia_router.get('/dias', response_model=list[DiaResumen])
+def get_dias_resumen_range(
   session: SessionDep,
   inicio: QueryDate,
-  # Default, usa el time del servidor
-  final: date = Query(
-    default_factory=lambda: datetime.now().date(),
-    description='Por defecto es hoy',
-  ),
+  final: QueryDate
 ):
   try:
-    return mostrar_dias(session, inicio, final)
+    dias = mostrar_dias(session, inicio, final)
+    return [resumen_dia(dia) for dia in dias]
   except ValueError as e:
     raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
 

@@ -4,9 +4,9 @@ import { Input } from './ui/input'
 import { manejarEnter } from '../utils/keyboard'
 
 export default function ActividadTemp({
-  offCreate,
+  setCrear,
 }: {
-  offCreate: () => void
+  setCrear: (value: boolean) => void
 }) {
   const crearActividad = useActividadesStore(state => state.crearActividad)
 
@@ -14,7 +14,7 @@ export default function ActividadTemp({
 
   const [nombreTemp, setNombreTemp] = useState('')
   // Si lo cambias también lo tienes que hacer en el backend (actividad.py)
-  const [colorTemp, setColorTemp] = useState('#0191f1')
+  const [colorTemp, setColorTemp] = useState('#A18072')
 
   // Auto-scroll cuando se crea el holograma de Actividad
   useEffect(() => {
@@ -26,7 +26,7 @@ export default function ActividadTemp({
     if (nombre) {
       await crearActividad({ nombre: nombre.toLowerCase(), color: colorTemp })
     }
-    offCreate()
+    setCrear(false)
   }
 
   const manejarBlur = (e: React.FocusEvent<HTMLDivElement>) => {

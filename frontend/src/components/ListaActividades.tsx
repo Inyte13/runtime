@@ -1,33 +1,24 @@
 import { useState } from 'react'
-import ListaActividadesFooter from './ListaActividadesFooter'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs'
-import { Archive, CircleCheck, X } from 'lucide-react'
-import Activas from './Activas'
-import Archivadas from './Archivadas'
+import { Archive, CircleCheck, Plus, X } from 'lucide-react'
+import ActividadesActivas from './ActividadesActivas'
+import ActividadesArchivadas from './ActividadesArchivadas'
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupButton,
   InputGroupInput,
 } from './ui/input-group'
+import { Button } from './ui/button'
 
 export default function ListaActividades() {
-  const traerActividadesDetail = useActividadesStore(
-    state => state.traerActividadesDetail
-  )
-  const [isCreate, setIsCreate] = useState(false)
-
-  useEffect(() => {
-    traerActividadesDetail()
-  }, [traerActividadesDetail])
-
-  const [search, setSearch] = useState('')
+  const [crear, setCrear] = useState(false)
   // TODO: Filtros, por color, con/sin bloques y recientes/semana
-
-  // h-auto en lugar de h-9 para evitar salto de layout al cambiar tabs
+  // TODO: En la medidad 1024x768, mejorar el sheet
+  const [search, setSearch] = useState('')
   return (
-    <section className='flex flex-col max-w-60 min-w-60 h-full overflow-hidden p-4 gap-y-2 justify-content'>
-      <InputGroup className='w-auto h-auto bg-input/30 border-input/30'>
+    <section className='flex flex-col min-w-60 max-w-60 h-full overflow-hidden p-4 gap-y-3'>
+      <InputGroup className='bg-input/30 border-input/30'>
         <InputGroupInput
           placeholder='Buscar'
           value={search}
@@ -46,8 +37,8 @@ export default function ListaActividades() {
         )}
       </InputGroup>
 
-      <Tabs defaultValue='activas' className='flex flex-col min-h-0 gap-2'>
-        <TabsList className='w-fit'>
+      <Tabs defaultValue='activas' className='flex flex-col min-h-0 gap-3'>
+        <TabsList>
           <TabsTrigger value='activas' className='flex gap-1'>
             <CircleCheck className='size-3.5' />
             Activas
@@ -63,13 +54,21 @@ export default function ListaActividades() {
           value='activas'
           className='m-0 flex flex-col min-h-50 gap-2'
         >
-          <Activas
-            isCreate={isCreate}
-            offCreate={() => setIsCreate(false)}
+          <ActividadesActivas
+            crear={crear}
+            setCrear={setCrear}
             search={search}
           />
           {!search && (
-            <ListaActividadesFooter onCreate={() => setIsCreate(true)} />
+            <footer>
+              <Button
+                size='icon'
+                className='w-full'
+                onClick={() => setCrear(true)}
+              >
+                <Plus />
+              </Button>
+            </footer>
           )}
         </TabsContent>
 
@@ -77,7 +76,7 @@ export default function ListaActividades() {
           value='archivadas'
           className='m-0 flex flex-col min-h-50 gap-2'
         >
-          <Archivadas search={search} />
+          <ActividadesArchivadas search={search} />
         </TabsContent>
       </Tabs>
     </section>

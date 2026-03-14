@@ -15,6 +15,12 @@ export interface BloqueRead {
   hora_fin: string
 }
 
+export interface BloqueResumen {
+  id_actividad: number
+  duracion: number
+  descripciones: string[]
+}
+
 export interface BloqueUpdate {
   descripcion?: string | null
   id_actividad?: number

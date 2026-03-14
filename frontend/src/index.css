@@ -12,8 +12,13 @@
   }
 }
 
-/* Genera variantes dark: */
 @custom-variant dark (&:is(.dark *));
+
+@layer base {
+  body {
+    @apply bg-background text-foreground;
+  }
+}
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
@@ -102,8 +107,8 @@
   --popover-foreground: var(--gray-12);
   --primary: var(--yellow-9);
   --primary-foreground: var(--yellow-1);
-  --secondary: var(--gray-4);
-  --secondary-foreground: var(--gray-12);
+  --secondary: var(--gray-3);
+  --secondary-foreground: var(--gray-11);
   --muted: var(--gray-2);
   --muted-foreground: var(--gray-10);
   --accent: var(--yellow-a2);
@@ -125,10 +130,4 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0); */
-}
-
-@layer base {
-  body {
-    @apply bg-background text-foreground;
-  }
 }

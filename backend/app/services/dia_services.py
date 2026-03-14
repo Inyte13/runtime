@@ -31,6 +31,7 @@ def buscar_dia_detail(session: Session, fecha: date) -> Dia:
     raise ValueError('No se encontró el día completo')
   return dia
 
+
 # Cuando SQLAlchemy devuelve es sequence Sequence[Dia]
 def mostrar_dias(session: Session, inicio: date, final: date) -> Sequence[Dia]:
   if final < inicio:
@@ -42,6 +43,32 @@ def mostrar_dias(session: Session, inicio: date, final: date) -> Sequence[Dia]:
   if (final - inicio).days > 365:
     raise ValueError('El intervalo no puede ser mayor a 1 año')
   return read_dias(session, inicio, final)
+
+
+def resumen_dia(dia: Dia) -> DiaResumen:
+  resumen: dict[int, BloqueResumen] = {}
+  bloques = dia.bloques
+
+  for bloque in bloques:
+    id_actividad = bloque.id_actividad
+    descripcion = bloque.descripcion
+    if id_actividad not in resumen:
+      resumen[id_actividad] = BloqueResumen(
+        id_actividad=id_actividad,
+        duracion=bloque.duracion,
+        descripciones=[descripcion] if descripcion else [],
+      )
+    else:
+      resumen[id_actividad].duracion += bloque.duracion
+      if descripcion:
+        resumen[id_actividad].descripciones.append(descripcion)
+
+  return DiaResumen(
+    fecha=dia.fecha,
+    titulo=dia.titulo,
+    estado=dia.estado,
+    bloques=sorted(resumen.values(), key=lambda b: b.duracion, reverse=True),
+  )
 
 
 def actualizar_dia(session: Session, fecha: date, dia: DiaUpdate) -> Dia:
@@ -56,6 +83,7 @@ def actualizar_dia(session: Session, fecha: date, dia: DiaUpdate) -> Dia:
     return create_dia(session, new_dia)
   # Si ya existe actualizamos normal
   return update_dia(session, dia_bd, dia)
+
 
 # Cuando yo armo la lista es list[Bloque]
 def recalcular_horas(

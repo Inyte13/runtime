@@ -6,11 +6,14 @@ export interface FechaState {
   prevDia: () => void
   nextDia: () => void
   irHoy: () => void
+  prevMes: () => void
+  nextMes: () => void
 }
 
 export const useFechaStore = create<FechaState>(set => ({
   fecha: new Date(),
   setFecha: date => set({ fecha: date }),
+
   prevDia: () =>
     set(state => {
       return {
@@ -21,6 +24,7 @@ export const useFechaStore = create<FechaState>(set => ({
         ),
       }
     }),
+
   nextDia: () =>
     set(state => {
       return {
@@ -31,8 +35,19 @@ export const useFechaStore = create<FechaState>(set => ({
         ),
       }
     }),
+
   irHoy: () =>
     set({
       fecha: new Date(),
     }),
+
+  prevMes: () =>
+    set(state => ({
+      fecha: new Date(state.fecha.getFullYear(), state.fecha.getMonth() - 1, 1),
+    })),
+    
+  nextMes: () =>
+    set(state => ({
+      fecha: new Date(state.fecha.getFullYear(), state.fecha.getMonth() + 1, 1),
+    })),
 }))

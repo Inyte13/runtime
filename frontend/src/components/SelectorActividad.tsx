@@ -24,7 +24,7 @@ export default memo(function SelectorActividad({ id }: { id: number }) {
       actividad => actividad.id === bloque?.id_actividad
     )
   )! // non-null assertion seguro por el loading en App
-  
+
   const actualizarBloque = useDiasStore(state => state.actualizarBloque)
   const actividades = useActividadesStore(state => state.actividadesDetail)
   const color = useColorStore(
@@ -57,7 +57,10 @@ export default memo(function SelectorActividad({ id }: { id: number }) {
     >
       <ComboboxTrigger
         render={
-          <Button variant='ghost' className='p-1! gap-1'>
+          <Button
+            variant='secondary'
+            className='p-1! gap-1 border-none text-card-foreground hover:bg-secondary'
+          >
             <div className='flex items-center gap-2'>
               {actividad && (
                 <span

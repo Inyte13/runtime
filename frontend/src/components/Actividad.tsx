@@ -1,5 +1,5 @@
 import { memo } from 'react'
-import ColorPicker from './ColorPicker'
+import ColorChange from './ColorChange'
 import { useActividadesStore } from '../store/actividadesStore'
 import { Input } from './ui/input'
 import { manejarEnter } from '../utils/keyboard'
@@ -18,8 +18,8 @@ export default memo(function Actividad({ id }: { id: number }) {
     state => state.eliminarActividad
   )
   if (!actividad) return null
-  const { nombre, color: colorFallback, tiene_bloques } = actividad
 
+  const { nombre, color: colorFallback, tiene_bloques, is_active } = actividad
   const manejarNombre = async (e: React.FocusEvent<HTMLInputElement>) => {
     const newNombre = e.target.value.toLowerCase().trim()
     // Si el newNombre es '' o es igual al inicial
@@ -29,45 +29,45 @@ export default memo(function Actividad({ id }: { id: number }) {
     }
     await actualizarActividad(id, { nombre: newNombre })
   }
-  const isArchived = actividad.is_active
 
   const manejarArchivar = async () => {
-    await actualizarActividad(id, { is_active: !isArchived })
+    await actualizarActividad(id, { is_active: !is_active })
   }
-
+  
   return (
     <div className='group flex items-center p-1.5 rounded-lg'>
-      <ColorPicker
+      <ColorChange
         id={id}
         colorFallback={colorFallback}
-        disabled={!isArchived}
-        className={cn(!isArchived && 'opacity-70')}
+        is_active={is_active}
       />
       <Input
         className={cn(
-          'capitalize p-0 pl-2 border-none outline-none rounded-none h-[1.6rem] text-base',
-          !isArchived && 'italic'
+          'capitalize p-0 pl-2 border-none outline-none rounded-none h-[1.6rem] truncate',
+          !is_active && 'italic'
         )}
         defaultValue={nombre}
         onBlur={manejarNombre}
         maxLength={50}
+        // Para dejar el foco con el enter
         onKeyDown={manejarEnter}
-        disabled={!isArchived}
+        disabled={!is_active}
       />
 
       <Button
         size='icon-xs'
         variant='ghost'
-        className='opacity-0 group-hover:opacity-100 transition-none pointer-events-none group-hover:pointer-events-auto'
+        className='opacity-0 group-hover:opacity-100 focus-visible:opacity-100 transition-none'
         onClick={manejarArchivar}
       >
-        {isArchived ? <Archive /> : <ArchiveRestore />}
+        {is_active ? <Archive /> : <ArchiveRestore />}
       </Button>
+      
       {!tiene_bloques && (
         <Button
           size='icon-xs'
           variant='destructive'
-          className='opacity-0 group-hover:opacity-100 transition-none pointer-events-none group-hover:pointer-events-auto'
+          className='opacity-0 group-hover:opacity-100 focus-visible:opacity-100 transition-none'
           onClick={() => eliminarActividad(id)}
         >
           <Trash2 />

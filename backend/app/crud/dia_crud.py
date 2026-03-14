@@ -27,6 +27,7 @@ def read_dias(session: Session, inicio: date, final: date) -> Sequence[Dia]:
     .where(inicio <= Dia.fecha)
     .where(Dia.fecha <= final)
     .order_by(col(Dia.fecha))
+    .options(selectinload(Dia.bloques))  # type: ignore
   )
   return session.exec(statement).all()
 

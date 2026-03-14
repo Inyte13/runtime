@@ -16,6 +16,10 @@ export interface DiaReadDetail extends DiaRead {
   bloques: BloqueRead[]
 }
 
+export interface DiaResumen extends DiaRead {
+  bloques: BloqueResumen[]
+}
+
 export interface DiaUpdate {
   titulo?: string | null
   estado?: Estado | null

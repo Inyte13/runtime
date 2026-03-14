@@ -4,7 +4,6 @@ from pydantic import field_serializer, field_validator
 from sqlmodel import Field, SQLModel
 
 
-
 # Necesita menos indicaciones porque no tiene tabla
 class BloqueCreate(SQLModel):
   # Si no viene usa el la fecha actual
@@ -50,6 +49,12 @@ class BloqueRead(SQLModel):
   @field_serializer('hora', 'hora_fin')
   def formatear_hora(self, value: time | None) -> str | None:
     return value.strftime('%H:%M') if value else None
+
+
+class BloqueResumen(SQLModel):
+  id_actividad: int
+  duracion: float
+  descripciones: list[str] = []
 
 
 class BloqueUpdate(SQLModel):

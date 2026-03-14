@@ -20,19 +20,19 @@ export async function readDiaDetail(fecha: string): Promise<DiaReadDetail> {
   return res.json() as Promise<DiaReadDetail>
 }
 
-// GET: Dias básicos entre un rango de fechas incluyendo al inicio y al final
-// export async function readDiasRange(
-//   fechaInicio: string,
-//   fechaFinal: string
-// ): Promise<DiaRead[]> {
-//   const params = new URLSearchParams({
-//     inicio: fechaInicio,
-//     final: fechaFinal,
-//   })
-//   const res = await fetch(`${URL}?${params.toString()}`)
-//   if (!res.ok) throw new Error('Error al cargar rango de dias por fecha')
-//   return res.json() as Promise<DiaRead[]>
-// }
+// GET: Dias  entre un rango de fechas incluyendo al inicio y al final
+export async function readDiasRange(
+  fechaInicio: string,
+  fechaFinal: string
+): Promise<DiaResumen[]> {
+  const params = new URLSearchParams({
+    inicio: fechaInicio,
+    final: fechaFinal,
+  })
+  const res = await fetch(`${URL}?${params.toString()}`)
+  if (!res.ok) throw new Error('Error al cargar rango de dias por fecha')
+  return res.json() as Promise<DiaResumen[]>
+}
 
 // POST? NO, se supone que 'todos' los dias ya están creados solo falta actualizarlos
 

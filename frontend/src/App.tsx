@@ -1,21 +1,32 @@
-import { Header } from './components/Header.js'
 import { Route, Routes } from 'react-router'
 import { lazy, useEffect, useState } from 'react'
 import { useActividadesStore } from './store/actividadesStore.js'
+import { Loader2 } from 'lucide-react'
 
 const Home = lazy(() => import('./pages/Home.js'))
 
-// El overflow-hidden en el div es para proteger toda la ventana
-// El overflow-hidden en el main es para proteger al header
 export default function App() {
+  // Loading global, por la normalizacion de datos
+  const [isReady, setIsReady] = useState(false)
+  const traerActividadesDetail = useActividadesStore(
+    state => state.traerActividadesDetail
+  )
+  useEffect(() => {
+    traerActividadesDetail().finally(() => setIsReady(true))
+  }, [traerActividadesDetail])
+
+  if (!isReady)
+    return (
+      <div className='h-dvh w-full flex items-center justify-center'>
+        <Loader2 className='animate-spin text-muted-foreground' />
+      </div>
+    )
+  // overflow-hidden: para que el contenido interior no rompa hacia fuera del contenedor
   return (
-    <div className='flex flex-col h-dvh overflow-hidden'>
-      <Header />
-      <main className='flex-1 overflow-hidden p-4 max-w-6xl mx-auto w-full'>
-        <Routes>
-          <Route path='/' element={<Home />} />
-        </Routes>
-      </main>
-    </div>
+    <>
+      <Routes>
+        <Route path='/' element={<Home />} />
+      </Routes>
+    </>
   )
 }
