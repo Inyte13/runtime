@@ -23,3 +23,10 @@ class ActividadResumen(SQLModel):
 class ActividadUpdate(SQLModel):
   nombre: str | None = None
   is_active: bool | None = None
+  @field_validator('nombre')
+  def to_lowercase_and_not_empty(cls, v: str | None) -> str | None:
+    if v is not None:
+      if v.strip() == '':
+        raise ValueError('El nombre no puede estar vacío')
+      return v.lower()
+    return v
