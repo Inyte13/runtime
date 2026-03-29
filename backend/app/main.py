@@ -23,6 +23,7 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan, title='Runtime App')
 app.include_router(dia_router)
 app.include_router(bloque_router)
+app.include_router(categoria_router)
 app.include_router(actividad_router)
 
 # Orígenes permitidos para CORS
