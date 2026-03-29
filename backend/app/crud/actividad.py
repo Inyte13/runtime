@@ -7,3 +7,8 @@ from app.models.bloque import Bloque
 from app.schemas.actividad import ActividadUpdate
 
 
+def create_actividad(session: Session, actividad: Actividad) -> Actividad:
+  session.add(actividad)
+  session.commit()
+  session.refresh(actividad)
+  return actividad
