@@ -17,3 +17,21 @@ def buscar_categoria(session: Session, id: int) -> Categoria:
   if not categoria:
     raise ValueError('Categoria no encontrada')
   return categoria
+# Le agregamos el el 'tiene_bloques'
+def mostrar_categorias(session: Session) -> list[CategoriaReadDetail]:
+  categorias = read_categorias(session)
+  new_categorias = []
+  for categoria in categorias:
+    assert categoria.id is not None
+    new_categorias.append(
+      CategoriaReadDetail(
+        id=categoria.id,
+        nombre=categoria.nombre,
+        color=categoria.color,
+        actividades=[
+          add_tiene_bloques(session, actividad)
+          for actividad in categoria.actividades
+        ],
+      )
+    )
+  return new_categorias
