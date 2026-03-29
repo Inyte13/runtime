@@ -12,3 +12,5 @@ def create_actividad(session: Session, actividad: Actividad) -> Actividad:
   session.commit()
   session.refresh(actividad)
   return actividad
+def read_actividad(session: Session, id: int) -> Actividad | None:
+  return session.get(Actividad, id)
