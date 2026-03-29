@@ -20,3 +20,14 @@ def is_exists_bloque(session: Session, id: int) -> bool:
   return result.one()
 def read_actividades(session: Session) -> Sequence[Actividad]:
   return session.exec(select(Actividad)).all()
+def update_actividad(
+  session: Session, actividad_bd: Actividad, actividad: ActividadUpdate
+) -> Actividad:
+  # Convertimos el input a diccionario, excluyendo los nulos
+  new_actividad = actividad.model_dump(exclude_unset=True)
+  # Actualizamos los atributos
+  actividad_bd.sqlmodel_update(new_actividad)
+  session.add(actividad_bd)
+  session.commit()
+  session.refresh(actividad_bd)
+  return actividad_bd
