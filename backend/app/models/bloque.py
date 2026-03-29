@@ -4,8 +4,6 @@ from sqlmodel import Field, Relationship, SQLModel
 
 from app.models.actividad import Actividad
 
-if TYPE_CHECKING:
-  from app.models.dia import Dia
 
 
 class Bloque(SQLModel, table=True):
@@ -26,7 +24,6 @@ class Bloque(SQLModel, table=True):
   
   # No tienen el nullable=False porque son Relationship
   
-  # Bloque sabe su dia y Dia sabe sus bloques
-  dia: 'Dia' = Relationship(back_populates='bloques')
+
   # Bloque sabe la actividad pero Actividad no sabe nada
   actividad: Actividad = Relationship()
