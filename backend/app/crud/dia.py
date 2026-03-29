@@ -35,3 +35,20 @@ def read_dias_resumen(
     .options(selectinload(Dia.bloques))  # type: ignore
   )
   return session.exec(statement).all()
+ACTIVIDADES_IGNORADAS = [6]
+# Ignoramos id=6, harcodeado, actividad 'Dormir'
+def read_bloques_resumen(
+  session: Session, fecha: date
+) -> Sequence[tuple[int, float, str | None, int]]:
+  statement = (
+    select(
+      Bloque.id_actividad,
+      Bloque.duracion,
+      Bloque.descripcion,
+      Actividad.id_categoria,
+    )
+    .join(Actividad)
+    .where(Bloque.fecha == fecha)
+    .where(col(Actividad.id).notin_(ACTIVIDADES_IGNORADAS))
+  )
+  return session.exec(statement).all()
