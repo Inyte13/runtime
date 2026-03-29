@@ -14,6 +14,7 @@ class BloqueCreate(SQLModel):
   # Podemos recibir None pero lo controlaremos en el backend
   id_actividad: int | None = None
   id_ref: int | None = None
+
   # Validator para que el '' se convierta en None
   @field_validator('descripcion')
   @classmethod
@@ -30,6 +31,8 @@ class BloqueCreate(SQLModel):
     if (v * 60) % 30 != 0:
       raise ValueError('La duración debe ser múltiplo de 30 minutos')
     return v
+
+
 class BloqueRead(SQLModel):
   id: int
   hora: time
@@ -37,14 +40,18 @@ class BloqueRead(SQLModel):
   duracion: float
   descripcion: str | None = None
   id_actividad: int
+
   # Transforma el time(8,30) en '08:30'
   @field_serializer('hora', 'hora_fin')
   def formatear_hora(self, value: time | None) -> str | None:
     return value.strftime('%H:%M') if value else None
+
+
 class BloqueUpdate(SQLModel):
   duracion: float | None = None
   descripcion: str | None = None
   id_actividad: int | None = None
+
   # Validator para que el '' se convierta en None
   @field_validator('descripcion')
   @classmethod
