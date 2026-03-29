@@ -53,3 +53,11 @@ class BloqueUpdate(SQLModel):
       return None
     return v
 
+  @field_validator('duracion')
+  @classmethod
+  def duracion_valida(cls, v: float) -> float:
+    if v <= 0:
+      raise ValueError('La duración debe ser mayor que 0')
+    if (v * 60) % 30 != 0:
+      raise ValueError('La duración debe ser múltiplo de 30 minutos')
+    return v
