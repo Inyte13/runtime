@@ -64,3 +64,10 @@ def recalculate_hours(
     return recalcular_horas(session, fecha, ids)
   except ValueError as e:
     raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
+# DELETE: Elimina el dia y los bloques que esten dentro
+@dia_router.delete('/dias/{fecha}', status_code=204)
+def delete_dia(session: SessionDep, fecha: PathDate):
+  try:
+    eliminar_dia(session, fecha)
+  except ValueError as e:
+    raise HTTPException(status_code=404, detail=str(e))
