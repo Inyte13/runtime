@@ -21,3 +21,7 @@ class CategoriaCreate(SQLModel):
       raise ValueError('El color debe ser un hexadecimal válido (#RRGGBB)')
     return v
 
+class CategoriaRead(SQLModel):
+  id: int
+  nombre: str
+  color: str
