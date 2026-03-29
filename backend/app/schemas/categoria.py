@@ -31,3 +31,6 @@ class CategoriaReadDetail(CategoriaRead):
 class CategoriaResumen(SQLModel):
   id: int
   actividades: list[ActividadResumen]
+class CategoriaUpdate(SQLModel):
+  nombre: str | None = None
+  color: str | None = None
