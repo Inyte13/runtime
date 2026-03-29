@@ -20,3 +20,6 @@ from app.services.categoria import (
 categoria_router = APIRouter(tags=['Categorias'])
 
 
+@categoria_router.get('/categorias', response_model=list[CategoriaReadDetail])
+def get_categorias(session: SessionDep):
+  return mostrar_categorias(session)
