@@ -34,3 +34,8 @@ class CategoriaResumen(SQLModel):
 class CategoriaUpdate(SQLModel):
   nombre: str | None = None
   color: str | None = None
+  @field_validator('nombre')
+  def to_lowercase_and_not_empty(cls, v: str) -> str:
+    if v.strip() == '':
+      raise ValueError('El nombre no puede estar vacío')
+    return v.lower()
