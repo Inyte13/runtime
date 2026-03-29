@@ -8,13 +8,13 @@ from app.services.actividad import (
 )
 
 
-def test_actividad_modificada_sin_bloques(session_temp, actividad):
-  actividad = actividad_modificada(session_temp, actividad)
+def test_add_tiene_bloques_sin_bloques(session_temp, actividad):
+  actividad = add_tiene_bloques(session_temp, actividad)
   assert not actividad.tiene_bloques
 
 
-def test_actividad_modificada_con_bloques(session_temp, actividad, bloque):
-  actividad = actividad_modificada(session_temp, actividad)
+def test_add_tiene_bloques_con_bloques(session_temp, actividad, bloque):
+  actividad = add_tiene_bloques(session_temp, actividad)
   assert actividad.tiene_bloques
 
 
