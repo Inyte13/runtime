@@ -12,3 +12,5 @@ def create_bloque(session: Session, bloque: Bloque) -> Bloque:
   session.commit()
   session.refresh(bloque)
   return bloque
+def read_bloque(session: Session, id: int) -> Bloque | None:
+  return session.get(Bloque, id)
