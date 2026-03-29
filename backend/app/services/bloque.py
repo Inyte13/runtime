@@ -112,3 +112,33 @@ def registrar_bloque_despues(session: Session, bloque: BloqueCreate) -> Bloque:
   _modificar_horas(session, siguientes, new_bloque.duracion)
   session.commit()
   return bloque_bd
+def actualizar_bloque(
+  session: Session, id: int, bloque: BloqueUpdate
+) -> Bloque:
+  bloque_bd = buscar_bloque(session, id)
+  if bloque.id_actividad:
+    # Validamos la actividad ingresada
+    validar_actividad(session, bloque.id_actividad)
+
+  # Siempre que tenga duracion y no sea la misma
+  if bloque.duracion and bloque.duracion != bloque_bd.duracion:
+    # El delta que tendra que cambiar en los bloques siguientes
+    diferencia = bloque.duracion - bloque_bd.duracion
+
+    # Actualizamos la duracion
+    bloque_bd.duracion = bloque.duracion
+    # Actualizamos la hora_fin
+    bloque_bd.hora_fin = modificar_hora(bloque_bd.hora, bloque.duracion)
+
+    # Traemos los siguientes
+    siguientes = read_bloques_by_range(
+      session=session,
+      fecha=bloque_bd.fecha,
+      hora_desde=bloque_bd.hora,
+    )
+    siguientes = [b for b in siguientes if b.id != bloque_bd.id]
+    # modificamos la duracion de todos los siguientes
+    _modificar_horas(session, siguientes, diferencia)
+
+  bloque_bd = update_bloque(session, bloque_bd, bloque)
+  return bloque_bd
