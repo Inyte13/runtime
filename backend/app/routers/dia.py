@@ -34,3 +34,11 @@ def get_dia(
     return DiaRead.model_validate(dia_db)
   except ValueError as e:
     raise HTTPException(status_code=404, detail=str(e))
+# GET: Dias mes entre un rango de fechas incluyendo al inicio y al final
+@dia_router.get('/dias', response_model=list[DiaResumen])
+def get_dias_resumen(session: SessionDep, inicio: QueryDate, final: QueryDate):
+  try:
+    dias = mostrar_dias(session, inicio, final)
+    return [resumen_dia(session, dia) for dia in dias]
+  except ValueError as e:
+    raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
