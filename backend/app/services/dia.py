@@ -72,3 +72,15 @@ def resumen_dia(session: Session, dia: Dia) -> DiaResumen:
     estado=dia.estado,
     categorias=list(categorias.values()),
   )
+def actualizar_dia(session: Session, fecha: date, dia: DiaUpdate) -> Dia:
+  # No se utiliza buscar_dia, por que controlamos si no existe
+  dia_bd = read_dia(session, fecha)
+  # UPSERT: Si no existe lo creamos
+  if not dia_bd:
+    # Solo usa los campos que se declararon
+    datos = dia.model_dump(exclude_unset=True)
+    # KWARGS: Granularmente actualiza los campos que sobrevivieron
+    new_dia = Dia(fecha=fecha, **datos)
+    return create_dia(session, new_dia)
+  # Si ya existe actualizamos normal
+  return update_dia(session, dia_bd, dia)
