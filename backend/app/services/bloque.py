@@ -27,11 +27,15 @@ def _modificar_horas(
     if bloque.duracion is not None:
       bloque.hora_fin = modificar_hora(bloque.hora, bloque.duracion)
     session.add(bloque)
+
+
 def buscar_bloque(session: Session, id: int) -> Bloque:
   bloque = read_bloque(session, id)
   if not bloque:
     raise ValueError('No se encontró el bloque')
   return bloque
+
+
 def registrar_bloque(session: Session, bloque: BloqueCreate) -> Bloque:
   # Patrón Get or Create
   # No usamos buscar_dia para controlar cuando no existe
@@ -45,6 +49,7 @@ def registrar_bloque(session: Session, bloque: BloqueCreate) -> Bloque:
   else:
     validar_actividad(session, 9)
     bloque.id_actividad = 9
+
   # Para el button de ListaBloques
   if bloque.id_ref is None:
     return registrar_bloque_btn(session, bloque)
@@ -52,8 +57,11 @@ def registrar_bloque(session: Session, bloque: BloqueCreate) -> Bloque:
   if bloque.id_ref == 0:
     # Insertar al inicio
     return registrar_bloque_al_inicio(session, bloque)
+
   # Si existe el id_ref del 'creador'
   return registrar_bloque_despues(session, bloque)
+
+
 def registrar_bloque_btn(session: Session, bloque: BloqueCreate) -> Bloque:
   assert bloque.id_actividad is not None
   ultimo = ultimo_bloque(session, bloque.fecha)
@@ -69,6 +77,8 @@ def registrar_bloque_btn(session: Session, bloque: BloqueCreate) -> Bloque:
     hora_fin=modificar_hora(hora, bloque.duracion),
   )
   return create_bloque(session, new_bloque)
+
+
 def registrar_bloque_al_inicio(
   session: Session, bloque: BloqueCreate
 ) -> Bloque:
@@ -90,6 +100,8 @@ def registrar_bloque_al_inicio(
   _modificar_horas(session, siguientes, bloque.duracion)
   session.commit()
   return bloque_bd
+
+
 def registrar_bloque_despues(session: Session, bloque: BloqueCreate) -> Bloque:
   assert bloque.id_actividad is not None
   assert bloque.id_ref is not None
@@ -112,6 +124,8 @@ def registrar_bloque_despues(session: Session, bloque: BloqueCreate) -> Bloque:
   _modificar_horas(session, siguientes, new_bloque.duracion)
   session.commit()
   return bloque_bd
+
+
 def actualizar_bloque(
   session: Session, id: int, bloque: BloqueUpdate
 ) -> Bloque:
@@ -142,6 +156,8 @@ def actualizar_bloque(
 
   bloque_bd = update_bloque(session, bloque_bd, bloque)
   return bloque_bd
+
+
 def eliminar_bloque(session: Session, id: int) -> None:
   bloque = buscar_bloque(session, id)
   ultimo = ultimo_bloque(session, bloque.fecha)

@@ -17,6 +17,8 @@ def buscar_categoria(session: Session, id: int) -> Categoria:
   if not categoria:
     raise ValueError('Categoria no encontrada')
   return categoria
+
+
 # Le agregamos el el 'tiene_bloques'
 def mostrar_categorias(session: Session) -> list[CategoriaReadDetail]:
   categorias = read_categorias(session)
@@ -35,11 +37,15 @@ def mostrar_categorias(session: Session) -> list[CategoriaReadDetail]:
       )
     )
   return new_categorias
+
+
 def actualizar_categoria(
   session, id: int, categoria: CategoriaUpdate
 ) -> Categoria:
   categoria_bd = buscar_categoria(session, id)
   return update_categoria(session, categoria_bd, categoria)
+
+
 def eliminar_categoria(session: Session, id: int) -> None:
   if is_exists_actividad(session, id):
     raise ValueError(
