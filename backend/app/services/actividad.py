@@ -25,6 +25,10 @@ def add_tiene_bloques(
     is_active=actividad.is_active,
     tiene_bloques=is_exists_bloque(session, actividad.id),
   )
+def validar_actividad(session: Session, id: int) -> None:
+  actividad = buscar_actividad(session, id)
+  if not actividad.is_active:
+    raise ValueError('La actividad está archivada')
 def buscar_actividad(session: Session, id: int) -> Actividad:
   actividad = read_actividad(session, id)
   if not actividad:
