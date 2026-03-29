@@ -19,3 +19,18 @@ from app.services.dia import (
 dia_router = APIRouter(tags=['Dia'])
 
 
+# GET: Dia básico o detail
+@dia_router.get('/dias/{fecha}', response_model=DiaReadDetail | DiaRead)
+def get_dia(
+  session: SessionDep,
+  fecha: PathDate,
+  detail: bool = False,
+):
+  try:
+    if detail:
+      dia_db = buscar_dia_detail(session, fecha)
+      return DiaReadDetail.model_validate(dia_db)
+    dia_db = buscar_dia(session, fecha)
+    return DiaRead.model_validate(dia_db)
+  except ValueError as e:
+    raise HTTPException(status_code=404, detail=str(e))
