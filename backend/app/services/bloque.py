@@ -32,3 +32,16 @@ def buscar_bloque(session: Session, id: int) -> Bloque:
   if not bloque:
     raise ValueError('No se encontró el bloque')
   return bloque
+def registrar_bloque(session: Session, bloque: BloqueCreate) -> Bloque:
+  # Patrón Get or Create
+  # No usamos buscar_dia para controlar cuando no existe
+  dia = read_dia(session, bloque.fecha)
+  if not dia:
+    dia = create_dia(session, Dia(fecha=bloque.fecha))
+
+  # Si el usuario manda o la actividad con id 9 'Empty'
+  if bloque.id_actividad:
+    validar_actividad(session, bloque.id_actividad)
+  else:
+    validar_actividad(session, 9)
+    bloque.id_actividad = 9
