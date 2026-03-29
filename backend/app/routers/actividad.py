@@ -40,3 +40,9 @@ def patch_actividad(session: SessionDep, actividad: ActividadUpdate, id: int):
     raise HTTPException(
       status_code=status.HTTP_400_BAD_REQUEST, detail='El nombre ya existe'
     )
+@actividad_router.delete('/actividades/{id}', status_code=204)
+def delete_actividad(session: SessionDep, id: int):
+  try:
+    eliminar_actividad(session, id)
+  except ValueError as e:
+    raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=str(e))
