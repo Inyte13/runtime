@@ -19,3 +19,9 @@ def post_bloque(session: SessionDep, bloque: BloqueCreate):
     return registrar_bloque(session, bloque)
   except ValueError as e:
     raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
+@bloque_router.patch('/bloques/{id}', response_model=BloqueRead)
+def patch_bloque(session: SessionDep, bloque: BloqueUpdate, id: int):
+  try:
+    return actualizar_bloque(session, id, bloque)
+  except ValueError as e:
+    raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
