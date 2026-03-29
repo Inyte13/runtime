@@ -1,13 +1,14 @@
 from datetime import time
 from typing import Sequence
 
-from sqlmodel import Session, desc, select
+from sqlmodel import Session
 
 from app.crud.bloque import (
   create_bloque,
   delete_bloque,
   read_bloque,
   read_bloques_by_range,
+  ultimo_bloque,
   update_bloque,
 )
 from app.crud.dia import create_dia, read_dia
