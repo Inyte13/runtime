@@ -18,3 +18,5 @@ def is_exists_bloque(session: Session, id: int) -> bool:
   subquery = select(Bloque.id).where(Bloque.id_actividad == id).exists()
   result = session.exec(select(subquery))
   return result.one()
+def read_actividades(session: Session) -> Sequence[Actividad]:
+  return session.exec(select(Actividad)).all()
