@@ -15,3 +15,6 @@ class ActividadResumen(SQLModel):
   id: int
   duracion: float
   descripciones: list[str] = []
+class ActividadUpdate(SQLModel):
+  nombre: str | None = None
+  is_active: bool | None = None
