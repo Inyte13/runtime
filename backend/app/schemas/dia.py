@@ -16,3 +16,13 @@ class DiaReadDetail(DiaRead):
   bloques: list[BloqueRead]
 class DiaResumen(DiaRead):
   categorias: list[CategoriaResumen]  
+class DiaUpdate(SQLModel):
+  titulo: str | None = None
+  estado: Estado | None = None
+  # Validator para que el '' se convierta en None
+  @field_validator('titulo')
+  @classmethod
+  def formatear_str_vacio(cls, v):
+    if v == '':
+      return None
+    return v
