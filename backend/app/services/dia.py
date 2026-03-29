@@ -111,3 +111,6 @@ def recalcular_horas(
     bloques_actualizados.append(bloque)
   session.commit()
   return bloques_actualizados
+def eliminar_dia(session: Session, fecha: date) -> None:
+  dia = buscar_dia(session, fecha)
+  delete_dia(session, dia)
