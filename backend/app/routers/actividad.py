@@ -29,3 +29,14 @@ def post_actividad(session: SessionDep, actividad: ActividadCreate):
     raise HTTPException(
       status_code=status.HTTP_400_BAD_REQUEST, detail='El nombre ya existe'
     )
+@actividad_router.patch('/actividades/{id}', response_model=ActividadRead)
+def patch_actividad(session: SessionDep, actividad: ActividadUpdate, id: int):
+  try:
+    return actualizar_actividad(session, id, actividad)
+  except ValueError as e:
+    raise HTTPException(status_code=404, detail=str(e))
+  # Usando el unique del schema
+  except IntegrityError:
+    raise HTTPException(
+      status_code=status.HTTP_400_BAD_REQUEST, detail='El nombre ya existe'
+    )
