@@ -34,6 +34,20 @@ def buscar_actividad(session: Session, id: int) -> Actividad:
   if not actividad:
     raise ValueError('Actividad no encontrada')
   return actividad
+def registrar_actividad(
+  session: Session, actividad: ActividadCreate
+) -> ActividadReadDetail:
+  actividad_detail = create_actividad(
+    session, Actividad.model_validate(actividad)
+  )
+  assert actividad_detail.id is not None
+  return ActividadReadDetail(
+    id=actividad_detail.id,
+    nombre=actividad_detail.nombre,
+    is_active=actividad_detail.is_active,
+    # Si está recién creado el 'tiene_bloques' siempre será False
+    tiene_bloques=False,
+  )
 def actualizar_actividad(
   session: Session, id: int, actividad: ActividadUpdate
 ) -> Actividad:
