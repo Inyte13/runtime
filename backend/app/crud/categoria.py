@@ -17,3 +17,7 @@ def read_categoria(session: Session, id: int) -> Categoria | None:
 def is_exists_actividad(session: Session, id: int) -> bool:
   subquery = select(Actividad.id).where(Actividad.id_categoria == id).exists()
   return session.exec(select(subquery)).one()
+# Lo ordenamos por orden de creacion
+def read_categorias(session: Session) -> Sequence[Categoria]:
+  statement = select(Categoria).order_by(col(Categoria.id))
+  return session.exec(statement).all()
