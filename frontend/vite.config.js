@@ -13,10 +13,10 @@ export default defineConfig({
   },
   server: {
     proxy: {
+      '/categorias': 'http://127.0.0.1:8000',
+      '/actividades': 'http://127.0.0.1:8000',
       '/bloques': 'http://127.0.0.1:8000',
       '/dias': 'http://127.0.0.1:8000',
-      '/configuracion': 'http://127.0.0.1:8000',
-      '/actividades': 'http://127.0.0.1:8000',
     },
   },
 })
