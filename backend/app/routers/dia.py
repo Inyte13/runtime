@@ -42,3 +42,4 @@ def get_dias_resumen(session: SessionDep, inicio: QueryDate, final: QueryDate):
     return [resumen_dia(session, dia) for dia in dias]
   except ValueError as e:
     raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
+# POST? NO, se supone que 'todos' los dias ya están creados solo falta actualizarlos
