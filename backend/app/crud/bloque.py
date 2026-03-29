@@ -28,3 +28,14 @@ def read_bloques_by_range(
   if hora_hasta is not None:
     statement = statement.where(Bloque.hora <= hora_hasta)
   return session.exec(statement).all()
+def update_bloque(
+  session: Session, bloque_bd: Bloque, bloque: BloqueUpdate
+) -> Bloque:
+  # Convertimos el input a diccionario, excluyendo los nulos
+  new_bloque = bloque.model_dump(exclude_unset=True)
+  # Actualizamos los atributos
+  bloque_bd.sqlmodel_update(new_bloque)
+  session.add(bloque_bd)
+  session.commit()
+  session.refresh(bloque_bd)
+  return bloque_bd
