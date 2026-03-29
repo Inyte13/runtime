@@ -45,3 +45,12 @@ def registrar_bloque(session: Session, bloque: BloqueCreate) -> Bloque:
   else:
     validar_actividad(session, 9)
     bloque.id_actividad = 9
+  # Para el button de ListaBloques
+  if bloque.id_ref is None:
+    return registrar_bloque_btn(session, bloque)
+  # Cuando cree con alt en el primer bloque
+  if bloque.id_ref == 0:
+    # Insertar al inicio
+    return registrar_bloque_al_inicio(session, bloque)
+  # Si existe el id_ref del 'creador'
+  return registrar_bloque_despues(session, bloque)
