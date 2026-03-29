@@ -41,3 +41,34 @@ def mostrar_dias(session: Session, inicio: date, final: date) -> Sequence[Dia]:
   if (final - inicio).days > 365:
     raise ValueError('El intervalo no puede ser mayor a 1 año')
   return read_dias_resumen(session, inicio, final)
+def resumen_dia(session: Session, dia: Dia) -> DiaResumen:
+  bloques_resumen = read_bloques_resumen(session, dia.fecha)
+  categorias: dict[int, CategoriaResumen] = {}
+  actividades: dict[int, ActividadResumen] = {}
+  for id_actividad, duracion, descripcion, id_categoria in bloques_resumen:
+    if id_categoria not in categorias:
+      categorias[id_categoria] = CategoriaResumen(
+        id=id_categoria, actividades=[]
+      )
+    if id_actividad not in actividades:
+      actividad = ActividadResumen(
+        id=id_actividad,
+        duracion=duracion,
+        descripciones=[descripcion] if descripcion else [],
+      )
+      actividades[id_actividad] = actividad
+      categorias[id_categoria].actividades.append(actividad)
+    else:
+      actividades[id_actividad].duracion += duracion
+      if descripcion:
+        actividades[id_actividad].descripciones.append(descripcion)
+  # Orden ascendente de las actividades
+  for categoria in categorias.values():
+    categoria.actividades.sort(key=lambda a: a.duracion, reverse=True)
+
+  return DiaResumen(
+    fecha=dia.fecha,
+    titulo=dia.titulo,
+    estado=dia.estado,
+    categorias=list(categorias.values()),
+  )
