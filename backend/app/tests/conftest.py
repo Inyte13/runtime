@@ -20,7 +20,7 @@ from app.services.bloque import registrar_bloque
 engine_temp = create_engine(
   'sqlite:///:memory:',
   connect_args={'check_same_thread': False},
-  poolclass=StaticPool,
+  poolclass=StaticPool,  # Reutiliza la BD de la memoria
   echo=False,
 )
 
