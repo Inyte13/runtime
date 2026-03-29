@@ -54,3 +54,13 @@ def patch_dia(
     return actualizar_dia(session, fecha, dia)
   except ValueError as e:
     raise HTTPException(status_code=404, detail=str(e))
+# PATCH: Con las duraciones hago coincidir hora y hora_fin
+@dia_router.patch('/dias/{fecha}/reordenar', response_model=list[BloqueRead])
+def recalculate_hours(
+  session: SessionDep, fecha: date, ids: list[int] = Body(...)
+):
+  try:
+    # ids: Lista de el nuevo orden enviado por el frontend
+    return recalcular_horas(session, fecha, ids)
+  except ValueError as e:
+    raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
