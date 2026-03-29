@@ -45,3 +45,9 @@ def patch_actividad(session: SessionDep, categoria: CategoriaUpdate, id: int):
     raise HTTPException(
       status_code=status.HTTP_400_BAD_REQUEST, detail='El nombre ya existe'
     )
+@categoria_router.delete('/categorias/{id}', status_code=204)
+def delete_categoria(session: SessionDep, id: int):
+  try:
+    eliminar_categoria(session, id)
+  except ValueError as e:
+    raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=str(e))
