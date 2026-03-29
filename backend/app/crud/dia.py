@@ -10,3 +10,5 @@ from app.models.dia import Dia
 from app.schemas.dia import DiaUpdate
 
 
+def read_dia(session: Session, fecha: date) -> Dia | None:
+  return session.get(Dia, fecha)
