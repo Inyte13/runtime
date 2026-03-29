@@ -10,6 +10,8 @@ def modificar_hora(hora: time, duracion: float) -> time:
   if minutos_fin > 1440:
     raise ValueError('El bloque se pasa de medianoche')
   return time(minutos_fin // 60, minutos_fin % 60)
+
+
 def validar_hora_granulidad(hora: time, unidad_duracion: int = 30) -> None:
   if (
     hora.minute % unidad_duracion != 0

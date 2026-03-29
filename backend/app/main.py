@@ -21,17 +21,18 @@ async def lifespan(app: FastAPI):
 
 # Instancia principal de FastAPI con lifespan
 app = FastAPI(lifespan=lifespan, title='Runtime App')
+
 app.include_router(dia_router)
 app.include_router(bloque_router)
 app.include_router(categoria_router)
 app.include_router(actividad_router)
+
 
 # Orígenes permitidos para CORS
 origins = [
   'http://localhost:5173',  # El frontend
   '*',  # Por ahora permitimos todo
 ]
-
 # Middleware de CORS, controla que dominios pueden hablar con mi API
 app.add_middleware(
   CORSMiddleware,
