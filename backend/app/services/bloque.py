@@ -90,3 +90,25 @@ def registrar_bloque_al_inicio(
   _modificar_horas(session, siguientes, bloque.duracion)
   session.commit()
   return bloque_bd
+def registrar_bloque_despues(session: Session, bloque: BloqueCreate) -> Bloque:
+  assert bloque.id_actividad is not None
+  assert bloque.id_ref is not None
+  bloque_ref = buscar_bloque(session, bloque.id_ref)
+  hora = bloque_ref.hora_fin
+  validar_hora_granulidad(hora)
+  new_bloque = Bloque(
+    fecha=bloque.fecha,
+    duracion=bloque.duracion,
+    descripcion=bloque.descripcion,
+    hora=hora,
+    id_actividad=bloque.id_actividad,
+    hora_fin=modificar_hora(hora, bloque.duracion),
+  )
+  bloque_bd = create_bloque(session, new_bloque)
+  # Si lo incluimos porque hora es la hora_fin o sea la hora de inicio de los siguientes
+  siguientes = read_bloques_by_range(session, bloque.fecha, hora_desde=hora)
+  # Cogemos los siguientes pero sin el creado
+  siguientes = [b for b in siguientes if b.id != bloque_bd.id]
+  _modificar_horas(session, siguientes, new_bloque.duracion)
+  session.commit()
+  return bloque_bd
