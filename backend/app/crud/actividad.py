@@ -31,3 +31,6 @@ def update_actividad(
   session.commit()
   session.refresh(actividad_bd)
   return actividad_bd
+def delete_actividad(session: Session, actividad: Actividad) -> None:
+  session.delete(actividad)
+  session.commit()
