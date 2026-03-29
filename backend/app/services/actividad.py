@@ -20,3 +20,8 @@ def buscar_actividad(session: Session, id: int) -> Actividad:
   if not actividad:
     raise ValueError('Actividad no encontrada')
   return actividad
+def actualizar_actividad(
+  session: Session, id: int, actividad: ActividadUpdate
+) -> Actividad:
+  actividad_bd = buscar_actividad(session, id)
+  return update_actividad(session, actividad_bd, actividad)

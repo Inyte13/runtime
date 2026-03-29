@@ -35,3 +35,8 @@ def mostrar_categorias(session: Session) -> list[CategoriaReadDetail]:
       )
     )
   return new_categorias
+def actualizar_categoria(
+  session, id: int, categoria: CategoriaUpdate
+) -> Categoria:
+  categoria_bd = buscar_categoria(session, id)
+  return update_categoria(session, categoria_bd, categoria)
