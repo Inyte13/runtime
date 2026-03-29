@@ -12,3 +12,8 @@ from app.schemas.categoria import CategoriaReadDetail, CategoriaUpdate
 from app.services.actividad import actividad_modificada
 
 
+def buscar_categoria(session: Session, id: int) -> Categoria:
+  categoria = read_categoria(session, id)
+  if not categoria:
+    raise ValueError('Categoria no encontrada')
+  return categoria

@@ -18,3 +18,8 @@ from app.services.actividad import validar_actividad
 from app.utils.time import modificar_hora, validar_hora_granulidad
 
 
+def buscar_bloque(session: Session, id: int) -> Bloque:
+  bloque = read_bloque(session, id)
+  if not bloque:
+    raise ValueError('No se encontró el bloque')
+  return bloque

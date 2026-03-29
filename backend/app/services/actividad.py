@@ -15,3 +15,8 @@ from app.schemas.actividad import (
 )
 
 
+def buscar_actividad(session: Session, id: int) -> Actividad:
+  actividad = read_actividad(session, id)
+  if not actividad:
+    raise ValueError('Actividad no encontrada')
+  return actividad

@@ -20,3 +20,13 @@ from app.schemas.categoria import CategoriaResumen
 from app.schemas.dia import DiaResumen, DiaUpdate
 
 
+def buscar_dia(session: Session, fecha: date) -> Dia:
+  dia = read_dia(session, fecha)
+  if not dia:
+    raise ValueError('No se encontró el día')
+  return dia
+def buscar_dia_detail(session: Session, fecha: date) -> Dia:
+  dia = read_dia_detail(session, fecha)
+  if not dia:
+    raise ValueError('No se encontró el día completo')
+  return dia
