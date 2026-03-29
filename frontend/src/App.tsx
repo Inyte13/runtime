@@ -8,12 +8,12 @@ const Home = lazy(() => import('./pages/Home.js'))
 export default function App() {
   // Loading global, por la normalizacion de datos
   const [isReady, setIsReady] = useState(false)
-  const traerActividadesDetail = useActividadesStore(
-    state => state.traerActividadesDetail
+  const traerCategoriasDetail = useCategoriasStore(
+    state => state.traerCategoriasDetail
   )
   useEffect(() => {
-    traerActividadesDetail().finally(() => setIsReady(true))
-  }, [traerActividadesDetail])
+    traerCategoriasDetail().finally(() => setIsReady(true))
+  }, [traerCategoriasDetail])
 
   if (!isReady)
     return (
