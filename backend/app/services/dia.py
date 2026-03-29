@@ -7,10 +7,10 @@ from app.crud.bloque import read_bloques_by_range
 from app.crud.dia import (
   create_dia,
   delete_dia,
-  read_actividad_resumen,
+  read_bloques_resumen,
   read_dia,
   read_dia_detail,
-  read_dias,
+  read_dias_resumen,
   update_dia,
 )
 from app.models.bloque import Bloque
