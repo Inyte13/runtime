@@ -40,3 +40,10 @@ def actualizar_categoria(
 ) -> Categoria:
   categoria_bd = buscar_categoria(session, id)
   return update_categoria(session, categoria_bd, categoria)
+def eliminar_categoria(session: Session, id: int) -> None:
+  if is_exists_actividad(session, id):
+    raise ValueError(
+      'Una categoria con al menos una actividad relacionada no se puede eliminar'
+    )
+  categoria = buscar_categoria(session, id)
+  delete_categoria(session, categoria)

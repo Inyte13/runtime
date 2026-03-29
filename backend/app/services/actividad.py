@@ -25,3 +25,10 @@ def actualizar_actividad(
 ) -> Actividad:
   actividad_bd = buscar_actividad(session, id)
   return update_actividad(session, actividad_bd, actividad)
+def eliminar_actividad(session: Session, id: int) -> None:
+  if is_exists_bloque(session, id):
+    raise ValueError(
+      'Una actividad con al menos un bloque relacionado no se puede eliminar'
+    )
+  actividad = buscar_actividad(session, id)
+  delete_actividad(session, actividad)
