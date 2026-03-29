@@ -32,3 +32,6 @@ def update_categoria(
   session.commit()
   session.refresh(categoria_bd)
   return categoria_bd
+def delete_categoria(session: Session, categoria: Categoria) -> None:
+  session.delete(categoria)
+  session.commit()
