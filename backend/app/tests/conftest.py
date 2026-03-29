@@ -52,3 +52,21 @@ def client():
   yield client
   app.dependency_overrides.clear()
   SQLModel.metadata.drop_all(engine_temp)
+@pytest.fixture
+def categoria(session_temp):
+  return create_categoria(session_temp, Categoria(nombre='entretenimiento'))
+@pytest.fixture
+def actividad(session_temp, categoria):
+  assert categoria.id is not None
+  return create_actividad(
+    session_temp,
+    Actividad(nombre='reels', id_categoria=categoria.id),
+  )
+@pytest.fixture
+def dia(session_temp):
+  return create_dia(session_temp, Dia(fecha=date.today()))
+@pytest.fixture
+def bloque(session_temp, dia, actividad):
+  return registrar_bloque(
+    session_temp, BloqueCreate(fecha=dia.fecha, id_actividad=actividad.id)
+  )
