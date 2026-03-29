@@ -41,6 +41,10 @@ class BloqueRead(SQLModel):
   @field_serializer('hora', 'hora_fin')
   def formatear_hora(self, value: time | None) -> str | None:
     return value.strftime('%H:%M') if value else None
+class BloqueUpdate(SQLModel):
+  duracion: float | None = None
+  descripcion: str | None = None
+  id_actividad: int | None = None
   # Validator para que el '' se convierta en None
   @field_validator('descripcion')
   @classmethod
