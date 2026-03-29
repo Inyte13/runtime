@@ -28,3 +28,6 @@ class CategoriaRead(SQLModel):
 class CategoriaReadDetail(CategoriaRead):
   actividades: list[ActividadReadDetail]
 
+class CategoriaResumen(SQLModel):
+  id: int
+  actividades: list[ActividadResumen]
