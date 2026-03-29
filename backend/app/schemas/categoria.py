@@ -25,3 +25,6 @@ class CategoriaRead(SQLModel):
   id: int
   nombre: str
   color: str
+class CategoriaReadDetail(CategoriaRead):
+  actividades: list[ActividadReadDetail]
+
