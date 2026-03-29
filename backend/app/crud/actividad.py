@@ -14,3 +14,7 @@ def create_actividad(session: Session, actividad: Actividad) -> Actividad:
   return actividad
 def read_actividad(session: Session, id: int) -> Actividad | None:
   return session.get(Actividad, id)
+def is_exists_bloque(session: Session, id: int) -> bool:
+  subquery = select(Bloque.id).where(Bloque.id_actividad == id).exists()
+  result = session.exec(select(subquery))
+  return result.one()
