@@ -12,3 +12,4 @@ from app.services.bloque import (
 bloque_router = APIRouter(tags=['Bloques'])
 
 
+# TODO: Un get para traer los bloques para las estadisticas
