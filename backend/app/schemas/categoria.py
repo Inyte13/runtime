@@ -15,3 +15,9 @@ class CategoriaCreate(SQLModel):
     if v.strip() == '':
       raise ValueError('El nombre no puede estar vacío')
     return v.lower()
+  @field_validator('color')
+  def color_not_empty(cls, v: str) -> str:
+    if not re.match(r'^#[0-9A-Fa-f]{6}$', v):
+      raise ValueError('El color debe ser un hexadecimal válido (#RRGGBB)')
+    return v
+
