@@ -22,7 +22,7 @@ def read_dia_detail(session: Session, fecha: date) -> Dia | None:
     # Evita error de lazy loading al acceder a dia.bloques fuera de la sesión
     .options(selectinload(Dia.bloques))  # type: ignore
   )
-  # Devuelve el cursor/iterable, el firstlo convierte en un Objeto Dia
+  # Devuelve el cursor/iterable, el first lo convierte en un objeto Dia
   return session.exec(statement).first()
 
 

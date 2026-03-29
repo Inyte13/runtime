@@ -15,9 +15,9 @@ class Estado(IntEnum):
 
 
 class Dia(SQLModel, table=True):
+  fecha: date = Field(primary_key=True)
   titulo: str | None = Field(max_length=150, default=None)
   estado: Estado | None = Field(default=None)
-  fecha: date = Field(primary_key=True)
 
   # Dia sabe sus bloques y Bloque no sabe nada
   bloques: list['Bloque'] = Relationship(
