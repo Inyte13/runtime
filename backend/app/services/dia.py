@@ -84,3 +84,30 @@ def actualizar_dia(session: Session, fecha: date, dia: DiaUpdate) -> Dia:
     return create_dia(session, new_dia)
   # Si ya existe actualizamos normal
   return update_dia(session, dia_bd, dia)
+# Cuando yo armo la lista es list[Bloque]
+def recalcular_horas(
+  session: Session, fecha: date, ids: list[int]
+) -> list[Bloque]:
+
+  bloques = read_bloques_by_range(session, fecha)
+  # Sacamos los id y lo convertimos a set para comparar con los que nos viene
+  if {bloque.id for bloque in bloques} != set(ids):
+    raise ValueError('Los bloques no coinciden')
+
+  # Dict para búsqueda rapida
+  bloques_dict = {bloque.id: bloque for bloque in bloques}
+
+  hora_temp = datetime.combine(fecha, time(0, 0))
+
+  bloques_actualizados = []
+  for id in ids:
+    bloque = bloques_dict[id]
+    bloque.hora = hora_temp.time()
+    # Le sumamos la duracion al temp
+    hora_temp += timedelta(hours=bloque.duracion)
+    # Le asignamos: hora_fin = hora_temp + duracion
+    bloque.hora_fin = hora_temp.time()
+    session.add(bloque)
+    bloques_actualizados.append(bloque)
+  session.commit()
+  return bloques_actualizados
