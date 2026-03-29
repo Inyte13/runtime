@@ -17,7 +17,7 @@ from app.models.dia import Dia
 from app.schemas.bloque import BloqueCreate
 from app.services.bloque import registrar_bloque
 
-sqlite_engine = create_engine(
+engine_temp = create_engine(
   'sqlite:///:memory:',
   connect_args={'check_same_thread': False},
   poolclass=StaticPool,
@@ -26,23 +26,23 @@ sqlite_engine = create_engine(
 
 
 @pytest.fixture
-def session_sqlite():
-  SQLModel.metadata.create_all(sqlite_engine)
-  with Session(sqlite_engine) as session:
+def session_temp():
+  SQLModel.metadata.create_all(engine_temp)
+  with Session(engine_temp) as session:
     yield session
-  SQLModel.metadata.drop_all(sqlite_engine)
+  SQLModel.metadata.drop_all(engine_temp)
 
 
 @pytest.fixture
 def client():
-  SQLModel.metadata.create_all(sqlite_engine)
+  SQLModel.metadata.create_all(engine_temp)
 
   def override_get_session():
-    with Session(sqlite_engine) as session:
+    with Session(engine_temp) as session:
       yield session
 
   app.dependency_overrides[get_session] = override_get_session
   client = TestClient(app)
   yield client
   app.dependency_overrides.clear()
-  SQLModel.metadata.drop_all(sqlite_engine)
+  SQLModel.metadata.drop_all(engine_temp)
