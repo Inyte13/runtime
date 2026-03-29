@@ -34,6 +34,8 @@ def get_dia(
     return DiaRead.model_validate(dia_db)
   except ValueError as e:
     raise HTTPException(status_code=404, detail=str(e))
+
+
 # GET: Dias mes entre un rango de fechas incluyendo al inicio y al final
 @dia_router.get('/dias', response_model=list[DiaResumen])
 def get_dias_resumen(session: SessionDep, inicio: QueryDate, final: QueryDate):
@@ -42,7 +44,11 @@ def get_dias_resumen(session: SessionDep, inicio: QueryDate, final: QueryDate):
     return [resumen_dia(session, dia) for dia in dias]
   except ValueError as e:
     raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
+
+
 # POST? NO, se supone que 'todos' los dias ya están creados solo falta actualizarlos
+
+
 # PATCH: Si 'actualiza' el titulo o el estado y si el dia no existe lo crear automaticamente
 @dia_router.patch('/dias/{fecha}', response_model=DiaRead)
 def patch_dia(
@@ -54,6 +60,8 @@ def patch_dia(
     return actualizar_dia(session, fecha, dia)
   except ValueError as e:
     raise HTTPException(status_code=404, detail=str(e))
+
+
 # PATCH: Con las duraciones hago coincidir hora y hora_fin
 @dia_router.patch('/dias/{fecha}/reordenar', response_model=list[BloqueRead])
 def recalculate_hours(
@@ -64,6 +72,8 @@ def recalculate_hours(
     return recalcular_horas(session, fecha, ids)
   except ValueError as e:
     raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
+
+
 # DELETE: Elimina el dia y los bloques que esten dentro
 @dia_router.delete('/dias/{fecha}', status_code=204)
 def delete_dia(session: SessionDep, fecha: PathDate):

@@ -23,6 +23,8 @@ categoria_router = APIRouter(tags=['Categorias'])
 @categoria_router.get('/categorias', response_model=list[CategoriaReadDetail])
 def get_categorias(session: SessionDep):
   return mostrar_categorias(session)
+
+
 @categoria_router.post(
   '/categorias', status_code=201, response_model=CategoriaReadDetail
 )
@@ -34,6 +36,8 @@ def post_categoria(session: SessionDep, categoria: CategoriaCreate):
     raise HTTPException(
       status_code=status.HTTP_400_BAD_REQUEST, detail='El nombre ya existe'
     )
+
+
 @categoria_router.patch('/categorias/{id}', response_model=CategoriaRead)
 def patch_actividad(session: SessionDep, categoria: CategoriaUpdate, id: int):
   try:
@@ -45,6 +49,8 @@ def patch_actividad(session: SessionDep, categoria: CategoriaUpdate, id: int):
     raise HTTPException(
       status_code=status.HTTP_400_BAD_REQUEST, detail='El nombre ya existe'
     )
+
+
 @categoria_router.delete('/categorias/{id}', status_code=204)
 def delete_categoria(session: SessionDep, id: int):
   try:

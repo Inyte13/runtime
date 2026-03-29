@@ -29,6 +29,8 @@ def post_actividad(session: SessionDep, actividad: ActividadCreate):
     raise HTTPException(
       status_code=status.HTTP_400_BAD_REQUEST, detail='El nombre ya existe'
     )
+
+
 @actividad_router.patch('/actividades/{id}', response_model=ActividadRead)
 def patch_actividad(session: SessionDep, actividad: ActividadUpdate, id: int):
   try:
@@ -40,6 +42,8 @@ def patch_actividad(session: SessionDep, actividad: ActividadUpdate, id: int):
     raise HTTPException(
       status_code=status.HTTP_400_BAD_REQUEST, detail='El nombre ya existe'
     )
+
+
 @actividad_router.delete('/actividades/{id}', status_code=204)
 def delete_actividad(session: SessionDep, id: int):
   try:
