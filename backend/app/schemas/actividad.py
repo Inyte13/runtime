@@ -9,3 +9,5 @@ class ActividadRead(SQLModel):
   id: int
   nombre: str
   is_active: bool
+class ActividadReadDetail(ActividadRead):
+  tiene_bloques: bool
