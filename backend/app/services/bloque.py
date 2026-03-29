@@ -54,3 +54,18 @@ def registrar_bloque(session: Session, bloque: BloqueCreate) -> Bloque:
     return registrar_bloque_al_inicio(session, bloque)
   # Si existe el id_ref del 'creador'
   return registrar_bloque_despues(session, bloque)
+def registrar_bloque_btn(session: Session, bloque: BloqueCreate) -> Bloque:
+  assert bloque.id_actividad is not None
+  ultimo = ultimo_bloque(session, bloque.fecha)
+  # Si es el primer bloque usa el 00:00 sino la hora_fin del ultimo
+  hora = ultimo.hora_fin if ultimo else time(0, 0)
+  validar_hora_granulidad(hora)
+  new_bloque = Bloque(
+    fecha=bloque.fecha,
+    duracion=bloque.duracion,
+    descripcion=bloque.descripcion,
+    hora=hora,
+    id_actividad=bloque.id_actividad,
+    hora_fin=modificar_hora(hora, bloque.duracion),
+  )
+  return create_bloque(session, new_bloque)
