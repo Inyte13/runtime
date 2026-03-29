@@ -30,3 +30,14 @@ def buscar_dia_detail(session: Session, fecha: date) -> Dia:
   if not dia:
     raise ValueError('No se encontró el día completo')
   return dia
+# Cuando SQLAlchemy devuelve es sequence Sequence[Dia]
+def mostrar_dias(session: Session, inicio: date, final: date) -> Sequence[Dia]:
+  if final < inicio:
+    raise ValueError('La fecha final debe ser mayor que la inicial')
+  # Si quieres buscar un día mejor hazlo con buscar_dia
+  if final == inicio:
+    raise ValueError('Las fechas no pueden ser iguales')
+  # Solo se puede mostrar máximo 1 año
+  if (final - inicio).days > 365:
+    raise ValueError('El intervalo no puede ser mayor a 1 año')
+  return read_dias_resumen(session, inicio, final)
