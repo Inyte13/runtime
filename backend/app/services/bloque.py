@@ -69,3 +69,24 @@ def registrar_bloque_btn(session: Session, bloque: BloqueCreate) -> Bloque:
     hora_fin=modificar_hora(hora, bloque.duracion),
   )
   return create_bloque(session, new_bloque)
+def registrar_bloque_al_inicio(
+  session: Session, bloque: BloqueCreate
+) -> Bloque:
+  assert bloque.id_actividad is not None
+  new_bloque = Bloque(
+    fecha=bloque.fecha,
+    duracion=bloque.duracion,
+    descripcion=bloque.descripcion,
+    hora=time(0, 0),
+    id_actividad=bloque.id_actividad,
+    hora_fin=modificar_hora(time(0, 0), bloque.duracion),
+  )
+  bloque_bd = create_bloque(session, new_bloque)
+  siguientes = read_bloques_by_range(
+    session, bloque.fecha, hora_desde=time(0, 0)
+  )
+  # Cogemos los siguientes pero sin el creado
+  siguientes = [b for b in siguientes if b.id != bloque_bd.id]
+  _modificar_horas(session, siguientes, bloque.duracion)
+  session.commit()
+  return bloque_bd
