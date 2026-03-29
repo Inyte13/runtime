@@ -14,3 +14,6 @@ def create_categoria(session: Session, categoria: Categoria) -> Categoria:
   return categoria
 def read_categoria(session: Session, id: int) -> Categoria | None:
   return session.get(Categoria, id)
+def is_exists_actividad(session: Session, id: int) -> bool:
+  subquery = select(Actividad.id).where(Actividad.id_categoria == id).exists()
+  return session.exec(select(subquery)).one()
