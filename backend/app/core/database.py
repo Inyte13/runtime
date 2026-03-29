@@ -24,5 +24,11 @@ def get_session():
 
 SessionDep = Annotated[Session, Depends(get_session)]
 
-PathDate = Annotated[date, Path(..., example='2026-02-25')]
-QueryDate = Annotated[date, Query(..., example='2026-02-25')]
+PathDate = Annotated[
+  date,
+  Path(..., openapi_examples={'example': {'value': date.today().isoformat()}}),
+]
+QueryDate = Annotated[
+  date,
+  Query(..., openapi_examples={'example': {'value': date.today().isoformat()}}),
+]
