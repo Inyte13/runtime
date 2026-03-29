@@ -142,3 +142,16 @@ def actualizar_bloque(
 
   bloque_bd = update_bloque(session, bloque_bd, bloque)
   return bloque_bd
+def eliminar_bloque(session: Session, id: int) -> None:
+  bloque = buscar_bloque(session, id)
+  ultimo = ultimo_bloque(session, bloque.fecha)
+  if ultimo and bloque.id != ultimo.id:
+    diferencia = -bloque.duracion
+    siguientes = read_bloques_by_range(
+      session=session,
+      fecha=bloque.fecha,
+      hora_desde=bloque.hora,
+    )
+    siguientes = [b for b in siguientes if b.id != bloque.id]
+    _modificar_horas(session, siguientes, diferencia)
+  delete_bloque(session, bloque)
