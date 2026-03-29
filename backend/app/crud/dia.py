@@ -22,3 +22,16 @@ def read_dia_detail(session: Session, fecha: date) -> Dia | None:
   )
   # Devuelve el cursor/iterable, el firstlo convierte en un Objeto Dia
   return session.exec(statement).first()
+def read_dias_resumen(
+  session: Session, inicio: date, final: date
+) -> Sequence[Dia]:
+  statement = (
+    select(Dia)
+    .where(inicio <= Dia.fecha)
+    .where(Dia.fecha <= final)
+    .order_by(col(Dia.fecha))
+    # Para hacerlo en una solo query
+    # Evita error de lazy loading al acceder a dia.bloques fuera de la sesión
+    .options(selectinload(Dia.bloques))  # type: ignore
+  )
+  return session.exec(statement).all()
