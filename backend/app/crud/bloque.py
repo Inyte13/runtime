@@ -39,3 +39,6 @@ def update_bloque(
   session.commit()
   session.refresh(bloque_bd)
   return bloque_bd
+def delete_bloque(session: Session, bloque: Bloque) -> None:
+  session.delete(bloque)
+  session.commit()
