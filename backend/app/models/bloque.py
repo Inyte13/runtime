@@ -5,7 +5,6 @@ from sqlmodel import Field, Relationship, SQLModel
 from app.models.actividad import Actividad
 
 
-
 class Bloque(SQLModel, table=True):
   __table_args__ = {'sqlite_autoincrement': True}
   # Tiene que ser | None, porque sqlite le asigna el id
@@ -21,9 +20,8 @@ class Bloque(SQLModel, table=True):
   fecha: date = Field(foreign_key='dia.fecha', nullable=False)
   # Tenemos id_actividad a pesar de tener actividad porque es FK
   id_actividad: int = Field(foreign_key='actividad.id', nullable=False)
-  
+
   # No tienen el nullable=False porque son Relationship
-  
 
   # Bloque sabe la actividad pero Actividad no sabe nada
   actividad: Actividad = Relationship()

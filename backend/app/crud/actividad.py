@@ -12,14 +12,22 @@ def create_actividad(session: Session, actividad: Actividad) -> Actividad:
   session.commit()
   session.refresh(actividad)
   return actividad
+
+
 def read_actividad(session: Session, id: int) -> Actividad | None:
   return session.get(Actividad, id)
+
+
 def is_exists_bloque(session: Session, id: int) -> bool:
   subquery = select(Bloque.id).where(Bloque.id_actividad == id).exists()
   result = session.exec(select(subquery))
   return result.one()
+
+
 def read_actividades(session: Session) -> Sequence[Actividad]:
   return session.exec(select(Actividad)).all()
+
+
 def update_actividad(
   session: Session, actividad_bd: Actividad, actividad: ActividadUpdate
 ) -> Actividad:
@@ -31,6 +39,8 @@ def update_actividad(
   session.commit()
   session.refresh(actividad_bd)
   return actividad_bd
+
+
 def delete_actividad(session: Session, actividad: Actividad) -> None:
   session.delete(actividad)
   session.commit()

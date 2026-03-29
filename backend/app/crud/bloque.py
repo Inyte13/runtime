@@ -12,8 +12,12 @@ def create_bloque(session: Session, bloque: Bloque) -> Bloque:
   session.commit()
   session.refresh(bloque)
   return bloque
+
+
 def read_bloque(session: Session, id: int) -> Bloque | None:
   return session.get(Bloque, id)
+
+
 def read_bloques_by_range(
   session: Session,
   fecha: date,
@@ -28,6 +32,8 @@ def read_bloques_by_range(
   if hora_hasta is not None:
     statement = statement.where(Bloque.hora <= hora_hasta)
   return session.exec(statement).all()
+
+
 def update_bloque(
   session: Session, bloque_bd: Bloque, bloque: BloqueUpdate
 ) -> Bloque:
@@ -39,6 +45,8 @@ def update_bloque(
   session.commit()
   session.refresh(bloque_bd)
   return bloque_bd
+
+
 def delete_bloque(session: Session, bloque: Bloque) -> None:
   session.delete(bloque)
   session.commit()

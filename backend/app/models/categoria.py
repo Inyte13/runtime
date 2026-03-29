@@ -10,5 +10,7 @@ class Categoria(SQLModel, table=True):
   id: int | None = Field(default=None, primary_key=True)
   nombre: str = Field(unique=True, max_length=50, nullable=False)
   color: str = Field(max_length=7, default='#A18072', nullable=False)
+
   # No tienen el nullable=False porque son Relationship
+
   actividades: list['Actividad'] = Relationship()

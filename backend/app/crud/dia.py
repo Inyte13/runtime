@@ -12,6 +12,8 @@ from app.schemas.dia import DiaUpdate
 
 def read_dia(session: Session, fecha: date) -> Dia | None:
   return session.get(Dia, fecha)
+
+
 def read_dia_detail(session: Session, fecha: date) -> Dia | None:
   statement = (
     select(Dia)
@@ -22,6 +24,8 @@ def read_dia_detail(session: Session, fecha: date) -> Dia | None:
   )
   # Devuelve el cursor/iterable, el firstlo convierte en un Objeto Dia
   return session.exec(statement).first()
+
+
 def read_dias_resumen(
   session: Session, inicio: date, final: date
 ) -> Sequence[Dia]:
@@ -35,7 +39,11 @@ def read_dias_resumen(
     .options(selectinload(Dia.bloques))  # type: ignore
   )
   return session.exec(statement).all()
+
+
 ACTIVIDADES_IGNORADAS = [6]
+
+
 # Ignoramos id=6, harcodeado, actividad 'Dormir'
 def read_bloques_resumen(
   session: Session, fecha: date
@@ -52,11 +60,15 @@ def read_bloques_resumen(
     .where(col(Actividad.id).notin_(ACTIVIDADES_IGNORADAS))
   )
   return session.exec(statement).all()
+
+
 def create_dia(session: Session, dia: Dia) -> Dia:
   session.add(dia)
   session.commit()
   session.refresh(dia)
   return dia
+
+
 def update_dia(session: Session, dia_bd: Dia, dia: DiaUpdate) -> Dia:
   # Solo usa los campos que se declararon
   campos_actualizados = dia.model_dump(exclude_unset=True)
@@ -66,6 +78,8 @@ def update_dia(session: Session, dia_bd: Dia, dia: DiaUpdate) -> Dia:
   session.commit()
   session.refresh(dia_bd)
   return dia_bd
+
+
 def delete_dia(session: Session, dia: Dia) -> None:
   session.delete(dia)
   session.commit()
