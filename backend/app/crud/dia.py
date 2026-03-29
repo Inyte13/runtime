@@ -52,3 +52,8 @@ def read_bloques_resumen(
     .where(col(Actividad.id).notin_(ACTIVIDADES_IGNORADAS))
   )
   return session.exec(statement).all()
+def create_dia(session: Session, dia: Dia) -> Dia:
+  session.add(dia)
+  session.commit()
+  session.refresh(dia)
+  return dia
