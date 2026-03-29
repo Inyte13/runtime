@@ -14,3 +14,5 @@ class DiaRead(SQLModel):
   estado: Estado | None = None
 class DiaReadDetail(DiaRead):
   bloques: list[BloqueRead]
+class DiaResumen(DiaRead):
+  categorias: list[CategoriaResumen]  
