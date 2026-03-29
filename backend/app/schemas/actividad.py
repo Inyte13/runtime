@@ -11,3 +11,7 @@ class ActividadRead(SQLModel):
   is_active: bool
 class ActividadReadDetail(ActividadRead):
   tiene_bloques: bool
+class ActividadResumen(SQLModel):
+  id: int
+  duracion: float
+  descripciones: list[str] = []
