@@ -43,3 +43,14 @@ def get_dias_resumen(session: SessionDep, inicio: QueryDate, final: QueryDate):
   except ValueError as e:
     raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
 # POST? NO, se supone que 'todos' los dias ya están creados solo falta actualizarlos
+# PATCH: Si 'actualiza' el titulo o el estado y si el dia no existe lo crear automaticamente
+@dia_router.patch('/dias/{fecha}', response_model=DiaRead)
+def patch_dia(
+  session: SessionDep,
+  dia: DiaUpdate,
+  fecha: PathDate,
+):
+  try:
+    return actualizar_dia(session, fecha, dia)
+  except ValueError as e:
+    raise HTTPException(status_code=404, detail=str(e))
