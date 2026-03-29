@@ -7,6 +7,11 @@ from app.models.bloque import Bloque
 from app.schemas.bloque import BloqueUpdate
 
 
+def ultimo_bloque(session: Session, fecha) -> Bloque | None:
+  statement = (
+    select(Bloque).where(Bloque.fecha == fecha).order_by(desc(Bloque.hora))
+  )
+  return session.exec(statement).first()
 def create_bloque(session: Session, bloque: Bloque) -> Bloque:
   session.add(bloque)
   session.commit()
