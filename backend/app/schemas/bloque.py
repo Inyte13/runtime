@@ -22,3 +22,11 @@ class BloqueCreate(SQLModel):
       return None
     return v
 
+  # Validator para que el '' se convierta en None
+  @field_validator('descripcion')
+  @classmethod
+  def formatear_str_vacio(cls, v):
+    if v == '':
+      return None
+    return v
+
