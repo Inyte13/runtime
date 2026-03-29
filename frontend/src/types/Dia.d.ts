@@ -1,4 +1,5 @@
-import { BloqueRead, BloqueResumen } from './Bloque'
+import { BloqueRead } from './Bloque'
+import { CategoriaResumen } from './Categoria'
 
 export enum Estado {
   MAL = 1,

@@ -1,12 +1,20 @@
 import { useDiasStore } from '../store/diasStore'
-import BloqueHeader from './BloqueHeader'
-import { Input } from './ui/input'
 import { memo, useCallback } from 'react'
-import BloqueColor from './BloqueColor'
-import { manejarEnter } from '../utils/keyboard'
-import { Button } from './ui/button'
-import { X } from 'lucide-react'
-import { useActividadesStore } from '@/store/actividadesStore'
+import { manejarCtrlEnter } from '../utils/keyboard'
+import { useCategoriasStore } from '@/store/categoriasStore'
+import ComboboxCategoria from './ComboboxCategoria'
+import Duracion from './Duracion'
+import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuTrigger,
+} from './ui/context-menu'
+import { useColorStore } from '@/store/colorStore'
+import { Textarea } from './ui/textarea'
+import { ArrowDownFromLine, ArrowUpFromLine, Trash2 } from 'lucide-react'
+import { ContextMenuGroup } from '@radix-ui/react-context-menu'
+
 
 export default memo(function Bloque({ id }: { id: number }) {
   const bloque = useDiasStore(state =>

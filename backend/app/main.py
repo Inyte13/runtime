@@ -4,9 +4,10 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.core.database import create_db_and_tables
-from app.routers.actividad_router import actividad_router
-from app.routers.bloque_router import bloque_router
-from app.routers.dia_router import dia_router
+from app.routers.actividad import actividad_router
+from app.routers.bloque import bloque_router
+from app.routers.categoria import categoria_router
+from app.routers.dia import dia_router
 
 
 @asynccontextmanager

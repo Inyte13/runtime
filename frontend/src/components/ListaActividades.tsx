@@ -1,15 +1,7 @@
-import { useState } from 'react'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs'
-import { Archive, CircleCheck, Plus, X } from 'lucide-react'
-import ActividadesActivas from './ActividadesActivas'
-import ActividadesArchivadas from './ActividadesArchivadas'
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupButton,
-  InputGroupInput,
-} from './ui/input-group'
-import { Button } from './ui/button'
+import { useCategoriasStore } from '@/store/categoriasStore'
+import { useColorStore } from '@/store/colorStore'
+import Actividad from './Actividad'
+import ActividadTemp from './ActividadTemp'
 
 export default function ListaActividades() {
   const [crear, setCrear] = useState(false)

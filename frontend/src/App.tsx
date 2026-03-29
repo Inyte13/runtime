@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router'
 import { lazy, useEffect, useState } from 'react'
-import { useActividadesStore } from './store/actividadesStore.js'
+import { useCategoriasStore } from './store/categoriasStore.js'
 import { Loader2 } from 'lucide-react'
 
 const Home = lazy(() => import('./pages/Home.js'))

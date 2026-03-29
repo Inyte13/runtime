@@ -1,19 +1,8 @@
-import {
-  CalendarDays,
-  ChevronLeft,
-  ChevronRight,
-  Columns3,
-  PanelLeft,
-} from 'lucide-react'
-import { useFechaStore } from '../store/fechaStore.js'
-import { Button } from './ui/button.js'
-import { formatFechaTitle } from '../utils/formatDate.js'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs.js'
-import { useDiasStore } from '@/store/diasStore.js'
-import CalendarioMes from './CalendarioMes.js'
-import { useMediaQuery } from '@/hooks/useMediaQuery.js'
-import { Sheet, SheetContent, SheetTrigger } from './ui/sheets.js'
-import ListaActividades from './ListaActividades.js'
+import { useFechaStore } from '@/store/fechaStore'
+import CalendarioDia from './CalendarioDia'
+import { useEffect } from 'react'
+import { useDiasStore } from '@/store/diasStore'
+import { cn } from '@/lib/utils'
 
 export default function Calendario() {
   const { prevDia, nextDia, irHoy, prevMes, nextMes } = useFechaStore()

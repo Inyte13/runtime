@@ -2,13 +2,11 @@ import { useDiasStore } from '@/store/diasStore'
 import { useFechaStore } from '@/store/fechaStore'
 import { formatFechaISO } from '@/utils/formatDate'
 import { Button } from './ui/button'
-import { useActividadesStore } from '@/store/actividadesStore'
 import Grafico from './Grafico'
 
 export default function CalendarioDia({ indice }: { indice: number }) {
   const diasResumen = useDiasStore(state => state.diasResumen)
   const fecha = useFechaStore(state => state.fecha)
-  const actividades = useActividadesStore(state => state.actividadesDetail)
   const setFecha = useFechaStore(state => state.setFecha)
 
   // El nro (semana) cuando Domingo = 0

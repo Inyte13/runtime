@@ -1,11 +1,9 @@
 import { memo } from 'react'
-import ColorChange from './ColorChange'
-import { useActividadesStore } from '../store/actividadesStore'
 import { Input } from './ui/input'
 import { manejarEnter } from '../utils/keyboard'
 import { Button } from './ui/button'
 import { Archive, ArchiveRestore, Trash2 } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import { useCategoriasStore } from '@/store/categoriasStore'
 
 export default memo(function Actividad({ id }: { id: number }) {
   const actividad = useActividadesStore(state =>

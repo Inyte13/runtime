@@ -1,7 +1,5 @@
-import { useMediaQuery } from '@/hooks/useMediaQuery'
-import Calendario from '../components/Calendario'
+import Layout from '../components/Layout'
 import Dia from '../components/Dia'
-import ListaActividades from '../components/ListaActividades'
 
 export default function Home() {
   const isSmall = useMediaQuery(1300)

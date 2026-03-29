@@ -1,4 +1,8 @@
 import { useColorStore } from '@/store/colorStore'
+import { useCategoriasStore } from '@/store/categoriasStore'
+import { HoverCard, HoverCardContent, HoverCardTrigger } from './ui/hover-card'
+import { useDiasStore } from '@/store/diasStore'
+import HoverDetalle from './HoverDetalle'
 
 export default function Grafico({
   id,

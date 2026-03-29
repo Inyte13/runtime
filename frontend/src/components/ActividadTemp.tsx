@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
-import { useActividadesStore } from '../store/actividadesStore'
+import { useRef, useState } from 'react'
+import { useCategoriasStore } from '../store/categoriasStore'
 import { Input } from './ui/input'
 import { manejarEnter } from '../utils/keyboard'
 

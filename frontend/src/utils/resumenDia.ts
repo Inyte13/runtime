@@ -1,5 +1,6 @@
-import { BloqueResumen } from "@/types/Bloque"
-import { DiaReadDetail, DiaResumen } from "@/types/Dia"
+import { ActividadResumen } from '@/types/Actividad'
+import { CategoriaReadDetail, CategoriaResumen } from '@/types/Categoria'
+import { DiaReadDetail, DiaResumen } from '@/types/Dia'
 
 export function resumenDia(diaDetail: DiaReadDetail): DiaResumen {
   const resumen: Record<number, BloqueResumen> = {}
