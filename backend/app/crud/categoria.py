@@ -7,3 +7,8 @@ from app.models.categoria import Categoria
 from app.schemas.categoria import CategoriaUpdate
 
 
+def create_categoria(session: Session, categoria: Categoria) -> Categoria:
+  session.add(categoria)
+  session.commit()
+  session.refresh(categoria)
+  return categoria
