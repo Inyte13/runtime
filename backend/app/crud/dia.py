@@ -57,3 +57,12 @@ def create_dia(session: Session, dia: Dia) -> Dia:
   session.commit()
   session.refresh(dia)
   return dia
+def update_dia(session: Session, dia_bd: Dia, dia: DiaUpdate) -> Dia:
+  # Solo usa los campos que se declararon
+  campos_actualizados = dia.model_dump(exclude_unset=True)
+  # Solo actualiza los campos que sobrevivieron
+  dia_bd.sqlmodel_update(campos_actualizados)
+  session.add(dia_bd)
+  session.commit()
+  session.refresh(dia_bd)
+  return dia_bd
