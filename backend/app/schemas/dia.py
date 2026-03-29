@@ -12,3 +12,5 @@ class DiaRead(SQLModel):
   fecha: date
   titulo: str | None = None
   estado: Estado | None = None
+class DiaReadDetail(DiaRead):
+  bloques: list[BloqueRead]
