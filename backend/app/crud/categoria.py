@@ -12,3 +12,5 @@ def create_categoria(session: Session, categoria: Categoria) -> Categoria:
   session.commit()
   session.refresh(categoria)
   return categoria
+def read_categoria(session: Session, id: int) -> Categoria | None:
+  return session.get(Categoria, id)
