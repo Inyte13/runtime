@@ -34,3 +34,14 @@ def post_categoria(session: SessionDep, categoria: CategoriaCreate):
     raise HTTPException(
       status_code=status.HTTP_400_BAD_REQUEST, detail='El nombre ya existe'
     )
+@categoria_router.patch('/categorias/{id}', response_model=CategoriaRead)
+def patch_actividad(session: SessionDep, categoria: CategoriaUpdate, id: int):
+  try:
+    return actualizar_categoria(session, id, categoria)
+  except ValueError as e:
+    raise HTTPException(status_code=404, detail=str(e))
+  # Usando el unique del schema
+  except IntegrityError:
+    raise HTTPException(
+      status_code=status.HTTP_400_BAD_REQUEST, detail='El nombre ya existe'
+    )
