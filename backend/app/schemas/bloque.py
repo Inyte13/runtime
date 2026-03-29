@@ -30,6 +30,13 @@ class BloqueCreate(SQLModel):
     if (v * 60) % 30 != 0:
       raise ValueError('La duración debe ser múltiplo de 30 minutos')
     return v
+class BloqueRead(SQLModel):
+  id: int
+  hora: time
+  hora_fin: time
+  duracion: float
+  descripcion: str | None = None
+  id_actividad: int
   # Validator para que el '' se convierta en None
   @field_validator('descripcion')
   @classmethod
