@@ -14,3 +14,17 @@ def create_bloque(session: Session, bloque: Bloque) -> Bloque:
   return bloque
 def read_bloque(session: Session, id: int) -> Bloque | None:
   return session.get(Bloque, id)
+def read_bloques_by_range(
+  session: Session,
+  fecha: date,
+  hora_desde: time | None = None,
+  hora_hasta: time | None = None,
+) -> Sequence[Bloque]:
+  statement = (
+    select(Bloque).where(Bloque.fecha == fecha).order_by(col(Bloque.hora))
+  )
+  if hora_desde is not None:
+    statement = statement.where(Bloque.hora >= hora_desde)
+  if hora_hasta is not None:
+    statement = statement.where(Bloque.hora <= hora_hasta)
+  return session.exec(statement).all()
