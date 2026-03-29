@@ -5,4 +5,5 @@ from sqlmodel import SQLModel
 
 from app.schemas.actividad import ActividadReadDetail, ActividadResumen
 
+# Si cambias el #A18072, cambialo en el frontend (categoriasStore y CategoriaTemp)
 
