@@ -25,22 +25,28 @@ engine_temp = create_engine(
 )
 
 
+# Fixture, para test que necesitan sesión directa a la BD (unit/integration)
 @pytest.fixture
 def session_temp():
+  # Crea las tablas
   SQLModel.metadata.create_all(engine_temp)
   with Session(engine_temp) as session:
     yield session
+  # Elimina las tablas al acabar
   SQLModel.metadata.drop_all(engine_temp)
 
 
+# Fixture para test endpoint
 @pytest.fixture
 def client():
   SQLModel.metadata.create_all(engine_temp)
 
+  # Sobreescribe el get_session con el temp
   def override_get_session():
     with Session(engine_temp) as session:
       yield session
 
+  # usamos la BD temporal
   app.dependency_overrides[get_session] = override_get_session
   client = TestClient(app)
   yield client
