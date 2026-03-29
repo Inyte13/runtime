@@ -14,3 +14,11 @@ class BloqueCreate(SQLModel):
   # Podemos recibir None pero lo controlaremos en el backend
   id_actividad: int | None = None
   id_ref: int | None = None
+  # Validator para que el '' se convierta en None
+  @field_validator('descripcion')
+  @classmethod
+  def formatear_str_vacio(cls, v):
+    if v == '':
+      return None
+    return v
+
