@@ -66,3 +66,7 @@ def update_dia(session: Session, dia_bd: Dia, dia: DiaUpdate) -> Dia:
   session.commit()
   session.refresh(dia_bd)
   return dia_bd
+def delete_dia(session: Session, dia: Dia) -> None:
+  session.delete(dia)
+  session.commit()
+  return
