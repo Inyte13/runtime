@@ -9,7 +9,7 @@ from app.crud.categoria import (
 )
 from app.models.categoria import Categoria
 from app.schemas.categoria import CategoriaReadDetail, CategoriaUpdate
-from app.services.actividad import actividad_modificada
+from app.services.actividad import add_tiene_bloques
 
 
 def buscar_categoria(session: Session, id: int) -> Categoria:

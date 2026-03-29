@@ -2,7 +2,7 @@ import pytest
 
 from app.schemas.actividad import ActividadCreate
 from app.services.actividad import (
-  actividad_modificada,
+  add_tiene_bloques,
   buscar_actividad,
   eliminar_actividad,
   registrar_actividad,
