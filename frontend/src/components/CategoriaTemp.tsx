@@ -32,8 +32,17 @@ export default function CategoriaTemp({
       tabIndex={0} // Para que sea focusable
       className='flex items-center p-1.5 pl-2 bg-card rounded-lg'
     >
+      <span className='rounded-full size-4 shrink-0 bg-[#A18072] opacity-50' />
+      <Input
+        autoFocus
+        className='capitalize italic p-0 border-none outline-none h-[1.6rem] shadow-none pl-2'
         value={nombreTemp}
         onChange={e => setNombreTemp(e.target.value)}
+        maxLength={50}
+      />
+      <Button variant='ghost' size='icon-xs' disabled>
+        <Plus />
+      </Button>
     </div>
   )
 }
