@@ -23,10 +23,12 @@ export default function Grafico({
     state.categoriasDetail.find(categoria => categoria?.id === id)
   )
   const color = useColorStore(state => state.colores[id])
+  if (!categoriaResumen) return
   const duracionTotal = categoriaResumen.actividades.reduce(
     (sum, act) => sum + act.duracion,
     0
   )
+  if (!categoria) return
   return (
     <div className='relative h-full flex items-end'>
       <div
