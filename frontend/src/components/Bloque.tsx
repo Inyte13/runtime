@@ -16,8 +16,13 @@ import { ArrowDownFromLine, ArrowUpFromLine, Trash2 } from 'lucide-react'
 import { ContextMenuGroup } from '@radix-ui/react-context-menu'
 
 export default memo(function Bloque({
+  id,
+  idPrevio,
+}: {
+  id: number
+  idPrevio: number
+}) {
 
-export default memo(function Bloque({ id }: { id: number }) {
   const bloque = useDiasStore(state =>
     state.diaDetail?.bloques.find(bloque => bloque.id === id)
   )
