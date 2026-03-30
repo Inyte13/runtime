@@ -70,6 +70,7 @@ export default memo(function ComboboxCategoria({ id }: { id: number }) {
           </Button>
         }
       />
+      <ComboboxContent className='w-[17ch] text-popover-foreground'>
         <ComboboxInput
           showTrigger={false}
           showClear={true}
@@ -84,8 +85,15 @@ export default memo(function ComboboxCategoria({ id }: { id: number }) {
         )}
         {/* El ComboboxList siempre debe estar aunque este vacio */}
         <ComboboxList className='[&::-webkit-scrollbar]:hidden [scrollbar-width:none] px-2'>
-          {categoriasFiltradas.map(categoria => {
-            const idsActividades = categoria.actividades
+          {categoriasFiltradas.map(categoria => (
+            <ComboboxGroup key={categoria.id}>
+              <ComboboxLabel className='capitalize truncate text-sm italic'>
+                {categoria.nombre}
+              </ComboboxLabel>
+            </ComboboxGroup>
+          ))}
+        </ComboboxList>
+      </ComboboxContent>
     </Combobox>
   )
 })
