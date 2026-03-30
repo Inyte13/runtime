@@ -25,6 +25,9 @@ export default function ListaActividades({
       style={{ borderLeftColor: color || categoria.color }}
     >
       {categoria.actividades.map(actividad => (
+        <li key={actividad.id}>
+          <Actividad idCategoria={id} idActividad={actividad.id} />w
+        </li>
       ))}
       {crearActividad && (
         <li>
