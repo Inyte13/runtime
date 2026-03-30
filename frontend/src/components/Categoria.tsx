@@ -19,6 +19,8 @@ export default function Categoria({ id }: { id: number }) {
   if (!categoria) return
   return (
     <Collapsible open={abrir} onOpenChange={setAbrir} asChild>
+        <header className='group flex items-center p-1.5 pl-2 bg-card rounded-lg'>
+          <CategoriaHeader id={id} />
           <Button
             variant='ghost'
             size='icon-xs'
@@ -40,6 +42,7 @@ export default function Categoria({ id }: { id: number }) {
               </Button>
             </CollapsibleTrigger>
           )}
+        </header>
     </Collapsible>
   )
 }
