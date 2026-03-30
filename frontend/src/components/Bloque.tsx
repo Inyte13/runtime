@@ -37,7 +37,7 @@ export default memo(function Bloque({
 
   const descripcion = bloque?.descripcion || ''
   const manejarDescripcion = useCallback(
-    async (e: React.FocusEvent<HTMLInputElement>) => {
+    async (e: React.FocusEvent<HTMLTextAreaElement>) => {
       const newDescripcion = e.target.value
       if (newDescripcion === descripcion) return
       await actualizarBloque(id, { descripcion: e.target.value })
@@ -53,6 +53,20 @@ export default memo(function Bloque({
     >
       <BloqueHeader id={id} />
     <ContextMenu>
+          <Textarea
+            className='border-border/50 rounded-lg py-1 px-2 shadow-none bg-transparent! min-h-0 focus:ring-0 focus:text-foreground resize-none overflow-hidden text-foreground/70 mt-1'
+            placeholder='Añadir descripción'
+            style={{ height: '30px' }}
+            defaultValue={descripcion}
+            onFocus={e => {
+              e.currentTarget.style.height = 'auto'
+              e.currentTarget.style.fieldSizing = 'content'
+            }}
+            onBlur={e => {
+              e.currentTarget.style.height = '30px'
+              e.currentTarget.style.fieldSizing = 'fixed'
+              manejarDescripcion(e)
+            }}
             onKeyDown={e => {
               if (e.key === 'Escape') {
                 e.currentTarget.value = descripcion
@@ -60,6 +74,8 @@ export default memo(function Bloque({
               }
               manejarCtrlEnter(e)
             }}
+            maxLength={255}
+          />
 
       <Button
         size='icon-xs'
@@ -74,14 +90,6 @@ export default memo(function Bloque({
         {bloque.hora} - {bloque.hora_fin}
       </span>
 
-      <Input
-        className='border-0 border-b border-transparent focus:border-(--color) outline-none rounded-none italic h-[1.6rem] text-base pr-0 pl-1 mt-1'
-        defaultValue={descripcion}
-        placeholder='Añadir descripción'
-        onBlur={manejarDescripcion}
-        maxLength={255}
-        onKeyDown={manejarEnter}
-      />
     </BloqueColor>
     </ContextMenu>
   )
