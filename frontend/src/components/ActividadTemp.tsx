@@ -5,11 +5,12 @@ import { manejarEnter } from '../utils/keyboard'
 
 export default function ActividadTemp({
   setCrear,
+  setCrearActividad,
 }: {
   setCrear: (value: boolean) => void
+  setCrearActividad: (value: boolean) => void
 }) {
-  const crearActividad = useActividadesStore(state => state.crearActividad)
-
+  const crearActividad = useCategoriasStore(state => state.crearActividad)
   const categoria = useCategoriasStore(state =>
     state.categoriasDetail.find(categoria => categoria?.id === id)
   )
@@ -18,7 +19,9 @@ export default function ActividadTemp({
   const [nombreTemp, setNombreTemp] = useState('')
   if (!categoria) return
 
+  const actualizar = () => {
     const nombre = nombreTemp.trim()
+    setCrearActividad(false)
     if (nombre) {
       crearActividad({
         nombre: nombre.toLowerCase(),
