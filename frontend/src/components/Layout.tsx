@@ -30,6 +30,7 @@ export default function Layout() {
       localStorage.setItem('theme', 'light')
     }
   }, [isDark])
+      <header className='flex gap-x-2 justify-between items-center pl-4'>
         <Button
           size='icon-sm'
           variant='ghost'
@@ -37,6 +38,26 @@ export default function Layout() {
         >
           <Menu />
         </Button>
+        <div className='flex gap-2 items-center justify-between flex-1 min-w-80 max-w-80'>
+          <Button
+            size='icon'
+            variant='ghost'
+            className='rounded-full'
+            onClick={prevMes}
+          >
+            <ChevronLeft />
+          </Button>
+          <h2 className='text-3xl font-semibold'>{fechaTitle}</h2>
+          <Button
+            size='icon'
+            variant='ghost'
+            className='rounded-full'
+            onClick={nextMes}
+          >
+            <ChevronRight />
+          </Button>
+        </div>
+
         <div className='flex items-center gap-x-1'>
           <Button
             size='icon-sm'
@@ -66,3 +87,4 @@ export default function Layout() {
             <ChevronRight />
           </Button>
         </div>
+      </header>
