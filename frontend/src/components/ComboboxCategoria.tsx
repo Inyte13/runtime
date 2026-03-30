@@ -58,6 +58,18 @@ export default memo(function ComboboxCategoria({ id }: { id: number }) {
         if (!open) setSearch('')
       }}
     >
+      <ComboboxTrigger
+        render={
+          <Button
+            variant='secondary'
+            className='px-2! gap-1 border-none text-card-foreground hover:bg-secondary whitespace-normal w-full justify-start'
+          >
+            <span className='capitalize text-2xl font-light truncate'>
+              <ComboboxValue />
+            </span>
+          </Button>
+        }
+      />
         <ComboboxInput
           showTrigger={false}
           showClear={true}
