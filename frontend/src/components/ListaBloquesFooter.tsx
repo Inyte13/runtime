@@ -3,7 +3,7 @@ import { Button } from './ui/button'
 import { Plus } from 'lucide-react'
 import { useDiasStore } from '@/store/diasStore'
 
-// Solo para no renderizas el btn cuando use el SelectorActividad
+// Solo para no renderizas el btn cuando use el ComboboxCategoria
 export default memo(function ListaBloquesFooter() {
   const crearBloque = useDiasStore(state => state.crearBloque)
   return (

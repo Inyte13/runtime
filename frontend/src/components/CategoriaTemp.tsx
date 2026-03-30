@@ -28,6 +28,7 @@ export default function CategoriaTemp({
     }
   }
 
+  // Si el foco salió del div actualizamos
   const manejarBlur = (e: React.FocusEvent<HTMLDivElement>) => {
     if (!e.currentTarget.contains(e.relatedTarget)) {
       actualizar()
