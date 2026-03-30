@@ -10,6 +10,7 @@ import {
 import React from 'react'
 import { Button } from './button'
 
+// Necesita un wrapper para controlar su width
 const Combobox = ComboboxPrimitive.Root
 
 // Para inyectarle el data-slot
@@ -144,6 +145,7 @@ function ComboboxContent({
   )
 }
 
+// El ComboboxList siempre debe estar aunque este vacio
 function ComboboxList({ className, ...props }: ComboboxPrimitive.List.Props) {
   return (
     <ComboboxPrimitive.List
