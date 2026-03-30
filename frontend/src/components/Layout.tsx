@@ -16,6 +16,7 @@ export default function Layout() {
   useEffect(() => {
     traerDiasResumen()
   }, [traerDiasResumen])
+  const [sidebarOpen, setSidebarOpen] = useState(true)
   // Btn para dark mode
   const [isDark, setIsDark] = useState(
     () => localStorage.getItem('theme') === 'dark'
@@ -29,6 +30,13 @@ export default function Layout() {
       localStorage.setItem('theme', 'light')
     }
   }, [isDark])
+        <Button
+          size='icon-sm'
+          variant='ghost'
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+        >
+          <Menu />
+        </Button>
         <div className='flex items-center gap-x-1'>
           <Button
             size='icon-sm'
