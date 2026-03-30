@@ -29,9 +29,11 @@ export default memo(function Bloque({
   const bloque = useDiasStore(state =>
     state.diaDetail?.bloques.find(bloque => bloque.id === id)
   )
-  const actividad = useActividadesStore(state =>
-    state.actividadesDetail.find(
-      actividad => actividad.id === bloque?.id_actividad
+  const categoria = useCategoriasStore(state =>
+    state.categoriasDetail.find(categoria =>
+      categoria.actividades.some(
+        actividad => actividad.id === bloque?.id_actividad
+      )
     )
   )! // non-null assertion seguro por el loading en App
 
@@ -45,6 +47,7 @@ export default memo(function Bloque({
     },
     [id, descripcion, actualizarBloque]
   )
+  const color = useColorStore(state => state.colores[categoria.id])
   if (!bloque) return null
   return (
     <ContextMenu>
