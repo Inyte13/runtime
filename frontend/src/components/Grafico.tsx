@@ -6,9 +6,11 @@ import HoverDetalle from './HoverDetalle'
 
 export default function Grafico({
   id,
+  fechaISO,
   maxDuracion,
 }: {
   id: number
+  fechaISO: string
   maxDuracion: number
 }) {
   const categoriaResumen = useDiasStore(state =>
@@ -25,6 +27,8 @@ export default function Grafico({
   )
   if (!categoria) return
   return (
+    <HoverCard openDelay={0} closeDelay={0}>
+      <HoverCardTrigger asChild>
         <ul
           className='min-h-1 h-2 flex gap-px group'
           style={{ width: `${(duracionTotal / maxDuracion) * 100}%` }}
@@ -40,6 +44,8 @@ export default function Grafico({
             />
           ))}
         </ul>
+      </HoverCardTrigger>
+      <HoverCardContent side='right' align='start' className='w-auto p-0'>
         <header className='px-2.5 py-1.5 flex justify-between bg-primary rounded-t-lg text-primary-foreground font-medium text-base gap-x-2'>
           <div className='flex items-center gap-x-1.5'>
             <span
@@ -50,5 +56,17 @@ export default function Grafico({
           </div>
           <span>{duracionTotal}h</span>
         </header>
+        <ul className='pl-3 pr-2 py-2 rounded-b-lg capitalize flex flex-col gap-y-1.5'>
+          {categoriaResumen.actividades.map(actividad => (
+            <HoverDetalle
+              key={actividad.id}
+              fechaISO={fechaISO}
+              idActividad={actividad.id}
+              idCategoria={id}
+            />
+          ))}
+        </ul>
+      </HoverCardContent>
+    </HoverCard>
   )
 }
