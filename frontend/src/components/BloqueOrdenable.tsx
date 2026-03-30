@@ -47,7 +47,9 @@ export default memo(function BloqueOrdenable({
           size='icon-sm'
           variant='ghost'
           className='w-6 h-7'
-          onClick={e => (e.altKey ? crearBloque(idPrevious ?? 0) : crearBloque(id))}
+          onClick={e =>
+            e.altKey ? crearBloque(idPrevio ?? 0) : crearBloque(id)
+          }
         >
           <Plus />
         </Button>
