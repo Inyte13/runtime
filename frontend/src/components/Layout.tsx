@@ -16,3 +16,23 @@ export default function Layout() {
   useEffect(() => {
     traerDiasResumen()
   }, [traerDiasResumen])
+  // Btn para dark mode
+  const [isDark, setIsDark] = useState(
+    () => localStorage.getItem('theme') === 'dark'
+  )
+  useEffect(() => {
+    if (isDark) {
+      document.documentElement.classList.add('dark')
+      localStorage.setItem('theme', 'dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+      localStorage.setItem('theme', 'light')
+    }
+  }, [isDark])
+          <Button
+            size='icon-sm'
+            variant='ghost'
+            onClick={() => setIsDark(!isDark)}
+          >
+            {isDark ? <Sun /> : <Moon />}
+          </Button>
