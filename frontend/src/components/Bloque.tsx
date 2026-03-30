@@ -80,20 +80,22 @@ export default memo(function Bloque({
         </article>
       </ContextMenuTrigger>
 
-      <Button
-        size='icon-xs'
-        variant='ghost'
-        className='top-[0.2rem] right-[0.2rem] absolute opacity-0 group-hover/bloque:opacity-100 focus-visible:opacity-100'
-        onClick={() => eliminarBloque(id)}
-      >
-        <X />
-      </Button>
 
       <span className='pl-1 text-foreground/70'>
         {bloque.hora} - {bloque.hora_fin}
       </span>
 
     </BloqueColor>
+        <ContextMenuGroup>
+          <ContextMenuItem
+            onClick={() => eliminarBloque(id)}
+            variant='destructive'
+          >
+            <Trash2 />
+            Eliminar
+          </ContextMenuItem>
+        </ContextMenuGroup>
+      </ContextMenuContent>
     </ContextMenu>
   )
 })
