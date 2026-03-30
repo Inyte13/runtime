@@ -19,6 +19,7 @@ export default function Categoria({ id }: { id: number }) {
   if (!categoria) return
   return (
     <Collapsible open={abrir} onOpenChange={setAbrir} asChild>
+      <article className='flex flex-col gap-y-1'>
         <header className='group flex items-center p-1.5 pl-2 bg-card rounded-lg'>
           <CategoriaHeader id={id} />
           <Button
@@ -43,6 +44,17 @@ export default function Categoria({ id }: { id: number }) {
             </CollapsibleTrigger>
           )}
         </header>
+        {abrir && (
+          <CollapsibleContent className='rounded-lg ml-3'>
+            <ListaActividades
+              id={id}
+              crearActividad={crearActividad}
+              setCrearActividad={setCrearActividad}
+              setAbrir={setAbrir}
+            />
+          </CollapsibleContent>
+        )}
+      </article>
     </Collapsible>
   )
 }
