@@ -7,6 +7,10 @@ import { manejarEnter } from '@/utils/keyboard'
 
 export default function CategoriaTemp({
   const tempRef = useRef<HTMLDivElement>(null)
+  // Auto-scroll cuando se crea el holograma de Actividad
+  useEffect(() => {
+    tempRef.current?.scrollIntoView({ behavior: 'auto', block: 'end' })
+  }, [])
   const manejarBlur = (e: React.FocusEvent<HTMLDivElement>) => {
     if (!e.currentTarget.contains(e.relatedTarget)) {
       actualizar()
