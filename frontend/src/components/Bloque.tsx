@@ -15,6 +15,7 @@ import { Textarea } from './ui/textarea'
 import { ArrowDownFromLine, ArrowUpFromLine, Trash2 } from 'lucide-react'
 import { ContextMenuGroup } from '@radix-ui/react-context-menu'
 
+export default memo(function Bloque({
 
 export default memo(function Bloque({ id }: { id: number }) {
   const bloque = useDiasStore(state =>
@@ -46,6 +47,7 @@ export default memo(function Bloque({ id }: { id: number }) {
       className='group/bloque flex flex-col border border-border border-l-2 rounded-md px-2 pb-2 pt-1 relative bg-card w-full'
     >
       <BloqueHeader id={id} />
+    <ContextMenu>
             onKeyDown={e => {
               if (e.key === 'Escape') {
                 e.currentTarget.value = descripcion
@@ -76,5 +78,6 @@ export default memo(function Bloque({ id }: { id: number }) {
         onKeyDown={manejarEnter}
       />
     </BloqueColor>
+    </ContextMenu>
   )
 })
