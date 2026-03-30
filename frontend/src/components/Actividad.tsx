@@ -44,12 +44,7 @@ export default memo(function Actividad({
   }
   
   return (
-    <div className='group flex items-center p-1.5 rounded-lg'>
-      <ColorChange
-        id={id}
-        colorFallback={colorFallback}
-        is_active={is_active}
-      />
+    <div className='group flex py-1.5 px-3'>
       <Input
         className={cn(
           'capitalize p-0 pl-2 border-none outline-none rounded-none h-[1.6rem] truncate',
