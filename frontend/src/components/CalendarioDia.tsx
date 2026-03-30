@@ -32,9 +32,6 @@ export default function CalendarioDia({ indice }: { indice: number }) {
 
   const diaResumen = diasResumen.find(dia => dia.fecha === fechaISO)
 
-  const bloquesFiltrados =
-    diaResumen?.bloques.filter(b => b.id_actividad !== 1) ?? []
-
   const maxDuracion =
     bloquesFiltrados.length > 0
       ? Math.max(...bloquesFiltrados.map(b => b.duracion))
@@ -64,7 +61,6 @@ export default function CalendarioDia({ indice }: { indice: number }) {
       </div>
       <div className='flex items-end justify-center w-full min-h-15'>
         {diaResumen?.bloques
-          .filter(b => b.id_actividad !== 1)
           .map(bloque => {
             const actividad = actividades.find(
               actividad => actividad.id === bloque.id_actividad
