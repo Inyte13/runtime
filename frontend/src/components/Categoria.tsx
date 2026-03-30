@@ -14,9 +14,21 @@ export default function Categoria({ id }: { id: number }) {
   const categoria = useCategoriasStore(state =>
     state.categoriasDetail.find(categoria => categoria.id === id)
   )
+  const [crearActividad, setCrearActividad] = useState(false)
+  const [abrir, setAbrir] = useState(true)
   if (!categoria) return
   return (
     <Collapsible open={abrir} onOpenChange={setAbrir} asChild>
+          <Button
+            variant='ghost'
+            size='icon-xs'
+            onClick={() => {
+              setCrearActividad(true)
+              setAbrir(true)
+            }}
+          >
+            <Plus />
+          </Button>
           {categoria.actividades.length > 0 && (
           )}
     </Collapsible>
