@@ -24,11 +24,13 @@ export default function ListaActividades({
       className='flex flex-col divide-y divide-border/50 border-l-2 border-border rounded-lg bg-card/50'
       style={{ borderLeftColor: color || categoria.color }}
     >
-      {categoria.actividades.map(actividad => (
-        <li key={actividad.id}>
-          <Actividad idCategoria={id} idActividad={actividad.id} />w
-        </li>
-      ))}
+      {categoria.actividades
+        .filter(actividad => actividad.is_active)
+        .map(actividad => (
+          <li key={actividad.id}>
+            <Actividad idCategoria={id} idActividad={actividad.id} />
+          </li>
+        ))}
       {crearActividad && (
         <li>
           <ActividadTemp
