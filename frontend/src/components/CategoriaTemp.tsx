@@ -6,6 +6,11 @@ import { Plus } from 'lucide-react'
 import { manejarEnter } from '@/utils/keyboard'
 
 export default function CategoriaTemp({
+  setCrearCategoria,
+}: {
+  setCrearCategoria: (value: boolean) => void
+}) {
+  const crearCategoria = useCategoriasStore(state => state.crearCategoria)
   const tempRef = useRef<HTMLDivElement>(null)
   const [nombreTemp, setNombreTemp] = useState('')
   // Auto-scroll cuando se crea el holograma de Actividad
@@ -39,6 +44,10 @@ export default function CategoriaTemp({
         value={nombreTemp}
         onChange={e => setNombreTemp(e.target.value)}
         maxLength={50}
+        onKeyDown={e => {
+          if (e.key === 'Escape') setCrearCategoria(false)
+          manejarEnter(e)
+        }}
       />
       <Button variant='ghost' size='icon-xs' disabled>
         <Plus />
