@@ -32,6 +32,7 @@ export default function Categoria({ id }: { id: number }) {
           >
             <Plus />
           </Button>
+
           {categoria.actividades.length > 0 && (
             <CollapsibleTrigger asChild>
               <Button
@@ -44,6 +45,7 @@ export default function Categoria({ id }: { id: number }) {
             </CollapsibleTrigger>
           )}
         </header>
+
         {abrir && (
           <CollapsibleContent className='rounded-lg ml-3'>
             <ListaActividades
@@ -54,6 +56,7 @@ export default function Categoria({ id }: { id: number }) {
             />
           </CollapsibleContent>
         )}
+        
       </article>
     </Collapsible>
   )

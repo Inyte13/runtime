@@ -12,11 +12,14 @@ export default function Layout() {
   const { prevDia, nextDia, irHoy, prevMes, nextMes } = useFechaStore()
   const fecha = useFechaStore(state => state.fecha)
   const fechaTitle = formatFechaTitle(fecha)
+  
   const traerDiasResumen = useDiasStore(state => state.traerDiasResumen)
   useEffect(() => {
     traerDiasResumen()
   }, [traerDiasResumen])
+
   const [sidebarOpen, setSidebarOpen] = useState(true)
+
   // Btn para dark mode
   const [isDark, setIsDark] = useState(
     () => localStorage.getItem('theme') === 'dark'

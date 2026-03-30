@@ -16,11 +16,15 @@ export default function Grafico({
   const categoriaResumen = useDiasStore(state =>
     state.diasResumen.find(dia => dia.fecha === fechaISO)
   )?.categorias.find(categoria => categoria.id === id)
+
   const categoria = useCategoriasStore(state =>
     state.categoriasDetail.find(categoria => categoria?.id === id)
   )
+
   const color = useColorStore(state => state.colores[id])
+
   if (!categoriaResumen) return
+
   const duracionTotal = categoriaResumen.actividades.reduce(
     (sum, act) => sum + act.duracion,
     0

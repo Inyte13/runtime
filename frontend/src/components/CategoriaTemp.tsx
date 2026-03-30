@@ -11,12 +11,15 @@ export default function CategoriaTemp({
   setCrearCategoria: (value: boolean) => void
 }) {
   const crearCategoria = useCategoriasStore(state => state.crearCategoria)
+
   const tempRef = useRef<HTMLDivElement>(null)
   const [nombreTemp, setNombreTemp] = useState('')
+
   // Auto-scroll cuando se crea el holograma de Actividad
   useEffect(() => {
     tempRef.current?.scrollIntoView({ behavior: 'auto', block: 'end' })
   }, [])
+
   const actualizar = () => {
     const nombre = nombreTemp.trim()
     setCrearCategoria(false)
@@ -24,11 +27,13 @@ export default function CategoriaTemp({
       crearCategoria({ nombre: nombre.toLowerCase() })
     }
   }
+
   const manejarBlur = (e: React.FocusEvent<HTMLDivElement>) => {
     if (!e.currentTarget.contains(e.relatedTarget)) {
       actualizar()
     }
   }
+
   // Si cambias el #A18072, cambialo en el backend (categoria.py) models y schemas
   return (
     <div
@@ -38,6 +43,7 @@ export default function CategoriaTemp({
       className='flex items-center p-1.5 pl-2 bg-card rounded-lg'
     >
       <span className='rounded-full size-4 shrink-0 bg-[#A18072] opacity-50' />
+
       <Input
         autoFocus
         className='capitalize italic p-0 border-none outline-none h-[1.6rem] shadow-none pl-2'

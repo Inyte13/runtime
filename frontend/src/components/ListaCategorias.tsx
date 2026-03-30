@@ -8,6 +8,7 @@ import { Button } from './ui/button'
 export default function ListaCategorias() {
   const ids = useCategoriasStore(state => state.categoriasDetail).map(
     categoriaDetail => categoriaDetail.id
+  )
   const [crearCategoria, setCrearCategoria] = useState(false)
   // TODO: Drag and drop para ordenar
   return (
@@ -21,10 +22,12 @@ export default function ListaCategorias() {
           <Plus />
         </Button>
       </header>
+
       <section className='flex flex-col gap-y-1 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]'>
         {ids.map(id => (
           <Categoria key={id} id={id} />
         ))}
+
         {crearCategoria && (
           <CategoriaTemp setCrearCategoria={setCrearCategoria} />
         )}

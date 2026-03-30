@@ -42,7 +42,6 @@ export default memo(function Actividad({
   const manejarArchivar = async () => {
     await actualizarActividad(idActividad, { is_active: !is_active })
   }
-  
   return (
     <div className='group flex py-1.5 px-3'>
       <Input
@@ -68,7 +67,7 @@ export default memo(function Actividad({
       >
         {is_active ? <Archive /> : <ArchiveRestore />}
       </Button>
-      
+
       {!tiene_bloques && (
         <Button
           size='icon-xs'

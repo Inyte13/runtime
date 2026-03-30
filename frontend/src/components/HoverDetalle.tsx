@@ -20,7 +20,9 @@ export default function HoverDetalle({
   )
     ?.categorias.find(categoria => categoria.id === idCategoria)
     ?.actividades.find(actividad => actividad.id === idActividad)
+
   if (!actividad || !actividadResumen) return
+
   return (
     <li className='flex flex-col justify-center'>
       <div className='flex justify-between gap-x-1.5 text-sm'>

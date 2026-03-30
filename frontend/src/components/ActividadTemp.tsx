@@ -17,7 +17,6 @@ export default function ActividadTemp({
     state.categoriasDetail.find(categoria => categoria?.id === id)
   )
   const tempRef = useRef<HTMLDivElement>(null)
-
   const [nombreTemp, setNombreTemp] = useState('')
   if (!categoria) return
 

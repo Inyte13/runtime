@@ -8,12 +8,14 @@ interface ColorState {
 
 export const useColorStore = create<ColorState>(set => ({
   colores: {},
+
   setColor: (id, color) =>
     // Solo cambiamos el color que cambia
     set(state => ({
       colores: { ...state.colores, [id]: color },
     })),
   setColores: actividades => {
+
     set({
       // Transforma en diccionario solo con id y color
       colores: Object.fromEntries(
@@ -21,4 +23,5 @@ export const useColorStore = create<ColorState>(set => ({
       ),
     })
   },
+
 }))
