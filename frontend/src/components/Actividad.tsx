@@ -38,11 +38,11 @@ export default memo(function Actividad({
       e.target.value = nombre
       return
     }
-    await actualizarActividad(id, { nombre: newNombre })
+    await actualizarActividad(idActividad, { nombre: newNombre })
   }
 
   const manejarArchivar = async () => {
-    await actualizarActividad(id, { is_active: !is_active })
+    await actualizarActividad(idActividad, { is_active: !is_active })
   }
   
   return (
@@ -79,7 +79,7 @@ export default memo(function Actividad({
           size='icon-xs'
           variant='destructive'
           className='opacity-0 group-hover:opacity-100 focus-visible:opacity-100 transition-none'
-          onClick={() => eliminarActividad(id)}
+          onClick={() => eliminarActividad(idActividad)}
         >
           <Trash2 />
         </Button>
