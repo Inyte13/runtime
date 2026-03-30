@@ -41,7 +41,7 @@ export default function CalendarioDia({ indice }: { indice: number }) {
     : 0
   return (
     <>
-      <div
+      <header
         className='flex items-center gap-x-1'
         onClick={() => setFecha(fechaCelda)}
       >
@@ -61,26 +61,19 @@ export default function CalendarioDia({ indice }: { indice: number }) {
             {diaResumen.titulo}
           </span>
         )}
-      </div>
-      <div className='flex items-end justify-center w-full min-h-15'>
-        {diaResumen?.bloques
-          .map(bloque => {
-            const actividad = actividades.find(
-              actividad => actividad.id === bloque.id_actividad
-            )!
-
-            return (
-              <Grafico
-                key={bloque.id_actividad}
-                id={bloque.id_actividad}
-                colorDefault={actividad.color}
-                duracion={bloque.duracion}
-                maxDuracion={maxDuracion}
-                nombre={actividad.nombre}
-              />
-            )
-          })}
-      </div>
+      </header>
+      {diaResumen && (
+        <div className='flex items-start w-full flex-col gap-px px-4 min-h-0 mt-auto'>
+          {diaResumen.categorias.map(categoria => (
+            <Grafico
+              key={categoria.id}
+              id={categoria.id}
+              fechaISO={fechaISO}
+              maxDuracion={maxDuracion}
+            />
+          ))}
+        </div>
+      )}
     </>
   )
 }
