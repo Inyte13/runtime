@@ -28,7 +28,7 @@ export default memo(function BloqueOrdenable({
     <li
       ref={setNodeRef} // El contenedor que se movera
       style={style}
-      className='group/bloque list-none w-full relative'
+      className='group/bloque list-none w-full flex gap-x-1'
     >
       <Bloque id={id} idPrevio={idPrevio} />
 

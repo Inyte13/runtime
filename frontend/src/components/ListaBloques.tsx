@@ -25,7 +25,7 @@ export default memo(function ListaBloques() {
     })
   )
   return (
-    <section className='flex flex-col h-full flex-1 min-h-0 overflow-y-auto pr-8 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]'>
+    <section className='flex flex-col h-full flex-1 min-h-0 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]'>
       <DndContext
         onDragEnd={reordenarBloques}
         collisionDetection={closestCenter} // Si el centro del bloque cruza el otro intercambia

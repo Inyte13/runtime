@@ -99,7 +99,7 @@
 }
 
 .dark {
-  --background: var(--gray-1);
+  --background: var(--gray-1) ;
   --foreground: var(--gray-12);
   --card: var(--gray-2);
   --card-foreground: var(--gray-12);

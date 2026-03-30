@@ -33,7 +33,7 @@ export default function DiaHeader() {
       <h2 className='text-2xl font-semibold'>{fechaDetail}</h2>
       <Input
         ref={inputRef} // 4. Conectamos la referencia al componente
-        className='text-center text-base italic border-0'
+        className='text-center text-base border-0 text-foreground/70 shadow-none'
         defaultValue={titulo} // Solo se lee la primera vez
         placeholder='Añadir título'
         onBlur={manejarTitulo}

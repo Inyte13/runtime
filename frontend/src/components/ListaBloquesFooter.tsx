@@ -7,8 +7,8 @@ import { useDiasStore } from '@/store/diasStore'
 export default memo(function ListaBloquesFooter() {
   const crearBloque = useDiasStore(state => state.crearBloque)
   return (
-    <footer className='w-full'>
-      <Button size='icon' className='w-full mt-2' onClick={() => crearBloque()}>
+    <footer className='mt-2 pr-8'>
+      <Button size='icon' className='w-full' onClick={() => crearBloque()}>
         <Plus />
       </Button>
     </footer>
