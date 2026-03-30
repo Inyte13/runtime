@@ -30,6 +30,15 @@ export default function Categoria({ id }: { id: number }) {
             <Plus />
           </Button>
           {categoria.actividades.length > 0 && (
+            <CollapsibleTrigger asChild>
+              <Button
+                variant='ghost'
+                size='icon-xs'
+                className='[&[data-state=open]>svg]:rotate-180'
+              >
+                <ChevronDown />
+              </Button>
+            </CollapsibleTrigger>
           )}
     </Collapsible>
   )
