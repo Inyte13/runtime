@@ -15,6 +15,12 @@ import { memo, useCallback, useEffect, useMemo, useState } from 'react'
 import ComboboxActividad from './ComboboxActividad.js'
 
 export default memo(function ComboboxCategoria({ id }: { id: number }) {
+  const bloque = useDiasStore(state =>
+    state.diaDetail?.bloques.find(bloque => bloque.id === id)
+  )
+  const actividad = categorias
+    .flatMap(categoria => categoria.actividades)
+    .find(actividad => actividad?.id === bloque?.id_actividad)
   // Es null al limpiar con el button X
   const manejarSelector = useCallback(
     async (idStr: string | null) => {
