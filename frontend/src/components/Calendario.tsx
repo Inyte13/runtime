@@ -30,6 +30,8 @@ export default function Calendario() {
     traerDiasResumen()
   }, [fecha.getMonth(), fecha.getFullYear(), traerDiasResumen])
 
+  return (
+    <section className='flex flex-col bg-card rounded-lg w-full h-full'>
       <header className='grid grid-cols-7'>
         {semana.map(dia => (
           <div
