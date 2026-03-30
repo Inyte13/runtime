@@ -55,7 +55,10 @@ export default function ActividadTemp({
         value={nombreTemp}
         onChange={e => setNombreTemp(e.target.value)}
         maxLength={50}
-        onKeyDown={manejarEnter}
+        onKeyDown={e => {
+          if (e.key === 'Escape') setCrearActividad(false)
+          manejarEnter(e)
+        }}
       />
     </div>
   )
