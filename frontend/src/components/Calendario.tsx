@@ -21,6 +21,9 @@ export default function Calendario() {
     0
   ).getDate()
 
+  // Renderizamos siempre redondeando hacia arriba
+  const nroFilas = Math.ceil((nroDiaSemana + nroDias) / 7)
+  const nroCeldas = nroFilas * 7
 
   const traerDiasResumen = useDiasStore(state => state.traerDiasResumen)
   useEffect(() => {
@@ -37,6 +40,17 @@ export default function Calendario() {
           </div>
         ))}
       </header>
+        {Array.from({ length: nroCeldas }).map((_, indice) => (
+          <li
+            key={indice}
+            className={cn(
+              'p-1 flex flex-col gap-y-2',
+              'border-t border-l border-border/50 min-h-0',
+              indice % 7 === 0 && 'border-l-0'
+            )}
+          >
+            <CalendarioDia indice={indice} />
+          </li>
     </section>
   )
 }
