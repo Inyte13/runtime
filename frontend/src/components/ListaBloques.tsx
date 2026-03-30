@@ -14,8 +14,8 @@ import { restrictToVerticalAxis } from '@dnd-kit/modifiers'
 import ListaBloquesFooter from './ListaBloquesFooter'
 
 export default memo(function ListaBloques() {
-  const bloquesIds = useDiasStore(
-    useShallow(state => state.diaDetail?.bloques?.map(bloque => bloque.id))
+  const idsBloques = useDiasStore(
+    useShallow(state => state.diaDetail?.bloques.map(bloque => bloque.id))
   )
   const reordenarBloques = useDiasStore(state => state.reordenarBloques)
   // Que actue solo si se mueve mas de 5px
@@ -33,12 +33,16 @@ export default memo(function ListaBloques() {
         sensors={sensors}
       >
         <SortableContext
-          items={bloquesIds ?? []}
+          items={idsBloques ?? []}
           strategy={verticalListSortingStrategy} // Optimiza las animaciones
         >
           <ul className='flex flex-col gap-y-2'>
-            {bloquesIds?.map((id, i) => (
-              <BloqueOrdenable key={id} id={id} idPrevious={bloquesIds[i-1]}/>
+            {idsBloques?.map((id, i) => (
+              <BloqueOrdenable
+                key={id}
+                id={id}
+                idPrevio={idsBloques[i - 1]}
+              />
             ))}
           </ul>
         </SortableContext>
