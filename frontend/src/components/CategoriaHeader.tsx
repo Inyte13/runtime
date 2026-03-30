@@ -5,9 +5,13 @@ import { Input } from './ui/input'
 import { useCategoriasStore } from '@/store/categoriasStore'
 import { manejarEnter } from '@/utils/keyboard'
 
+  const categoria = useCategoriasStore(state =>
+    state.categoriasDetail.find(categoria => categoria.id === id)
+  )
   const actualizarCategoria = useCategoriasStore(
     state => state.actualizarCategoria
   )
+  const eliminarCategoria = useCategoriasStore(state => state.eliminarCategoria)
 
   const manejarNombre = async (e: React.FocusEvent<HTMLInputElement>) => {
     const newNombre = e.target.value.toLowerCase().trim()
@@ -34,3 +38,13 @@ import { manejarEnter } from '@/utils/keyboard'
         }}
       />
 
+      {!categoria.actividades.length && (
+        <Button
+          size='icon-xs'
+          variant='destructive'
+          className='opacity-0 group-hover:opacity-100 focus-visible:opacity-100 transition-none'
+          onClick={() => eliminarCategoria(id)}
+        >
+          <Trash2 />
+        </Button>
+      )}
