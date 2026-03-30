@@ -18,7 +18,7 @@ export interface DiaReadDetail extends DiaRead {
 }
 
 export interface DiaResumen extends DiaRead {
-  bloques: BloqueResumen[]
+  categorias: CategoriaResumen[]
 }
 
 export interface DiaUpdate {

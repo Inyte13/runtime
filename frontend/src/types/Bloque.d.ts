@@ -9,9 +9,6 @@ export interface BloqueCreate {
 export interface BloqueRead {
   id: number
   hora: string
-  descripcion: string | null
-  id_actividad: number
-  duracion: number
   hora_fin: string
 }
 
