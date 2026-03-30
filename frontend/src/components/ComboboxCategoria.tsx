@@ -49,6 +49,18 @@ export default memo(function ComboboxCategoria({ id }: { id: number }) {
       manejarSelector(actividadesFiltradas[0].id.toString())
     }
   }, [categoriasFiltradas, manejarSelector])
+  // Para que entienda que el value no es un número
+  // Usamos categorias porque si entre las categoriasFiltradas no esta el actual renderizaria el número
+  const items = useMemo(
+    () =>
+      categorias.flatMap(categoria =>
+        categoria.actividades.map(actividad => ({
+          label: actividad.nombre,
+          value: actividad.id.toString(),
+        }))
+      ),
+    [categorias]
+  )
   return (
     <Combobox
       items={items}
