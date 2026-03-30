@@ -5,7 +5,6 @@ import {
   ComboboxContent,
   ComboboxGroup,
   ComboboxInput,
-  ComboboxItem,
   ComboboxLabel,
   ComboboxList,
   ComboboxTrigger,
