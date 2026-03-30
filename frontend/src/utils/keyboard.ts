@@ -9,3 +9,10 @@ export function manejarEnter(
   }
 }
 
+export function manejarCtrlEnter(
+  e: KeyboardEvent<HTMLTextAreaElement>
+) {
+  if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
+    e.currentTarget.blur()
+  }
+}
