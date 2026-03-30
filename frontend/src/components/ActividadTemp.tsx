@@ -4,11 +4,13 @@ import { Input } from './ui/input'
 import { manejarEnter } from '../utils/keyboard'
 
 export default function ActividadTemp({
-  setCrear,
   setCrearActividad,
+  id,
+  setAbrir,
 }: {
-  setCrear: (value: boolean) => void
   setCrearActividad: (value: boolean) => void
+  id: number
+  setAbrir: (value: boolean) => void
 }) {
   const crearActividad = useCategoriasStore(state => state.crearActividad)
   const categoria = useCategoriasStore(state =>
