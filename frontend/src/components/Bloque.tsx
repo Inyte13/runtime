@@ -23,6 +23,8 @@ export default memo(function Bloque({
   idPrevio: number
 }) {
   const crearBloque = useDiasStore(state => state.crearBloque)
+  const actualizarBloque = useDiasStore(state => state.actualizarBloque)
+  const eliminarBloque = useDiasStore(state => state.eliminarBloque)
 
   const bloque = useDiasStore(state =>
     state.diaDetail?.bloques.find(bloque => bloque.id === id)
@@ -33,8 +35,6 @@ export default memo(function Bloque({
     )
   )! // non-null assertion seguro por el loading en App
 
-  const actualizarBloque = useDiasStore(state => state.actualizarBloque)
-  const eliminarBloque = useDiasStore(state => state.eliminarBloque)
 
   const descripcion = bloque?.descripcion || ''
   const manejarDescripcion = useCallback(
@@ -55,6 +55,9 @@ export default memo(function Bloque({
             borderLeftColor: color || categoria.color,
           }}
         >
+          <span className='text-foreground/70'>
+            {bloque.hora} - {bloque.hora_fin}
+          </span>
           <Textarea
             className='border-border/50 rounded-lg py-1 px-2 shadow-none bg-transparent! min-h-0 focus:ring-0 focus:text-foreground resize-none overflow-hidden text-foreground/70 mt-1'
             placeholder='Añadir descripción'
@@ -88,16 +91,12 @@ export default memo(function Bloque({
             Agregar arriba
           </ContextMenuItem>
 
-      <span className='pl-1 text-foreground/70'>
-        {bloque.hora} - {bloque.hora_fin}
-      </span>
           <ContextMenuItem onClick={() => crearBloque(id)}>
             <ArrowDownFromLine />
             Agregar abajo
           </ContextMenuItem>
         </ContextMenuGroup>
 
-    </BloqueColor>
         <ContextMenuGroup>
           <ContextMenuItem
             onClick={() => eliminarBloque(id)}
