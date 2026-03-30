@@ -4,6 +4,16 @@ import Actividad from './Actividad'
 import ActividadTemp from './ActividadTemp'
 
 export default function ListaActividades({
+  id,
+  crearActividad,
+  setCrearActividad,
+  setAbrir,
+}: {
+  id: number
+  crearActividad: boolean
+  setCrearActividad: (value: boolean) => void
+  setAbrir: (value: boolean) => void
+}) {
   const categoria = useCategoriasStore(state =>
     state.categoriasDetail.find(categoria => categoria?.id === id)
   )
@@ -15,6 +25,10 @@ export default function ListaActividades({
     >
       {categoria.actividades.map(actividad => (
       ))}
+          <ActividadTemp
+            setCrearActividad={setCrearActividad}
+            id={id}
+            setAbrir={setAbrir}
           />
       )}
     </ul>
