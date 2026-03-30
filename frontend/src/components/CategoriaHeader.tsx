@@ -12,6 +12,7 @@ import { manejarEnter } from '@/utils/keyboard'
     state => state.actualizarCategoria
   )
   const eliminarCategoria = useCategoriasStore(state => state.eliminarCategoria)
+  if (!categoria) return
 
   const manejarNombre = async (e: React.FocusEvent<HTMLInputElement>) => {
     const newNombre = e.target.value.toLowerCase().trim()
@@ -23,6 +24,7 @@ import { manejarEnter } from '@/utils/keyboard'
     await actualizarCategoria(id, { nombre: newNombre })
   }
   return (
+      <ChangeColor id={id} colorFallback={categoria.color} />
       <Input
         className='capitalize italic p-0 border-none outline-none h-[1.6rem] truncate shadow-none pl-2'
         defaultValue={categoria.nombre}
