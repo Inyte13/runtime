@@ -9,10 +9,10 @@ import { useDiasStore } from '@/store/diasStore'
 // Creado solo para separar el li del bloque y dejarlo limpio
 export default memo(function BloqueOrdenable({
   id,
-  idPrevious,
+  idPrevio,
 }: {
   id: number
-  idPrevious: number
+  idPrevio: number
 }) {
   const crearBloque = useDiasStore(state => state.crearBloque)
   const { attributes, listeners, setNodeRef, transform, transition } =
@@ -30,8 +30,9 @@ export default memo(function BloqueOrdenable({
       style={style}
       className='group/bloque list-none w-full relative'
     >
-      <Bloque id={id} />
-      <div className='absolute right-[-1.7rem] top-0 h-full flex flex-col items-center justify-center opacity-0 group-hover/bloque:opacity-80 transition-opacity'>
+      <Bloque id={id} idPrevio={idPrevio} />
+
+      <div className='h-full flex flex-col items-center justify-center opacity-0 group-hover/bloque:opacity-80 transition-opacity '>
         <Button
           size='icon-sm'
           variant='ghost'
