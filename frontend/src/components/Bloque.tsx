@@ -55,6 +55,13 @@ export default memo(function Bloque({
             borderLeftColor: color || categoria.color,
           }}
         >
+          <header className='flex justify-between items-center gap-x-1'>
+            {/* Necesita un wrapper para controlar su width */}
+            <div className='min-w-0'>
+              <ComboboxCategoria id={id} />
+            </div>
+            <Duracion id={id} />
+          </header>
           <span className='text-foreground/70'>
             {bloque.hora} - {bloque.hora_fin}
           </span>
