@@ -23,6 +23,10 @@ export default function Grafico({
     state.categoriasDetail.find(categoria => categoria?.id === id)
   )
   const color = useColorStore(state => state.colores[id])
+  const duracionTotal = categoriaResumen.actividades.reduce(
+    (sum, act) => sum + act.duracion,
+    0
+  )
   return (
     <div className='relative h-full flex items-end'>
       <div
@@ -34,6 +38,10 @@ export default function Grafico({
         <span className='text-primary ml-1'>{duracion}h</span>
       </div>
     </div>
+        <ul
+          className='min-h-1 h-2 flex gap-px group'
+          style={{ width: `${(duracionTotal / maxDuracion) * 100}%` }}
+        >
           {categoriaResumen.actividades.map(actividad => (
             <li
               className='h-full first:rounded-l-lg last:rounded-r-lg opacity-60 group-hover:opacity-100'
@@ -44,6 +52,8 @@ export default function Grafico({
               }}
             />
           ))}
+        </ul>
+        <header className='px-2.5 py-1.5 flex justify-between bg-primary rounded-t-lg text-primary-foreground font-medium text-base gap-x-2'>
           <div className='flex items-center gap-x-1.5'>
             <span
               className='rounded-full size-3'
@@ -51,5 +61,7 @@ export default function Grafico({
             />
             <h4 className='capitalize italic truncate'>{categoria.nombre}</h4>
           </div>
+          <span>{duracionTotal}h</span>
+        </header>
   )
 }
