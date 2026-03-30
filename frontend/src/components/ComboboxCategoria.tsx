@@ -19,10 +19,12 @@ export default memo(function ComboboxCategoria({ id }: { id: number }) {
     state.diaDetail?.bloques.find(bloque => bloque.id === id)
   )
   const actualizarBloque = useDiasStore(state => state.actualizarBloque)
+
   const categorias = useCategoriasStore(state => state.categoriasDetail)
   const actividad = categorias
     .flatMap(categoria => categoria.actividades)
     .find(actividad => actividad?.id === bloque?.id_actividad)
+
   // Es null al limpiar con el button X
   const manejarSelector = useCallback(
     async (idStr: string | null) => {
@@ -31,12 +33,15 @@ export default memo(function ComboboxCategoria({ id }: { id: number }) {
     },
     [id, actualizarBloque]
   )
+
   const [search, setSearch] = useState('')
+
   const sinTilde = (str: string) =>
     str
       .normalize('NFD')
       .replace(/[\u0300-\u036f]/g, '')
       .toLowerCase()
+
   // Reducer para no recorrer dos veces
   const categoriasFiltradas = useMemo(() => {
     const searchSinTilde = sinTilde(search)
@@ -48,6 +53,7 @@ export default memo(function ComboboxCategoria({ id }: { id: number }) {
       return acc
     }, [])
   }, [categorias, search])
+
   // Si hay solo una actividad en la búsqueda, la usa
   useEffect(() => {
     const actividadesFiltradas = categoriasFiltradas.flatMap(
@@ -57,6 +63,7 @@ export default memo(function ComboboxCategoria({ id }: { id: number }) {
       manejarSelector(actividadesFiltradas[0].id.toString())
     }
   }, [categoriasFiltradas, manejarSelector])
+
   // Para que entienda que el value no es un número
   // Usamos categorias porque si entre las categoriasFiltradas no esta el actual renderizaria el número
   const items = useMemo(
@@ -90,6 +97,7 @@ export default memo(function ComboboxCategoria({ id }: { id: number }) {
           </Button>
         }
       />
+
       <ComboboxContent className='w-[17ch] text-popover-foreground'>
         <ComboboxInput
           showTrigger={false}
@@ -110,6 +118,7 @@ export default memo(function ComboboxCategoria({ id }: { id: number }) {
               <ComboboxLabel className='capitalize truncate text-sm italic'>
                 {categoria.nombre}
               </ComboboxLabel>
+
               {categoria.actividades
                 .filter(actividad => actividad.is_active)
                 .map(actividad => (

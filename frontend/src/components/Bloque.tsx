@@ -37,7 +37,6 @@ export default memo(function Bloque({
     )
   )! // non-null assertion seguro por el loading en App
 
-
   const descripcion = bloque?.descripcion || ''
   const manejarDescripcion = useCallback(
     async (e: React.FocusEvent<HTMLTextAreaElement>) => {
@@ -65,9 +64,11 @@ export default memo(function Bloque({
             </div>
             <Duracion id={id} />
           </header>
+
           <span className='text-foreground/70'>
             {bloque.hora} - {bloque.hora_fin}
           </span>
+
           <Textarea
             className='border-border/50 rounded-lg py-1 px-2 shadow-none bg-transparent! min-h-0 focus:ring-0 focus:text-foreground resize-none overflow-hidden text-foreground/70 mt-1'
             placeholder='Añadir descripción'

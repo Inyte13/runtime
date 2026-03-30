@@ -18,4 +18,12 @@ import {
   updateCategoria,
 } from '@/services/categoriaService'
 
+
+  
   // Si cambias el #A18072, cambialo en el backend (categoria.py) models y schemas
+
+
+
+
+
+

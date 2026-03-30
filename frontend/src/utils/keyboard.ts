@@ -8,3 +8,4 @@ export function manejarEnter(
     e.currentTarget.blur()
   }
 }
+

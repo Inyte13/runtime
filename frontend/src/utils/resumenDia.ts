@@ -19,7 +19,6 @@ export function resumenDia(diaDetail: DiaReadDetail): DiaResumen {
       if (descripcion) resumen[id_actividad].descripciones.push(descripcion)
     }
   }
-
   return {
     fecha: diaDetail.fecha,
     titulo: diaDetail.titulo,

@@ -5,6 +5,7 @@ import { Input } from './ui/input'
 import { useCategoriasStore } from '@/store/categoriasStore'
 import { manejarEnter } from '@/utils/keyboard'
 
+
         onKeyDown={e => {
           if (e.key === 'Escape') {
             e.currentTarget.value = nombre
@@ -12,3 +13,4 @@ import { manejarEnter } from '@/utils/keyboard'
           }
           manejarEnter(e)
         }}
+

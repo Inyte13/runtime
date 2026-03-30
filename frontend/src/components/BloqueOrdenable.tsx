@@ -42,6 +42,7 @@ export default memo(function BloqueOrdenable({
         >
           <GripVertical />
         </Button>
+
         <Button
           size='icon-sm'
           variant='ghost'

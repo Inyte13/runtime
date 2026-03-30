@@ -25,6 +25,7 @@ interface DiasState {
   diaDetail: DiaReadDetail | null
   diasResumen: DiaResumen[]
   traerDiasMes: () => Promise<void>
+
   traerDiaDetail: () => Promise<void>
   actualizarDia: (fechaISO: string, dia: DiaUpdate) => Promise<void>
   crearBloque: (id?: number) => Promise<void>
@@ -91,6 +92,12 @@ export const useDiasStore = create<DiasState>(set => {
         }))
       } catch (err) {
         console.error('Error actualizando el dia', err)
+
+
+
+
+
+
       }
     },
 
@@ -114,6 +121,7 @@ export const useDiasStore = create<DiasState>(set => {
               diasResumen: [...state.diasResumen, resumenDia(diaDetail)],
             }
           }
+
           const bloques = state.diaDetail.bloques
           if (id === undefined) {
             const diaDetail = {
@@ -273,7 +281,6 @@ export const useDiasStore = create<DiasState>(set => {
     eliminarBloque: async (id: number) => {
       set(state => {
         if (!state.diaDetail) return state
-
         const bloques = state.diaDetail.bloques
         const indiceRef = bloques.findIndex(bloque => bloque.id === id)
         if (indiceRef === -1) return state
@@ -281,6 +288,9 @@ export const useDiasStore = create<DiasState>(set => {
         const isLast = indiceRef === bloques.length - 1
         const newBloques = bloques.filter(bloque => bloque.id !== id)
         const duracion = bloques[indiceRef].duracion
+
+
+
         const diaDetail = {
           ...state.diaDetail,
           bloques: isLast
