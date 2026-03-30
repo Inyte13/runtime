@@ -8,3 +8,7 @@ import Sidebar from './Sidebar.js'
 import { useEffect, useState } from 'react'
 import { cn } from '@/lib/utils.js'
 
+export default function Layout() {
+  const { prevDia, nextDia, irHoy, prevMes, nextMes } = useFechaStore()
+  const fecha = useFechaStore(state => state.fecha)
+  const fechaTitle = formatFechaTitle(fecha)
