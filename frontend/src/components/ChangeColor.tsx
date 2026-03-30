@@ -26,6 +26,13 @@ export default function ChangeColor({
         }
       }}
     >
+      <PopoverTrigger asChild>
+        <Button
+          className='rounded-full size-4'
+          size='icon'
+          style={{ background: color }}
+        />
+      </PopoverTrigger>
 
     </Popover>
   )
