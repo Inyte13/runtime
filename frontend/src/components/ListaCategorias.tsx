@@ -6,8 +6,15 @@ import CategoriaTemp from './CategoriaTemp'
 import { Button } from './ui/button'
 
 export default function ListaCategorias() {
+  const ids = useCategoriasStore(state => state.categoriasDetail).map(
+    categoriaDetail => categoriaDetail.id
   return (
     <section className='m-0 flex flex-col min-h-0 gap-y-0 items-end'>
+      <section className='flex flex-col gap-y-1 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]'>
+        {ids.map(id => (
+          <Categoria key={id} id={id} />
+        ))}
+      </section>
     </section>
   )
 }
