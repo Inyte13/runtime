@@ -46,13 +46,14 @@ export default memo(function Bloque({
   )
   if (!bloque) return null
   return (
-    <BloqueColor
-      id={actividad.id}
-      colorDefault={actividad.color}
-      className='group/bloque flex flex-col border border-border border-l-2 rounded-md px-2 pb-2 pt-1 relative bg-card w-full'
-    >
-      <BloqueHeader id={id} />
     <ContextMenu>
+      <ContextMenuTrigger asChild>
+        <article
+          className='group/bloque flex flex-col border-l-2 border-border rounded-lg px-2 pb-2 pt-1 relative bg-card w-59'
+          style={{
+            borderLeftColor: color || categoria.color,
+          }}
+        >
           <Textarea
             className='border-border/50 rounded-lg py-1 px-2 shadow-none bg-transparent! min-h-0 focus:ring-0 focus:text-foreground resize-none overflow-hidden text-foreground/70 mt-1'
             placeholder='Añadir descripción'
@@ -76,6 +77,8 @@ export default memo(function Bloque({
             }}
             maxLength={255}
           />
+        </article>
+      </ContextMenuTrigger>
 
       <Button
         size='icon-xs'
