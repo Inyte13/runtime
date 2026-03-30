@@ -29,6 +29,12 @@ export default function ListaCategorias() {
           <CategoriaTemp setCrearCategoria={setCrearCategoria} />
         )}
       </section>
+      {ids.length === 0 && !crearCategoria && (
+        <div className='flex items-center justify-center gap-1 text-muted-foreground p-4 bg-card rounded-lg w-full'>
+          <Ghost className='size-4' />
+          <p className='text-sm'>Sin categorias</p>
+        </div>
+      )}
     </section>
   )
 }
