@@ -30,6 +30,8 @@ export default function Layout() {
       localStorage.setItem('theme', 'light')
     }
   }, [isDark])
+  return (
+    <section className='flex flex-col w-full h-full gap-y-3 p-4 pl-0'>
       <header className='flex gap-x-2 justify-between items-center pl-4'>
         <Button
           size='icon-sm'
@@ -99,3 +101,6 @@ export default function Layout() {
         </div>
         <Calendario />
       </main>
+    </section>
+  )
+}
