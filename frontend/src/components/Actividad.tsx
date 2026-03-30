@@ -5,9 +5,22 @@ import { Button } from './ui/button'
 import { Archive, ArchiveRestore, Trash2 } from 'lucide-react'
 import { useCategoriasStore } from '@/store/categoriasStore'
 
-export default memo(function Actividad({ id }: { id: number }) {
-  const actividad = useActividadesStore(state =>
-    state.actividadesDetail.find(actividad => actividad.id === id)
+export default memo(function Actividad({
+  idActividad,
+  idCategoria,
+}: {
+  idActividad: number
+  idCategoria?: number
+}) {
+  // Lo hacemos compatible con el Actividad de ListaArchivadas
+  const actividad = useCategoriasStore(state =>
+    idCategoria
+      ? state.categoriasDetail
+          .find(categoria => categoria.id === idCategoria)
+          ?.actividades.find(actividad => actividad.id === idActividad)
+      : state.categoriasDetail
+          .flatMap(categoria => categoria.actividades)
+          .find(actividad => actividad.id === idActividad)
   )
   const actualizarActividad = useActividadesStore(
     state => state.actualizarActividad
