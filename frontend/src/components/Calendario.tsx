@@ -6,6 +6,19 @@ import { cn } from '@/lib/utils'
 
 export default function Calendario() {
   const fecha = useFechaStore(state => state.fecha)
+  // El nro (semana) cuando Domingo = 0
+  const nroDiaSemanaGregoriano = new Date(
+    fecha.getFullYear(),
+    fecha.getMonth(),
+    1
+  ).getDay()
+  // El nro (semana) cuando Lunes = 0
+  const nroDiaSemana = (nroDiaSemanaGregoriano + 6) % 7
+  const nroDias = new Date(
+    fecha.getFullYear(),
+    fecha.getMonth() + 1,
+    0
+  ).getDate()
 
 
   const traerDiasResumen = useDiasStore(state => state.traerDiasResumen)
