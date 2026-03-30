@@ -65,6 +65,11 @@ export default memo(function ComboboxCategoria({ id }: { id: number }) {
           onChange={e => setSearch(e.target.value.toLowerCase())}
         />
 
+        {categoriasFiltradas.length === 0 && (
+          <p className='py-4 text-center text-sm text-muted-foreground'>
+            No se encontraron actividades
+          </p>
+        )}
         {/* El ComboboxList siempre debe estar aunque este vacio */}
         <ComboboxList className='[&::-webkit-scrollbar]:hidden [scrollbar-width:none] px-2'>
           {categoriasFiltradas.map(categoria => {
