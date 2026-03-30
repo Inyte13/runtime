@@ -18,6 +18,7 @@ export default memo(function ComboboxCategoria({ id }: { id: number }) {
   const bloque = useDiasStore(state =>
     state.diaDetail?.bloques.find(bloque => bloque.id === id)
   )
+  const categorias = useCategoriasStore(state => state.categoriasDetail)
   const actividad = categorias
     .flatMap(categoria => categoria.actividades)
     .find(actividad => actividad?.id === bloque?.id_actividad)
