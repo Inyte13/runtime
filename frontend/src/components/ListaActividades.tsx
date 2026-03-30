@@ -25,11 +25,14 @@ export default function ListaActividades({
     >
       {categoria.actividades.map(actividad => (
       ))}
+      {crearActividad && (
+        <li>
           <ActividadTemp
             setCrearActividad={setCrearActividad}
             id={id}
             setAbrir={setAbrir}
           />
+        </li>
       )}
     </ul>
   )
