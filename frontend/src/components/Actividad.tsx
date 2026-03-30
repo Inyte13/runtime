@@ -30,7 +30,7 @@ export default memo(function Actividad({
   )
   if (!actividad) return null
 
-  const { nombre, color: colorFallback, tiene_bloques, is_active } = actividad
+  const { nombre, tiene_bloques, is_active } = actividad
   const manejarNombre = async (e: React.FocusEvent<HTMLInputElement>) => {
     const newNombre = e.target.value.toLowerCase().trim()
     // Si el newNombre es '' o es igual al inicial
