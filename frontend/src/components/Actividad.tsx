@@ -46,10 +46,7 @@ export default memo(function Actividad({
   return (
     <div className='group flex py-1.5 px-3'>
       <Input
-        className={cn(
-          'capitalize p-0 pl-2 border-none outline-none rounded-none h-[1.6rem] truncate',
-          !is_active && 'italic'
-        )}
+        className='capitalize p-0 pl-2 border-none outline-none h-[1.6rem] truncate shadow-none'
         defaultValue={nombre}
         onBlur={manejarNombre}
         maxLength={50}
