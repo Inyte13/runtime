@@ -53,8 +53,13 @@ export default memo(function Actividad({
         defaultValue={nombre}
         onBlur={manejarNombre}
         maxLength={50}
-        // Para dejar el foco con el enter
-        onKeyDown={manejarEnter}
+        onKeyDown={e => {
+          if (e.key === 'Escape') {
+            e.currentTarget.value = nombre
+            e.currentTarget.blur()
+          }
+          manejarEnter(e)
+        }}
         disabled={!is_active}
       />
 

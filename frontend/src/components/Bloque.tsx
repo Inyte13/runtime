@@ -46,6 +46,13 @@ export default memo(function Bloque({ id }: { id: number }) {
       className='group/bloque flex flex-col border border-border border-l-2 rounded-md px-2 pb-2 pt-1 relative bg-card w-full'
     >
       <BloqueHeader id={id} />
+            onKeyDown={e => {
+              if (e.key === 'Escape') {
+                e.currentTarget.value = descripcion
+                e.currentTarget.blur()
+              }
+              manejarCtrlEnter(e)
+            }}
 
       <Button
         size='icon-xs'
