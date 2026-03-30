@@ -16,6 +16,12 @@ export default function Grafico({
   nombre: string
 }) {
   const altura = (duracion / maxDuracion) * 100
+  const categoriaResumen = useDiasStore(state =>
+    state.diasResumen.find(dia => dia.fecha === fechaISO)
+  )?.categorias.find(categoria => categoria.id === id)
+  const categoria = useCategoriasStore(state =>
+    state.categoriasDetail.find(categoria => categoria?.id === id)
+  )
   const color = useColorStore(state => state.colores[id])
   return (
     <div className='relative h-full flex items-end'>
@@ -28,6 +34,22 @@ export default function Grafico({
         <span className='text-primary ml-1'>{duracion}h</span>
       </div>
     </div>
+          {categoriaResumen.actividades.map(actividad => (
+            <li
+              className='h-full first:rounded-l-lg last:rounded-r-lg opacity-60 group-hover:opacity-100'
+              key={actividad.id}
+              style={{
+                backgroundColor: color || categoria.color,
+                width: `${(actividad.duracion / duracionTotal) * 100}%`,
+              }}
+            />
+          ))}
+          <div className='flex items-center gap-x-1.5'>
+            <span
+              className='rounded-full size-3'
               style={{ backgroundColor: color || categoria.color }}
+            />
+            <h4 className='capitalize italic truncate'>{categoria.nombre}</h4>
+          </div>
   )
 }
