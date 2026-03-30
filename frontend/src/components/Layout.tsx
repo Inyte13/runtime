@@ -88,3 +88,14 @@ export default function Layout() {
           </Button>
         </div>
       </header>
+      <main className='flex w-full min-h-0 flex-1 gap-x-4'>
+        <div
+          className={cn(
+            'overflow-hidden transition-[width] duration-300 ease-in-out h-full shrink-0',
+            sidebarOpen ? 'w-56' : 'w-0'
+          )}
+        >
+          <Sidebar />
+        </div>
+        <Calendario />
+      </main>
