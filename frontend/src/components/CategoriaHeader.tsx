@@ -5,6 +5,7 @@ import { Input } from './ui/input'
 import { useCategoriasStore } from '@/store/categoriasStore'
 import { manejarEnter } from '@/utils/keyboard'
 
+export default function CategoriaHeader({ id }: { id: number }) {
   const categoria = useCategoriasStore(state =>
     state.categoriasDetail.find(categoria => categoria.id === id)
   )
@@ -24,6 +25,7 @@ import { manejarEnter } from '@/utils/keyboard'
     await actualizarCategoria(id, { nombre: newNombre })
   }
   return (
+    <>
       <ChangeColor id={id} colorFallback={categoria.color} />
       <Input
         className='capitalize italic p-0 border-none outline-none h-[1.6rem] truncate shadow-none pl-2'
@@ -50,3 +52,6 @@ import { manejarEnter } from '@/utils/keyboard'
           <Trash2 />
         </Button>
       )}
+    </>
+  )
+}
