@@ -10,13 +10,10 @@ export default function Dia() {
   useEffect(() => {
     traerDiaDetail()
   }, [fecha, traerDiaDetail])
-  // TODO: width no fijo, truncate para selector y en el combobox
   return (
-    <section className='flex flex-col min-w-75 h-full gap-y-2 p-4 pr-0'>
+    <section className='flex flex-col min-w-75 h-full gap-y-2 p-4'>
       <DiaHeader />
-      <div className='flex-1 min-h-0'>
-        <ListaBloques />
-      </div>
+      <ListaBloques />
     </section>
   )
 }
