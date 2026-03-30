@@ -40,6 +40,10 @@ export default function Calendario() {
           </div>
         ))}
       </header>
+      <ol
+        className='grid grid-cols-7 flex-1 min-h-0'
+        style={{ gridTemplateRows: `repeat(${nroFilas}, minmax(50px, 1fr))` }}
+      >
         {Array.from({ length: nroCeldas }).map((_, indice) => (
           <li
             key={indice}
@@ -51,6 +55,8 @@ export default function Calendario() {
           >
             <CalendarioDia indice={indice} />
           </li>
+        ))}
+      </ol>
     </section>
   )
 }
