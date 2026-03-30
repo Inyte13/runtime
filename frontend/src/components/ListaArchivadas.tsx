@@ -14,6 +14,7 @@ export default memo(function ListaArchivadas() {
   )
   return (
     <>
+      {archivadas.length > 0 && (
         <ul className='flex flex-col divide-y divide-border/50 border-l-2 border-border rounded-lg bg-card/50'>
           {archivadas.map(actividad => (
             <li key={actividad.id}>
@@ -21,6 +22,13 @@ export default memo(function ListaArchivadas() {
             </li>
           ))}
         </ul>
+      )}
+      {archivadas.length === 0 && (
+        <div className='flex items-center justify-center gap-1 text-muted-foreground p-4 bg-card rounded-lg'>
+          <Archive className='size-4' />
+          <p className='text-sm'>Sin Archivados</p>
+        </div>
+      )}
     </>
   )
 })
