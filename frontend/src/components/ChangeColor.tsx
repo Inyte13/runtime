@@ -6,9 +6,27 @@ import { colores } from '@/lib/colors.js'
 import { HexColorPicker } from 'react-colorful'
 import { Separator } from './ui/separator.js'
 
+export default function ChangeColor({
+  id,
+  colorFallback,
+}: {
+  id: number
+  colorFallback: string
+}) {
   const color = useColorStore(state => state.colores[id] || colorFallback)
   const setColor = useColorStore(state => state.setColor)
   const actualizarCategoria = useCategoriasStore(
     state => state.actualizarCategoria
   )
+  return (
+    <Popover
+      onOpenChange={async open => {
+        if (!open) {
+          await actualizarCategoria(id, { color })
+        }
+      }}
+    >
 
+    </Popover>
+  )
+}
