@@ -10,21 +10,30 @@ export default function ActividadTemp({
 }) {
   const crearActividad = useActividadesStore(state => state.crearActividad)
 
+  const categoria = useCategoriasStore(state =>
+    state.categoriasDetail.find(categoria => categoria?.id === id)
+  )
   const tempRef = useRef<HTMLDivElement>(null)
 
   const [nombreTemp, setNombreTemp] = useState('')
+  if (!categoria) return
 
     const nombre = nombreTemp.trim()
     if (nombre) {
-      await crearActividad({ nombre: nombre.toLowerCase(), color: colorTemp })
+      crearActividad({
+        nombre: nombre.toLowerCase(),
+        id_categoria: id,
+      })
     }
-    setCrear(false)
   }
 
   const manejarBlur = (e: React.FocusEvent<HTMLDivElement>) => {
     // Si el nuevo elemento clickeado está fuera, guardamos
     if (!e.currentTarget.contains(e.relatedTarget)) {
       actualizar()
+      if (!nombreTemp.trim()) {
+        if (!categoria.actividades.length) setAbrir(false)
+      }
     }
   }
 
