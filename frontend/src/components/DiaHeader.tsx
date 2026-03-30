@@ -8,8 +8,6 @@ export default function DiaHeader() {
   const fecha = useFechaStore(state => state.fecha)
   const fechaISO = formatFechaISO(fecha)
   const fechaDetail = formatFechaDetail(fecha)
-  // (|| ''): Lo usamos porque un dia puede tener el titulo null
-  // (?.): Lo usamos porque diaDetail puede no estar creado
   const titulo = useDiasStore(state => state.diaDetail?.titulo) || ''
   const actualizarDia = useDiasStore(state => state.actualizarDia)
 
@@ -25,11 +23,8 @@ export default function DiaHeader() {
   }, [titulo])
 
   const manejarTitulo = async () => {
-    // inputRef.current? puede ser undefinded
     const newTitulo = inputRef.current?.value || ''
-    // Si es igual no hace nada
     if (newTitulo === titulo) return
-    // Actualiza a la bd
     await actualizarDia(fechaISO, { titulo: newTitulo })
   }
 
