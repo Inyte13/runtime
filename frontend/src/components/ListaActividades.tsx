@@ -14,6 +14,7 @@ export default function ListaActividades({
   setCrearActividad: (value: boolean) => void
   setAbrir: (value: boolean) => void
 }) {
+  const color = useColorStore(state => state.colores[id])
   const categoria = useCategoriasStore(state =>
     state.categoriasDetail.find(categoria => categoria?.id === id)
   )
