@@ -1,8 +1,8 @@
 export interface BloqueCreate {
-  duracion?: number
+  duracion?: number // default: 0.5 en el backend
   descripcion?: string | null
-  id_actividad?: number
   fecha: string
+  id_actividad?: number
   id_ref?: number
 }
 
@@ -10,16 +10,13 @@ export interface BloqueRead {
   id: number
   hora: string
   hora_fin: string
-}
-
-export interface BloqueResumen {
-  id_actividad: number
   duracion: number
-  descripciones: string[]
+  descripcion: string | null
+  id_actividad: number
 }
 
 export interface BloqueUpdate {
+  duracion?: number
   descripcion?: string | null
   id_actividad?: number
-  duracion?: number
 }

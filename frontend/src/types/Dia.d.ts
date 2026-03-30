@@ -8,9 +8,9 @@ export enum Estado {
 }
 
 export interface DiaRead {
+  fecha: string
   titulo: string | null
   estado: Estado | null
-  fecha: string
 }
 
 export interface DiaReadDetail extends DiaRead {
