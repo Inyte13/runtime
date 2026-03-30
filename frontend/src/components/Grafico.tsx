@@ -6,19 +6,17 @@ import HoverDetalle from './HoverDetalle'
 
 export default function Grafico({
   id,
-  colorDefault,
   duracion,
   maxDuracion,
   nombre,
 }: {
   id: number
-  colorDefault: string
   duracion: number
   maxDuracion: number
   nombre: string
 }) {
-  const color = useColorStore(state => state.colores[id] || colorDefault)
   const altura = (duracion / maxDuracion) * 100
+  const color = useColorStore(state => state.colores[id])
   return (
     <div className='relative h-full flex items-end'>
       <div
@@ -30,5 +28,6 @@ export default function Grafico({
         <span className='text-primary ml-1'>{duracion}h</span>
       </div>
     </div>
+              style={{ backgroundColor: color || categoria.color }}
   )
 }
