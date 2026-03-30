@@ -76,6 +76,8 @@ export default memo(function ComboboxCategoria({ id }: { id: number }) {
       ),
     [categorias]
   )
+  // TODO: Al mantener la actividad truncate, para mostrarla completa
+  // TODO: Comprender el ComboboxInput, InputGroupInput, Input, para que coincidan los estilos
   return (
     <Combobox
       items={items}

@@ -42,6 +42,7 @@ export default memo(function Actividad({
   const manejarArchivar = async () => {
     await actualizarActividad(idActividad, { is_active: !is_active })
   }
+  // TODO: Al mantener la actividad truncate, para mostrarla completa
   return (
     <div className='group flex py-1.5 px-3'>
       <Input

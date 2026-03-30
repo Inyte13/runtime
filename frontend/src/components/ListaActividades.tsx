@@ -19,6 +19,7 @@ export default function ListaActividades({
     state.categoriasDetail.find(categoria => categoria?.id === id)
   )
   if (!categoria) return
+  // TODO: Drag and drop para ordenar
   return (
     <ul
       className='flex flex-col divide-y divide-border/50 border-l-2 border-border rounded-lg bg-card/50'
