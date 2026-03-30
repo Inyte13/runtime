@@ -22,6 +22,7 @@ export default memo(function Bloque({
   id: number
   idPrevio: number
 }) {
+  const crearBloque = useDiasStore(state => state.crearBloque)
 
   const bloque = useDiasStore(state =>
     state.diaDetail?.bloques.find(bloque => bloque.id === id)
@@ -80,10 +81,21 @@ export default memo(function Bloque({
         </article>
       </ContextMenuTrigger>
 
+      <ContextMenuContent>
+        <ContextMenuGroup>
+          <ContextMenuItem onClick={() => crearBloque(idPrevio ?? 1)}>
+            <ArrowUpFromLine />
+            Agregar arriba
+          </ContextMenuItem>
 
       <span className='pl-1 text-foreground/70'>
         {bloque.hora} - {bloque.hora_fin}
       </span>
+          <ContextMenuItem onClick={() => crearBloque(id)}>
+            <ArrowDownFromLine />
+            Agregar abajo
+          </ContextMenuItem>
+        </ContextMenuGroup>
 
     </BloqueColor>
         <ContextMenuGroup>
