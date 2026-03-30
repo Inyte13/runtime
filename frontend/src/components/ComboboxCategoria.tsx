@@ -23,6 +23,23 @@ export default memo(function ComboboxCategoria({ id }: { id: number }) {
     },
     [id, actualizarBloque]
   )
+  const [search, setSearch] = useState('')
+  const sinTilde = (str: string) =>
+    str
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+  // Reducer para no recorrer dos veces
+  const categoriasFiltradas = useMemo(() => {
+    const searchSinTilde = sinTilde(search)
+    return categorias.reduce<typeof categorias>((acc, categoria) => {
+      const actividades = categoria.actividades.filter(actividad =>
+        sinTilde(actividad.nombre).includes(searchSinTilde)
+      )
+      if (actividades.length) acc.push({ ...categoria, actividades })
+      return acc
+    }, [])
+  }, [categorias, search])
   // Si hay solo una actividad en la búsqueda, la usa
   useEffect(() => {
     const actividadesFiltradas = categoriasFiltradas.flatMap(
@@ -41,6 +58,17 @@ export default memo(function ComboboxCategoria({ id }: { id: number }) {
         if (!open) setSearch('')
       }}
     >
+        <ComboboxInput
+          showTrigger={false}
+          showClear={true}
+          placeholder='Buscar'
+          onChange={e => setSearch(e.target.value.toLowerCase())}
+        />
+
+        {/* El ComboboxList siempre debe estar aunque este vacio */}
+        <ComboboxList className='[&::-webkit-scrollbar]:hidden [scrollbar-width:none] px-2'>
+          {categoriasFiltradas.map(categoria => {
+            const idsActividades = categoria.actividades
     </Combobox>
   )
 })
