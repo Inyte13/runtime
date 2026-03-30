@@ -90,6 +90,15 @@ export default memo(function ComboboxCategoria({ id }: { id: number }) {
               <ComboboxLabel className='capitalize truncate text-sm italic'>
                 {categoria.nombre}
               </ComboboxLabel>
+              {categoria.actividades
+                .filter(actividad => actividad.is_active)
+                .map(actividad => (
+                  <ComboboxActividad
+                    key={actividad.id}
+                    idCategoria={categoria.id}
+                    idActividad={actividad.id}
+                  />
+                ))}
             </ComboboxGroup>
           ))}
         </ComboboxList>
