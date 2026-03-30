@@ -32,11 +32,12 @@ export default function ActividadTemp({
     <div
       ref={tempRef}
       onBlur={manejarBlur}
-      className='flex items-center p-1.5 hover:bg-accent hover:text-accent-foreground rounded-lg'
+      tabIndex={0} // Para que sea focusable
+      className='flex items-center py-1.5 px-3'
     >
       <Input
         autoFocus
-        className='capitalize p-0 pl-2 border-none outline-none rounded-none h-[1.6rem] text-base'
+        className='capitalize p-0 pl-2 border-none outline-none h-[1.6rem] truncate'
         value={nombreTemp}
         onChange={e => setNombreTemp(e.target.value)}
         maxLength={50}
