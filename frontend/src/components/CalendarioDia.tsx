@@ -32,10 +32,13 @@ export default function CalendarioDia({ indice }: { indice: number }) {
 
   const diaResumen = diasResumen.find(dia => dia.fecha === fechaISO)
 
-  const maxDuracion =
-    bloquesFiltrados.length > 0
-      ? Math.max(...bloquesFiltrados.map(b => b.duracion))
-      : 1
+  const maxDuracion = diaResumen
+    ? Math.max(
+        ...diaResumen.categorias.map(categoria =>
+          categoria.actividades.reduce((sum, act) => sum + act.duracion, 0)
+        )
+      )
+    : 0
   return (
     <>
       <div
