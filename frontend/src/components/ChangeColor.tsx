@@ -6,4 +6,9 @@ import { colores } from '@/lib/colors.js'
 import { HexColorPicker } from 'react-colorful'
 import { Separator } from './ui/separator.js'
 
+  const color = useColorStore(state => state.colores[id] || colorFallback)
+  const setColor = useColorStore(state => state.setColor)
+  const actualizarCategoria = useCategoriasStore(
+    state => state.actualizarCategoria
+  )
 
