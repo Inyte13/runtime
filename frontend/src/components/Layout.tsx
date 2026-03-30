@@ -29,6 +29,7 @@ export default function Layout() {
       localStorage.setItem('theme', 'light')
     }
   }, [isDark])
+        <div className='flex items-center gap-x-1'>
           <Button
             size='icon-sm'
             variant='ghost'
@@ -36,3 +37,24 @@ export default function Layout() {
           >
             {isDark ? <Sun /> : <Moon />}
           </Button>
+
+          <Button
+            size='icon'
+            variant='secondary'
+            className='rounded-full'
+            onClick={prevDia}
+          >
+            <ChevronLeft />
+          </Button>
+          <Button variant='secondary' onClick={irHoy}>
+            Hoy
+          </Button>
+          <Button
+            size='icon'
+            variant='secondary'
+            className='rounded-full'
+            onClick={nextDia}
+          >
+            <ChevronRight />
+          </Button>
+        </div>
