@@ -22,12 +22,10 @@ export default memo(function Actividad({
           .flatMap(categoria => categoria.actividades)
           .find(actividad => actividad.id === idActividad)
   )
-  const actualizarActividad = useActividadesStore(
+  const actualizarActividad = useCategoriasStore(
     state => state.actualizarActividad
   )
-  const eliminarActividad = useActividadesStore(
-    state => state.eliminarActividad
-  )
+  const eliminarActividad = useCategoriasStore(state => state.eliminarActividad)
   if (!actividad) return null
 
   const { nombre, tiene_bloques, is_active } = actividad
