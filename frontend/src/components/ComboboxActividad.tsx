@@ -3,6 +3,12 @@ import { ComboboxItem } from './ui/combobox'
 import { useColorStore } from '@/store/colorStore'
 
 export default function ComboboxActividad({
+  idCategoria,
+  idActividad,
+}: {
+  idCategoria: number
+  idActividad: number
+}) {
   const categoria = useCategoriasStore(state =>
     state.categoriasDetail.find(categoria => categoria.id === idCategoria)
   )
