@@ -33,7 +33,53 @@ export default function ChangeColor({
           style={{ background: color }}
         />
       </PopoverTrigger>
+      <PopoverContent
+        side='top'
+        align='start'
+        className='w-44 p-1 flex flex-row items-center gap-x-1'
+        sideOffset={8}
+        alignOffset={0}
+      >
+        <div className='flex overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]'>
+          {colores.map(({ nombre, hex }) => (
+            <div key={nombre} className='flex px-0.5 py-1'>
+              <Button
+                size='icon'
+                className='size-4 rounded-full'
+                style={{ background: hex }}
+                onClick={() => setColor(id, hex)}
+              />
+            </div>
+          ))}
+        </div>
 
+        <Separator orientation='vertical' className='h-4 w-px ' />
+
+        <Popover>
+          <PopoverTrigger asChild>
+            <div className='flex ml-0.5'>
+              <Button
+                className='rounded-full size-4'
+                size='icon'
+                style={{ background: color }}
+              />
+            </div>
+          </PopoverTrigger>
+          <PopoverContent
+            className='w-auto'
+            side='right'
+            align='start'
+            sideOffset={16}
+            alignOffset={-8}
+            updatePositionStrategy='always'
+          >
+            <HexColorPicker
+              color={color}
+              onChange={newColor => setColor(id, newColor)}
+            />
+          </PopoverContent>
+        </Popover>
+      </PopoverContent>
     </Popover>
   )
 }
