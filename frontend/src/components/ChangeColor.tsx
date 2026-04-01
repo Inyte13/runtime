@@ -40,18 +40,18 @@ export default function ChangeColor({
         sideOffset={8}
         alignOffset={0}
       >
-        <div className='flex overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]'>
+        <ul className='flex overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]'>
           {colores.map(({ nombre, hex }) => (
-            <div key={nombre} className='flex px-0.5 py-1'>
+            <li key={nombre} className='flex px-0.5 py-1'>
               <Button
                 size='icon'
                 className='size-4 rounded-full'
                 style={{ background: hex }}
                 onClick={() => setColor(id, hex)}
               />
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
 
         <Separator orientation='vertical' className='h-4 w-px ' />
 

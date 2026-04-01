@@ -3,7 +3,7 @@ import Dia from '../components/Dia'
 
 export default function Home() {
   return (
-    <main className='flex h-dvh overflow-hidden justify-center'>
+    <main className='flex h-dvh overflow-hidden'>
       <Layout />
       <Dia />
     </main>

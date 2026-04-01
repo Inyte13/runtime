@@ -11,8 +11,8 @@ export default function ListaCategorias() {
   const [crearCategoria, setCrearCategoria] = useState(false)
   // TODO: Drag and drop para ordenar
   return (
-    <section className='m-0 flex flex-col min-h-0 gap-y-0 items-end'>
-      <header>
+    <section className='m-0 flex flex-col min-h-0 gap-y-0'>
+      <header className='self-end'>
         <Button
           size='icon-xs'
           variant='ghost'
