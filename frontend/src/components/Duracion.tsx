@@ -17,7 +17,6 @@ export default memo(function Duracion({ id }: { id: number }) {
       <span className='text-3xl font-extralight text-card-foreground'>
         {duracion}h
       </span>
-      <div className='flex flex-col '>
       <div data-slot='wrapper' className='flex flex-col'>
         <Button
           size='icon-xs'

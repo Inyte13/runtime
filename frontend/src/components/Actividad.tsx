@@ -44,7 +44,7 @@ export default memo(function Actividad({
   }
   // TODO: Al mantener la actividad truncate, para mostrarla completa
   return (
-    <div className='group flex py-1.5 px-3'>
+    <div data-slot='wrapper' className='group flex py-1.5 px-3'>
       <Input
         className='capitalize p-0 pl-2 border-none outline-none h-[1.6rem] truncate shadow-none'
         defaultValue={nombre}
