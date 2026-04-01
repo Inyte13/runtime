@@ -7,6 +7,7 @@ import { Button } from './ui/button'
 
 export default function ListaCategorias() {
   const categorias = useCategoriasStore(state => state.categoriasDetail)
+
   const [crearCategoria, setCrearCategoria] = useState(false)
   // TODO: Drag and drop para ordenar
   return (

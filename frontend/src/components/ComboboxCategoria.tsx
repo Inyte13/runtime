@@ -16,10 +16,10 @@ import ComboboxActividad from './ComboboxActividad.js'
 
 export default memo(function ComboboxCategoria({ id }: { id: number }) {
   const actualizarBloque = useDiasStore(state => state.actualizarBloque)
+  
   const bloque = useDiasStore(state =>
     state.diaDetail?.bloques.find(bloque => bloque.id === id)
   )
-
   const categorias = useCategoriasStore(state => state.categoriasDetail)
   const actividad = categorias
     .flatMap(categoria => categoria.actividades)

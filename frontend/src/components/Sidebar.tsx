@@ -10,7 +10,7 @@ export default function Sidebar() {
     <Tabs defaultValue='activas' asChild>
       <section className='flex flex-col h-full overflow-hidden gap-y-2 pl-4 w-56'>
         <TabsList asChild>
-          <header >
+          <header>
             <TabsTrigger value='activas' className='flex gap-1'>
               <CircleCheck className='size-3.5' />
               Activas

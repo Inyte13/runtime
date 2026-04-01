@@ -10,7 +10,6 @@ export default memo(function Duracion({ id }: { id: number }) {
     state =>
       state.diaDetail?.bloques.find(bloque => bloque.id === id)?.duracion ?? 0
   )
-
   const nextTime = () => manejarDuracion(duracion + 0.5)
   const prevTime = () => manejarDuracion(Math.max(0, duracion - 0.5))
   return (

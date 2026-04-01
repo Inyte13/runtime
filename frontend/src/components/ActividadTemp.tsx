@@ -17,6 +17,7 @@ export default function ActividadTemp({
     state.categoriasDetail.find(categoria => categoria?.id === id)
   )
   const tempRef = useRef<HTMLDivElement>(null)
+  
   // State creado porque este nombre es provisional, no definitivo
   const [nombreTemp, setNombreTemp] = useState('')
   if (!categoria) return
