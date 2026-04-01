@@ -11,12 +11,14 @@ import {
 } from '@dnd-kit/core'
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers'
-import ListaBloquesFooter from './ListaBloquesFooter'
+import { Button } from './ui/button'
+import { Plus } from 'lucide-react'
 
 export default memo(function ListaBloques() {
   const idsBloques = useDiasStore(
     useShallow(state => state.diaDetail?.bloques.map(bloque => bloque.id))
   )
+  const crearBloque = useDiasStore(state => state.crearBloque)
   const reordenarBloques = useDiasStore(state => state.reordenarBloques)
   // Que actue solo si se mueve mas de 5px
   const sensors = useSensors(
@@ -47,7 +49,12 @@ export default memo(function ListaBloques() {
           </ul>
         </SortableContext>
       </DndContext>
-      <ListaBloquesFooter />
+
+      <footer className='mt-2 pr-8'>
+        <Button size='icon' className='w-full' onClick={() => crearBloque()}>
+          <Plus />
+        </Button>
+      </footer>
     </section>
   )
 })
