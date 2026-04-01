@@ -5,7 +5,7 @@ import { Button } from './ui/button'
 import Grafico from './Grafico'
 
 export default function CalendarioDia({ indice }: { indice: number }) {
-  const diasResumen = useDiasStore(state => state.diasResumen)
+  const dias = useDiasStore(state => state.diasResumen)
   const fecha = useFechaStore(state => state.fecha)
   const setFecha = useFechaStore(state => state.setFecha)
 
@@ -23,19 +23,19 @@ export default function CalendarioDia({ indice }: { indice: number }) {
     0
   ).getDate()
 
-  const nroDiaMes = indice - nroDiaSemana + 1
-  const existeDia = 1 <= nroDiaMes && nroDiaMes <= nroDias
+  const nroDia = indice - nroDiaSemana + 1
+
   // Para cortar si no pertene a los dias del mes
+  const existeDia = 1 <= nroDia && nroDia <= nroDias
   if (!existeDia) return null
 
-  const fechaCelda = new Date(fecha.getFullYear(), fecha.getMonth(), nroDiaMes)
+  const fechaCelda = new Date(fecha.getFullYear(), fecha.getMonth(), nroDia)
   const fechaISO = formatFechaISO(fechaCelda)
+  const dia = dias.find(dia => dia.fecha === fechaISO)
 
-  const diaResumen = diasResumen.find(dia => dia.fecha === fechaISO)
-
-  const maxDuracion = diaResumen
+  const maxDuracion = dia
     ? Math.max(
-        ...diaResumen.categorias.map(categoria =>
+        ...dia.categorias.map(categoria =>
           categoria.actividades.reduce((sum, act) => sum + act.duracion, 0)
         )
       )
@@ -55,11 +55,11 @@ export default function CalendarioDia({ indice }: { indice: number }) {
           className='rounded-full text-xs'
           size='icon-xs'
         >
-          {nroDiaMes}
+          {nroDia}
         </Button>
-        {diaResumen?.titulo && (
+        {dia?.titulo && (
           <span className='text-sm text-muted-foreground truncate px-0.5 w-full italic cursor-pointer'>
-            {diaResumen.titulo}
+            {dia.titulo}
           </span>
         )}
       </header>

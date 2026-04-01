@@ -41,11 +41,7 @@ export default memo(function ListaBloques() {
         >
           <ul className='flex flex-col gap-y-2'>
             {idsBloques?.map((id, i) => (
-              <BloqueOrdenable
-                key={id}
-                id={id}
-                idPrevio={idsBloques[i - 1]}
-              />
+              <BloqueOrdenable key={id} id={id} idPrevio={idsBloques[i - 1]} />
             ))}
           </ul>
         </SortableContext>

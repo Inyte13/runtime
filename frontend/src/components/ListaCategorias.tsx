@@ -6,9 +6,7 @@ import CategoriaTemp from './CategoriaTemp'
 import { Button } from './ui/button'
 
 export default function ListaCategorias() {
-  const ids = useCategoriasStore(state => state.categoriasDetail).map(
-    categoriaDetail => categoriaDetail.id
-  )
+  const categorias = useCategoriasStore(state => state.categoriasDetail)
   const [crearCategoria, setCrearCategoria] = useState(false)
   // TODO: Drag and drop para ordenar
   return (
@@ -24,22 +22,23 @@ export default function ListaCategorias() {
       </header>
 
       <section className='flex flex-col gap-y-1 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]'>
-        {ids.map(id => (
-          <Categoria key={id} id={id} />
+        {categorias.map(categoria => (
+          <Categoria key={categoria.id} id={categoria.id} />
         ))}
 
         {crearCategoria && (
           <CategoriaTemp setCrearCategoria={setCrearCategoria} />
         )}
+        {categorias.length === 0 && !crearCategoria && (
+          <div
             data-slot='wrapper'
             className='flex items-center justify-center gap-1 text-muted-foreground p-4 bg-card rounded-lg w-full'
           >
             <Ghost className='size-4' />
             <p className='text-sm'>Sin categorias</p>
           </div>
+        )}
       </section>
-      {ids.length === 0 && !crearCategoria && (
-      )}
     </section>
   )
 }

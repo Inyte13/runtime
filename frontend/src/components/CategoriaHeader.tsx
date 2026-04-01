@@ -42,7 +42,7 @@ export default function CategoriaHeader({ id }: { id: number }) {
         }}
       />
 
-      {!categoria.actividades.length && (
+      {categoria.actividades.length === 0 && (
         <Button
           size='icon-xs'
           variant='destructive'

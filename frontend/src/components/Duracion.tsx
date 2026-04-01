@@ -7,7 +7,8 @@ import { useDiasStore } from '@/store/diasStore'
 export default memo(function Duracion({ id }: { id: number }) {
   const { manejarDuracion } = useDuracionBloque(id)
   const duracion = useDiasStore(
-    state => state.diaDetail?.bloques.find(b => b.id === id)?.duracion ?? 0
+    state =>
+      state.diaDetail?.bloques.find(bloque => bloque.id === id)?.duracion ?? 0
   )
 
   const nextTime = () => manejarDuracion(duracion + 0.5)

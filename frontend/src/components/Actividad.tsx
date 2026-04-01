@@ -12,13 +12,13 @@ export default memo(function Actividad({
   idActividad: number
   idCategoria?: number
 }) {
-  // Lo hacemos compatible con el Actividad de ListaArchivadas
   const actividad = useCategoriasStore(state =>
     idCategoria
       ? state.categoriasDetail
           .find(categoria => categoria.id === idCategoria)
           ?.actividades.find(actividad => actividad.id === idActividad)
-      : state.categoriasDetail
+      : // Lo hacemos compatible con el ActividadTemp de ListaArchivadas
+        state.categoriasDetail
           .flatMap(categoria => categoria.actividades)
           .find(actividad => actividad.id === idActividad)
   )
@@ -28,36 +28,35 @@ export default memo(function Actividad({
   const eliminarActividad = useCategoriasStore(state => state.eliminarActividad)
   if (!actividad) return null
 
-  const { nombre, tiene_bloques, is_active } = actividad
   const manejarNombre = async (e: React.FocusEvent<HTMLInputElement>) => {
     const newNombre = e.target.value.toLowerCase().trim()
     // Si el newNombre es '' o es igual al inicial
-    if (!newNombre || newNombre === nombre) {
-      e.target.value = nombre
+    if (!newNombre || newNombre === actividad.nombre) {
+      e.target.value = actividad.nombre
       return
     }
     await actualizarActividad(idActividad, { nombre: newNombre })
   }
 
   const manejarArchivar = async () => {
-    await actualizarActividad(idActividad, { is_active: !is_active })
+    await actualizarActividad(idActividad, { is_active: !actividad.is_active })
   }
   // TODO: Al mantener la actividad truncate, para mostrarla completa
   return (
     <div data-slot='wrapper' className='group flex py-1.5 px-3'>
       <Input
         className='capitalize p-0 pl-2 border-none outline-none h-[1.6rem] truncate shadow-none'
-        defaultValue={nombre}
+        defaultValue={actividad.nombre}
         onBlur={manejarNombre}
         maxLength={50}
         onKeyDown={e => {
           if (e.key === 'Escape') {
-            e.currentTarget.value = nombre
+            e.currentTarget.value = actividad.nombre
             e.currentTarget.blur()
           }
           manejarEnter(e)
         }}
-        disabled={!is_active}
+        disabled={!actividad.is_active}
       />
 
       <Button
@@ -66,10 +65,10 @@ export default memo(function Actividad({
         className='opacity-0 group-hover:opacity-100 focus-visible:opacity-100 transition-none'
         onClick={manejarArchivar}
       >
-        {is_active ? <Archive /> : <ArchiveRestore />}
+        {actividad.is_active ? <Archive /> : <ArchiveRestore />}
       </Button>
 
-      {!tiene_bloques && (
+      {!actividad.tiene_bloques && (
         <Button
           size='icon-xs'
           variant='destructive'

@@ -15,10 +15,10 @@ import { memo, useCallback, useEffect, useMemo, useState } from 'react'
 import ComboboxActividad from './ComboboxActividad.js'
 
 export default memo(function ComboboxCategoria({ id }: { id: number }) {
+  const actualizarBloque = useDiasStore(state => state.actualizarBloque)
   const bloque = useDiasStore(state =>
     state.diaDetail?.bloques.find(bloque => bloque.id === id)
   )
-  const actualizarBloque = useDiasStore(state => state.actualizarBloque)
 
   const categorias = useCategoriasStore(state => state.categoriasDetail)
   const actividad = categorias
