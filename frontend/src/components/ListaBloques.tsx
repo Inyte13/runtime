@@ -15,6 +15,7 @@ import { Button } from './ui/button'
 import { Plus } from 'lucide-react'
 
 export default memo(function ListaBloques() {
+  // Usamos ids, en parte por el SortableContext y en parte porque cambiamos la lista constantemente
   const idsBloques = useDiasStore(
     useShallow(state => state.diaDetail?.bloques.map(bloque => bloque.id))
   )

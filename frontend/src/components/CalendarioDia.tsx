@@ -25,6 +25,7 @@ export default function CalendarioDia({ indice }: { indice: number }) {
 
   const nroDiaMes = indice - nroDiaSemana + 1
   const existeDia = 1 <= nroDiaMes && nroDiaMes <= nroDias
+  // Para cortar si no pertene a los dias del mes
   if (!existeDia) return null
 
   const fechaCelda = new Date(fecha.getFullYear(), fecha.getMonth(), nroDiaMes)

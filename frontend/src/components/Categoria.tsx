@@ -14,7 +14,9 @@ export default function Categoria({ id }: { id: number }) {
   const categoria = useCategoriasStore(state =>
     state.categoriasDetail.find(categoria => categoria.id === id)
   )
+  // State creado para mostrar ActividadTemp
   const [crearActividad, setCrearActividad] = useState(false)
+  // State creado para que sea automatico al abrir un collapsible
   const [abrir, setAbrir] = useState(true)
   if (!categoria) return
   return (

@@ -13,6 +13,7 @@ export default function CategoriaTemp({
   const crearCategoria = useCategoriasStore(state => state.crearCategoria)
 
   const tempRef = useRef<HTMLDivElement>(null)
+  // State creado porque este nombre es provisional, no definitivo
   const [nombreTemp, setNombreTemp] = useState('')
 
   // Auto-scroll cuando se crea el holograma de Actividad

@@ -34,6 +34,7 @@ export default memo(function ComboboxCategoria({ id }: { id: number }) {
     [id, actualizarBloque]
   )
 
+  // State creado para la busqueda
   const [search, setSearch] = useState('')
 
   const sinTilde = (str: string) =>
