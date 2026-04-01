@@ -32,7 +32,10 @@ export default memo(function BloqueOrdenable({
     >
       <Bloque id={id} idPrevio={idPrevio} />
 
-      <div className='h-full flex flex-col items-center justify-center opacity-0 group-hover/bloque:opacity-80 transition-opacity '>
+      <div
+        data-slot='wrapper'
+        className='h-full flex flex-col items-center justify-center opacity-0 group-hover/bloque:opacity-80 transition-opacity '
+      >
         <Button
           size='icon-sm'
           variant='ghost'

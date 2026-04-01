@@ -46,6 +46,7 @@ export default function ActividadTemp({
       ref={tempRef}
       onBlur={manejarBlur}
       tabIndex={0} // Para que sea focusable
+      data-slot='wrapper'
       className='flex items-center py-1.5 px-3'
     >
       <Input

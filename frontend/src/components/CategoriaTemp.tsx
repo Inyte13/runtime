@@ -41,6 +41,7 @@ export default function CategoriaTemp({
       ref={tempRef}
       onBlur={manejarBlur}
       tabIndex={0} // Para que sea focusable
+      data-slot='wrapper'
       className='flex items-center p-1.5 pl-2 bg-card rounded-lg'
     >
       <span className='rounded-full size-4 shrink-0 bg-[#A18072] opacity-50' />

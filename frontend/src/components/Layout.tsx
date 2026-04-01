@@ -43,7 +43,10 @@ export default function Layout() {
         >
           <Menu />
         </Button>
-        <div className='flex gap-2 items-center justify-between flex-1 min-w-80 max-w-80'>
+        <div
+          data-slot='wrapper'
+          className='flex gap-2 items-center justify-between flex-1 min-w-80 max-w-80'
+        >
           <Button
             size='icon'
             variant='ghost'
@@ -63,7 +66,7 @@ export default function Layout() {
           </Button>
         </div>
 
-        <div className='flex items-center gap-x-1'>
+        <div data-slot='wrapper' className='flex items-center gap-x-1'>
           <Button
             size='icon-sm'
             variant='ghost'
@@ -95,6 +98,7 @@ export default function Layout() {
       </header>
       <main className='flex w-full min-h-0 flex-1 gap-x-4'>
         <div
+          data-component='wrapper'
           className={cn(
             'overflow-hidden transition-[width] duration-300 ease-in-out h-full shrink-0',
             sidebarOpen ? 'w-56' : 'w-0'

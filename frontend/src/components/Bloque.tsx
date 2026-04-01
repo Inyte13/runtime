@@ -59,7 +59,7 @@ export default memo(function Bloque({
         >
           <header className='flex justify-between items-center gap-x-1'>
             {/* Necesita un wrapper para controlar su width */}
-            <div className='min-w-0'>
+            <div data-slot='wrapper' className='min-w-0'>
               <ComboboxCategoria id={id} />
             </div>
             <Duracion id={id} />

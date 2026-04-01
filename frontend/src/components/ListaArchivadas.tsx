@@ -24,7 +24,10 @@ export default memo(function ListaArchivadas() {
         </ul>
       )}
       {archivadas.length === 0 && (
-        <div className='flex items-center justify-center gap-1 text-muted-foreground p-4 bg-card rounded-lg'>
+        <div
+          data-slot='wrapper'
+          className='flex items-center justify-center gap-1 text-muted-foreground p-4 bg-card rounded-lg'
+        >
           <Archive className='size-4' />
           <p className='text-sm'>Sin Archivados</p>
         </div>

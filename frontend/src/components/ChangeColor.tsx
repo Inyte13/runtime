@@ -57,7 +57,7 @@ export default function ChangeColor({
 
         <Popover>
           <PopoverTrigger asChild>
-            <div className='flex ml-0.5'>
+            <div data-slot='wrapper' className='flex ml-0.5'>
               <Button
                 className='rounded-full size-4'
                 size='icon'

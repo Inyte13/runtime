@@ -62,9 +62,12 @@ export default function CalendarioDia({ indice }: { indice: number }) {
           </span>
         )}
       </header>
-      {diaResumen && (
-        <div className='flex items-start w-full flex-col gap-px px-4 min-h-0 mt-auto'>
-          {diaResumen.categorias.map(categoria => (
+      {dia && (
+        <div
+          data-slot='wrapper'
+          className='flex items-start w-full flex-col gap-px px-4 min-h-0 mt-auto'
+        >
+          {dia.categorias.map(categoria => (
             <Grafico
               key={categoria.id}
               id={categoria.id}
