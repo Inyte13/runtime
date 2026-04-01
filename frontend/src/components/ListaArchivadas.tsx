@@ -13,7 +13,7 @@ export default memo(function ListaArchivadas() {
     )
   )
   return (
-    <>
+    <section className='m-0 flex flex-col flex-1 gap-y-1 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]'>
       {archivadas.length > 0 && (
         <ul className='flex flex-col divide-y divide-border/50 border-l-2 border-border rounded-lg bg-card/50'>
           {archivadas.map(actividad => (
@@ -32,6 +32,6 @@ export default memo(function ListaArchivadas() {
           <p className='text-sm'>Sin Archivados</p>
         </div>
       )}
-    </>
+    </section>
   )
 })

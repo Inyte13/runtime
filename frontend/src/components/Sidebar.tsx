@@ -27,10 +27,7 @@ export default function Sidebar() {
           <ListaCategorias />
         </TabsContent>
 
-        <TabsContent
-          value='archivadas'
-          className='m-0 flex flex-col flex-1 gap-y-1 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]'
-        >
+        <TabsContent value='archivadas' asChild>
           <ListaArchivadas />
         </TabsContent>
       </section>
