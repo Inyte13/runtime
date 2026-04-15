@@ -20,7 +20,12 @@ async def lifespan(app: FastAPI):
 
 
 # Instancia principal de FastAPI con lifespan
-app = FastAPI(lifespan=lifespan, title='Runtime App')
+app = FastAPI(
+  lifespan=lifespan,
+  title='Runtime App',
+  version='1.0.0',
+  openapi_version='3.0.0',
+)
 
 app.include_router(dia_router)
 app.include_router(bloque_router)

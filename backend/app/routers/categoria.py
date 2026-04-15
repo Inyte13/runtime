@@ -39,7 +39,7 @@ def post_categoria(session: SessionDep, categoria: CategoriaCreate):
 
 
 @categoria_router.patch('/categorias/{id}', response_model=CategoriaRead)
-def patch_actividad(session: SessionDep, categoria: CategoriaUpdate, id: int):
+def patch_categoria(session: SessionDep, categoria: CategoriaUpdate, id: int):
   try:
     return actualizar_categoria(session, id, categoria)
   except ValueError as e:

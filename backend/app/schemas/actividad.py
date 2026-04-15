@@ -32,6 +32,7 @@ class ActividadResumen(SQLModel):
 class ActividadUpdate(SQLModel):
   nombre: str | None = None
   is_active: bool | None = None
+  id_categoria: int | None = None
 
   @field_validator('nombre')
   def to_lowercase_and_not_empty(cls, v: str | None) -> str | None:

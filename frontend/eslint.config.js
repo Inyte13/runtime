@@ -39,6 +39,6 @@ export default tseslint.config(
     }
   },
 
-  // IMPORTANTE: Prettier va al final para apagar cualquier regla de estilo de ESLint
+  // IMPORTANTE: Prettier siempre al final
   prettierConfig
 )

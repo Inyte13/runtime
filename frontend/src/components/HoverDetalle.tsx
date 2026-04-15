@@ -35,7 +35,7 @@ export default function HoverDetalle({
         actividadResumen.descripciones.length > 0 && (
           <ul>
             {actividadResumen.descripciones.map((descripcion, i) => (
-              <li className='text-secondary-foreground truncate' key={i}>
+              <li className='text-secondary-foreground truncate normal-case' key={i}>
                 {descripcion}
               </li>
             ))}

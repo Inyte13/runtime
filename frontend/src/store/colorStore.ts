@@ -3,7 +3,8 @@ import { create } from 'zustand'
 interface ColorState {
   colores: Record<number, string>
   setColor: (id: number, color: string) => void
-  setColores: (actividades: { id: number; color: string }[]) => void
+  setColores: (categorias: { id: number; color: string }[]) => void
+  eliminarColor: (id: number) => void
 }
 
 export const useColorStore = create<ColorState>(set => ({
@@ -14,14 +15,18 @@ export const useColorStore = create<ColorState>(set => ({
     set(state => ({
       colores: { ...state.colores, [id]: color },
     })),
-  setColores: actividades => {
 
+  setColores: categorias => {
     set({
       // Transforma en diccionario solo con id y color
       colores: Object.fromEntries(
-        actividades.map(actividad => [actividad.id, actividad.color])
+        categorias.map(categoria => [categoria.id, categoria.color])
       ),
     })
   },
 
+  eliminarColor: (id) => set(state => {
+    const { [id]: _, ...colors} = state.colores
+    return { colores: colors}
+  })
 }))
