@@ -17,9 +17,11 @@ packaging==26.0
 pluggy==1.6.0
 pycparser==2.23
 pydantic==2.12.5
+pydantic-settings==2.13.1
 pydantic_core==2.41.5
 Pygments==2.19.2
 pytest==9.0.2
+python-dotenv==1.2.2
 ruff==0.15.7
 SQLAlchemy==2.0.45
 sqlmodel==0.0.27
